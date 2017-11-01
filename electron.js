@@ -13,10 +13,9 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    minWidth: 300,
-    minHeight: 475,
-    maxWidth: 800,
-    maxHeight: 600
+    minWidth: 800,
+    minHeight: 600,
+    autoHideMenuBar: true
   });
 
   // and load the index.html of the app.

@@ -11,9 +11,12 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "build": "grunt build",
-    "travis": "npm run build && npm run react-native:ios && npm run react-native:android && npm test",
-    "react-native:ios": "react-native bundle --entry-file src/index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false",
-    "react-native:android": "react-native bundle --entry-file src/index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --platform android --dev false --assets-dest android/app/src/main/res/",
+    "travis":
+      "npm run build && npm run react-native:ios && npm run react-native:android && npm test",
+    "react-native:ios":
+      "react-native bundle --entry-file src/index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false",
+    "react-native:android":
+      "react-native bundle --entry-file src/index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --platform android --dev false --assets-dest android/app/src/main/res/",
     "serve:web": "grunt serve-web",
     "serve:web/dist": "grunt serve-web-dist",
     "serve:electron": "grunt serve-electron",
@@ -21,23 +24,15 @@
     "postinstall": "npm install fbjs@0.6.0"
   },
   "window": {
-    "toolbar": true,
-    "min_width": 300,
-    "min_height": 475,
-    "max_width": 800,
-    "max_height": 600
+    "toolbar": false,
+    "min_width": 800,
+    "min_height": 600
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "testFileExtensions": [
-      "js"
-    ],
-    "testPathDirs": [
-      "src"
-    ],
-    "moduleFileExtensions": [
-      "js"
-    ],
+    "testFileExtensions": ["js"],
+    "testPathDirs": ["src"],
+    "moduleFileExtensions": ["js"],
     "verbose": true,
     "collectCoverage": true
   },
