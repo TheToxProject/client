@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+
+  box-sizing: border-box;
 }
 
 #content {
@@ -13,17 +15,68 @@
 
 button {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  background-color: #03a9f4;
-  color: white;
-  padding: 8px 8px;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 8px 16px;
   border-radius: 3px;
   text-transform: uppercase;
   font-weight: bold;
+  font-size: 12px;
   outline: none;
   border: none;
+  transition: all 280ms ease-in-out;
+}
+button:hover {
+  background-color: #3f51b5;
+  color: white;
+  transition: all 100ms ease-in-out;
+}
+button:active {
+  background-color: #954a97;
+  color: white;
 }
 
-.main {
+input {
+  margin-bottom: 16px;
+  border: none;
+  background-color: #333333;
+  padding: 8px 16px;
+  border-radius: 3px;
+  outline: none;
+  color: white;
+  transition: all 280ms ease-in-out;
+}
+input:focus {
+  background-color: #222222;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+input::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: rgba(255, 255, 255, 0.56);
+}
+input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: rgba(255, 255, 255, 0.56);
+}
+input:-ms-input-placeholder {
+  /* IE 10+ */
+  color: rgba(255, 255, 255, 0.56);
+}
+input:-moz-placeholder {
+  /* Firefox 18- */
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.github-fork {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+.main,
+.auth-screen {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -32,11 +85,67 @@ button {
   padding: 8px 16px;
 }
 
+.auth-screen {
+  background-color: #414141;
+}
+
+.box-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+
+.login-form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 35%;
+  max-width: 320px;
+}
+
+.login-form input {
+  width: 100%;
+}
+
+.login-form .actions {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.login-form .actions a {
+  color: white;
+  text-decoration: none;
+  transition: all 280ms ease-in-out;
+}
+.login-form .actions a:active {
+  color: rgba(255, 255, 255, 0.6);
+}
+
 h1 {
   font-size: 32px;
   font-weight: bold;
   text-align: center !important;
   color: black;
+}
+
+.logo {
+  /*color: white;
+  font-size: 48px;*/
+  /*background: transparent url(../assets/tox-logo@1x.png) no-repeat center left;*/
+  background: transparent url(../assets/tox-logo.svg) no-repeat center center /
+    cover;
+  width: 150px;
+  height: 60px;
+  text-indent: -99999px;
+  margin-bottom: 32px;
 }
 
 .subtitle {

@@ -118,6 +118,7 @@
     "redbox-react": "^1.5.0",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.0",
+    "svg-url-loader": "^2.3.0",
     "typecheck": "^0.1.2",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",

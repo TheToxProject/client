@@ -12,7 +12,10 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatch,
     onLoginButtonPress: () => {
-      alert("onLoginButtonPress clicked/pressed");
+      alert("Login button clicked.");
+    },
+    onRegisterButtonPress: () => {
+      alert("Register button clicked.");
     }
   };
 };

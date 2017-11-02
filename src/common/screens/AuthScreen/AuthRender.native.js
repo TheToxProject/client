@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { Dimensions, View, Text, Button, Image, TextInput } from "react-native";
 
 export default class AuthRender extends Component {
   constructor(props) {
@@ -7,33 +7,81 @@ export default class AuthRender extends Component {
   }
 
   render() {
+    const { width, height } = Dimensions.get("window");
+    const formWidth = width - 60;
+
     return (
-      <View style={styles.main}>
-        <Text style={styles.h1}>Welcome from AuthScreen</Text>
-        <Button
-          onPress={() => this.props.onLoginButtonPress()}
-          title="Go to MainScreen"
+      <View style={styles.authScreen}>
+        <Image
+          style={styles.logo}
+          resizeMode={"contain"}
+          source={require("../../../assets/tox-logo.png")}
         />
+        <View style={[styles.loginForm, { width: formWidth }]}>
+          <TextInput
+            ref={input => (this.inputUsername = input)}
+            style={styles.authInput}
+            placeholder="Username..."
+            placeholderTextColor="rgba(255, 255, 255, 0.56)"
+            underlineColorAndroid="rgba(255, 255, 255, 0)"
+          />
+          <TextInput
+            ref={input => (this.inputPassword = input)}
+            style={styles.authInput}
+            placeholder="Password..."
+            secureTextEntry={true}
+            placeholderTextColor="rgba(255, 255, 255, 0.56)"
+            underlineColorAndroid="rgba(255, 255, 255, 0)"
+          />
+          <View style={styles.actions}>
+            <Button
+              onPress={() => this.props.onLoginButtonPress()}
+              title="Sign in"
+            />
+            <Text style={styles.createAccount}>Create an account</Text>
+          </View>
+        </View>
       </View>
     );
   }
 }
 
 const styles = {
-  main: {
+  authScreen: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: "white"
+    backgroundColor: "#414141"
   },
-  h1: {
-    fontSize: 32,
-    color: "black",
-    marginBottom: 16,
-    fontWeight: "bold",
-    textAlign: "center"
+  logo: {
+    width: 150,
+    height: 60,
+    marginBottom: 32
+  },
+  loginForm: {},
+  authInput: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    marginVertical: 8,
+    backgroundColor: "#333333",
+    color: "white",
+    borderRadius: 3
+  },
+  authInput_active: {
+    backgroundColor: "#222222",
+    elevation: 2
+  },
+  actions: {
+    marginTop: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  createAccount: {
+    fontSize: 16,
+    color: "white"
   }
 };

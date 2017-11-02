@@ -46,6 +46,10 @@ module.exports = {
       {
         test: /\.(png|jpg)$/,
         loader: "url-loader?limit=8192"
+      },
+      {
+        test: /\.svg/,
+        loader: "svg-url-loader"
       }
     ]
   }

@@ -13,6 +13,7 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    title: "Tox - Secure messenger.",
     minWidth: 800,
     minHeight: 600,
     autoHideMenuBar: true
