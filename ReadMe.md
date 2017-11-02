@@ -129,7 +129,7 @@ There isn't any additional requirements since you already installed the deps wit
 ### Quick start
 
 - `npm run build` to build the project (at least the first time)
-- `npm run serve-web` to preview in the browser at http://localhost:8000/index.web.html or http://localhost:8000/webpack-dev-server/index.web.html with webpack-dev-server and hot reload enabled
+- `npm run serve:web` to preview in the browser at http://localhost:8000/index.web.html or http://localhost:8000/webpack-dev-server/index.web.html with webpack-dev-server and hot reload enabled
 
 Congratulations! You've just successfully run the project as a Website App.
 
@@ -142,7 +142,7 @@ There isn't any additional requirements since you already installed the deps wit
 ### Quick start
 
 - `npm run build` to build the project (at least the first time)
-- `npm run serve-electron` to launch the desktop app and enable livereload
+- `npm run serve:electron` to launch the desktop app and enable livereload
 
 Congratulations! You've just successfully run the project as a Desktop App.
 
