@@ -11,6 +11,18 @@
   background-color: white;
 }
 
+button {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background-color: #03a9f4;
+  color: white;
+  padding: 8px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: bold;
+  outline: none;
+  border: none;
+}
+
 .main {
   display: flex;
   flex-flow: column wrap;
@@ -20,10 +32,10 @@
   padding: 8px 16px;
 }
 
-.h1 {
+h1 {
   font-size: 32px;
   font-weight: bold;
-  text-align: center;
+  text-align: center !important;
   color: black;
 }
 

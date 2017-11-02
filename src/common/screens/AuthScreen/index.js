@@ -4,11 +4,17 @@ import { connect } from "react-redux";
 import AuthRender from "./AuthRender";
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  return {
+    user: state.user
+  };
 };
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    dispatch,
+    onLoginButtonPress: () => {
+      alert("onLoginButtonPress clicked/pressed");
+    }
+  };
 };
 
-const AuthScreen = connect(mapStateToProps, mapDispatchToProps)(AuthRender);
-export default AuthScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(AuthRender);
