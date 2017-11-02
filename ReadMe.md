@@ -71,6 +71,10 @@ export default class Screen extends Base {
 }
 ```
 
+### Styles
+
+Styles are written in different fashions between React & React Native. This project use [react-native-css](https://github.com/sabeurthabti/react-native-css) to share the stylesheets between web/desktop version and mobile one. This allow for faster iteration cycle and also remove duplicate/not-in-sync styles issues.
+
 # How to build/run the projects
 
 ## General requirements before running any specific project

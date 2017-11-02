@@ -23,7 +23,7 @@ function createWindow() {
     mainWindow.loadURL("file://" + __dirname + "/index.desktop.html");
   } else {
     mainWindow.loadURL(
-      "http://localhost:8000/webpack-dev-server/index.desktop.html"
+      "http://localhost:8000/webpack-dev-server/index.web.html"
     );
   }
 

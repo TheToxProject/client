@@ -84,6 +84,11 @@ module.exports = function(grunt) {
           },
           {
             flatten: true,
+            src: ["<%= pkg.src %>/index.desktop.html"],
+            dest: "<%= pkg.dist %>/index.desktop.html"
+          },
+          {
+            flatten: true,
             src: ["<%= pkg.src %>/favicon.ico"],
             dest: "<%= pkg.dist %>/favicon.ico"
           }
@@ -110,8 +115,8 @@ module.exports = function(grunt) {
         livereload: true
       },
       build: {
-        files: "src/**/*.js",
-        tasks: ["clean", "copy", "webpack"]
+        files: ["src/**/*.js", "src/**/*.css"],
+        tasks: ["webpack"]
       }
     },
 
@@ -121,7 +126,7 @@ module.exports = function(grunt) {
 
     concurrent: {
       electron: {
-        tasks: ["watch", "exec:launch_electron"],
+        tasks: ["webpack", "exec:launch_electron"],
         options: {
           logConcurrentOutput: true
         }

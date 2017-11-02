@@ -11,17 +11,13 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "build": "grunt build",
-    "travis":
-      "npm run build && npm run react-native:ios && npm run react-native:android && npm test",
-    "react-native:ios":
-      "react-native bundle --entry-file src/index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false",
-    "react-native:android":
-      "react-native bundle --entry-file src/index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --platform android --dev false --assets-dest android/app/src/main/res/",
+    "travis": "npm run build && npm run react-native:ios && npm run react-native:android && npm test",
+    "react-native:ios": "react-native bundle --entry-file src/index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false",
+    "react-native:android": "react-native bundle --entry-file src/index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --platform android --dev false --assets-dest android/app/src/main/res/",
     "serve:web": "grunt serve-web",
     "serve:web/dist": "grunt serve-web-dist",
     "serve:electron": "grunt serve-electron",
-    "test": "jest",
-    "postinstall": "npm install fbjs@0.6.0"
+    "test": "jest"
   },
   "window": {
     "toolbar": false,
@@ -30,9 +26,15 @@
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "testFileExtensions": ["js"],
-    "testPathDirs": ["src"],
-    "moduleFileExtensions": ["js"],
+    "testFileExtensions": [
+      "js"
+    ],
+    "testPathDirs": [
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ],
     "verbose": true,
     "collectCoverage": true
   },
@@ -50,7 +52,13 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-native": "0.49.5",
+    "react-native-css": "^2.1.2",
+    "react-navigation": "^1.0.0-beta.16",
+    "react-primitives": "^0.4.3",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "serve-static": "^1.13.1",
+    "styled-components": "^2.2.3",
     "uniqid": "^1.0.0"
   },
   "devDependencies": {

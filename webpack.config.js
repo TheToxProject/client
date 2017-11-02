@@ -10,14 +10,16 @@ module.exports = {
   output: {
     filename: "main.js",
     publicPath: "/assets/",
-    publicPath: "/assets/",
-    path: "assets/",
-    filename: "main.js"
+    path: "assets/"
   },
-  cache: true,
+  cache: false,
   debug: true,
   devtool: false,
-  entry: ["webpack/hot/only-dev-server", "./src/index.js"],
+  entry: [
+    "react-hot-loader/patch",
+    "webpack/hot/only-dev-server",
+    "./src/index.js"
+  ],
   stats: {
     colors: true,
     reasons: true

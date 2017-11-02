@@ -1,7 +1,6 @@
-"use strict";
-
-import Render from "./AppRender.native";
+import React from 'react';
+import AppRender from "./AppRender.native";
 
 export default function() {
-  return Render.call(this, this.props, this.state);
+  return <AppRender />;
 }

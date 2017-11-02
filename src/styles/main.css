@@ -1,20 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 #content {
   display: flex;
   height: 100vh;
   width: 100vw;
 
-  background-color: red;
+  background-color: white;
 }
 
 .main {
   display: flex;
-  flex: 1;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 8px 16px;
 }
 
 .h1 {
+  font-size: 32px;
+  font-weight: bold;
   text-align: center;
-  color: white;
+  color: black;
+}
+
+.subtitle {
+  color: rgba(0, 0, 0, 0.54);
+  text-align: center;
 }
