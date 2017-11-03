@@ -10,8 +10,8 @@ export default class AuthRender extends Component {
         <div className="box-container">
           <h1 className="logo">Tox</h1>
           <div className="login-form">
-            <Input type="text" name="username" placeholder="Username..." />
-            <Input type="password" name="password" placeholder="Password..." />
+            <Input placeholder="Username..." />
+            <Input placeholder="Password..." secureTextEntry={true} />
             <div className="actions">
               <Button
                 uppercase
