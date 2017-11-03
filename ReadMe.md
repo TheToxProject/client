@@ -1,5 +1,7 @@
 # The Universal Tox Client
 
+[![Build Status](https://travis-ci.org/Tox-Client/client.svg?branch=master)](https://travis-ci.org/Tox-Client/client)
+
 This project is a fresh start of the new Tox client I'm willing to dev. It's shared between platforms with only one codebase and can run easily on Android, iOS, Linux, OSX, Windows 10/UWP, Windows 7/8, and maybe Windows Phone.
 
 The main goal of this project is to provide the same experience between platforms by giving users an instant messenger application that is both secure and user-friendly.
