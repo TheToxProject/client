@@ -6,6 +6,10 @@ import Style from "../../style.js";
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 export default class InputRender extends Component {
+  setNativeProps = nativeProps => {
+    this._input.setNativeProps(nativeProps);
+  };
+
   constructor(props) {
     super(props);
 
@@ -30,8 +34,8 @@ export default class InputRender extends Component {
 
     return (
       <AnimatedTextInput
+        ref={"input"}
         {...this.props}
-        ref={input => (this.inputPassword = input)}
         style={[inputStyles, this.props.style, { backgroundColor, elevation }]}
         placeholderTextColor={Style.DARK_TEXT_LIGHT_COLOR}
         placeholder={this.props.placeholder && this.props.placeholder}

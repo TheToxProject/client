@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Dimensions, View, Text, Image, TextInput } from "react-native";
+import ReactNative, {
+  Dimensions,
+  View,
+  Text,
+  Image,
+  TextInput
+} from "react-native";
 
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -21,8 +27,16 @@ export default class AuthRender extends Component {
           source={require("../../../assets/tox-logo.png")}
         />
         <View style={[styles.loginForm, { width: formWidth }]}>
-          <Input placeholder="Username..." />
-          <Input placeholder="Password..." secureTextEntry={true} />
+          <Input
+            placeholder="Username..."
+            onSubmitEditing={this._focusNextInput.bind(this, "inputPassword")}
+          />
+          <Input
+            ref="inputPassword"
+            placeholder="Password..."
+            secureTextEntry={true}
+            blurOnSubmit={true}
+          />
           <View style={styles.actions}>
             <Button
               uppercase={true}
@@ -40,6 +54,16 @@ export default class AuthRender extends Component {
         </View>
       </View>
     );
+  }
+
+  _focusNextInput(nodeRef) {
+    if (this.refs[nodeRef]) {
+      const input = ReactNative.findNodeHandle(
+        this.refs[nodeRef].refs["input"]
+      );
+      console.log(this.refs[nodeRef], input);
+      input.focus();
+    }
   }
 }
 
