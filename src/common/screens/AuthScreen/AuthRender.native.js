@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Dimensions, View, Text, Image, TextInput } from "react-native";
 
 import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 export default class AuthRender extends Component {
   constructor(props) {
@@ -20,21 +21,8 @@ export default class AuthRender extends Component {
           source={require("../../../assets/tox-logo.png")}
         />
         <View style={[styles.loginForm, { width: formWidth }]}>
-          <TextInput
-            ref={input => (this.inputUsername = input)}
-            style={styles.authInput}
-            placeholder="Username..."
-            placeholderTextColor="rgba(255, 255, 255, 0.56)"
-            underlineColorAndroid="rgba(255, 255, 255, 0)"
-          />
-          <TextInput
-            ref={input => (this.inputPassword = input)}
-            style={styles.authInput}
-            placeholder="Password..."
-            secureTextEntry={true}
-            placeholderTextColor="rgba(255, 255, 255, 0.56)"
-            underlineColorAndroid="rgba(255, 255, 255, 0)"
-          />
+          <Input placeholder="Username..." />
+          <Input placeholder="Password..." secureTextEntry={true} />
           <View style={styles.actions}>
             <Button
               uppercase={true}
@@ -71,18 +59,7 @@ const styles = {
     marginBottom: 32
   },
   loginForm: {},
-  authInput: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginVertical: 8,
-    backgroundColor: "#333333",
-    color: "white",
-    borderRadius: 3
-  },
-  authInput_active: {
-    backgroundColor: "#222222",
-    elevation: 2
-  },
+
   actions: {
     marginTop: 16,
     flexDirection: "row",

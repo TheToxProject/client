@@ -13,6 +13,7 @@ import InitialScreen from "./common/screens/InitialScreen";
 
 // CSS
 require("./styles/normalize.css");
+require("./styles/components.css");
 require("./styles/main.css");
 
 export default class App extends Component {
