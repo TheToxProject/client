@@ -42,7 +42,12 @@ export default class AuthRender extends Component {
               onPressDelay={200}
               text="Sign in"
             />
-            <Text style={styles.createAccount}>Create an account</Text>
+            <Text
+              onPress={() => this.props.onRegisterButtonPress()}
+              style={styles.createAccount}
+            >
+              Create an account
+            </Text>
           </View>
         </View>
       </View>
