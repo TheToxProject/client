@@ -8,7 +8,7 @@ The main goal of this project is to provide the same experience between platform
 
 Behind the hood, it uses React (Web/Desktop) and React Native (Android/iOS) and a pattern based on `Base` component and `Renderer` components that allows us to share the application logic between every pattern but allowing platform-specific stuff in different files. Compiler (webpack/grunt) then takes care of choosing the right file to resolve depending on which platform it's being built for.
 
-![](https://0x0.st/ssDY.png)
+![](https://0x0.st/sshQ.png)
 
 
 ## Libraries/tools
