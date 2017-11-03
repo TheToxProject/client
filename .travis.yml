@@ -1,4 +1,5 @@
 language: node_js
+cache: yarn
 
 node_js:
   - "5.0"
@@ -14,4 +15,4 @@ node_js:
   - "8.0.0"
   - "8.8.1"
 
-script: npm run travis
+script: yarn run travis
