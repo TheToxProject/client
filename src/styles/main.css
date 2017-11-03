@@ -13,25 +13,24 @@
   background-color: white;
 }
 
-button {
+.button {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background-color: white;
   color: rgba(0, 0, 0, 0.87);
   padding: 8px 16px;
   border-radius: 3px;
-  text-transform: uppercase;
   font-weight: bold;
   font-size: 12px;
   outline: none;
   border: none;
   transition: all 280ms ease-in-out;
 }
-button:hover {
+.button:hover {
   background-color: #3f51b5;
   color: white;
   transition: all 100ms ease-in-out;
 }
-button:active {
+.button:active {
   background-color: #954a97;
   color: white;
 }

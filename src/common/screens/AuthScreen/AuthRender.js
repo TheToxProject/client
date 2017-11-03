@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import Button from "../../components/Button";
+
 export default class AuthRender extends Component {
   render() {
     return (
@@ -10,9 +12,12 @@ export default class AuthRender extends Component {
             <input type="text" name="username" placeholder="Username..." />
             <input type="password" name="password" placeholder="Password..." />
             <div className="actions">
-              <button onClick={() => this.props.onLoginButtonPress()}>
-                Sign in
-              </button>
+              <Button
+                uppercase
+                onPress={() => this.props.onLoginButtonPress()}
+                onPressDelay={200}
+                text="Sign in"
+              />
               <a href="#" onClick={() => this.props.onRegisterButtonPress()}>
                 Create an account
               </a>
