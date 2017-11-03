@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Dimensions, View, Text, Button, Image, TextInput } from "react-native";
+import { Dimensions, View, Text, Image, TextInput } from "react-native";
+
+import Button from "../../components/Button";
 
 export default class AuthRender extends Component {
   constructor(props) {
@@ -35,8 +37,10 @@ export default class AuthRender extends Component {
           />
           <View style={styles.actions}>
             <Button
+              uppercase={true}
               onPress={() => this.props.onLoginButtonPress()}
-              title="Sign in"
+              onPressDelay={200}
+              text="Sign in"
             />
             <Text style={styles.createAccount}>Create an account</Text>
           </View>
