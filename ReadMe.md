@@ -1,6 +1,6 @@
 # The Universal Tox Client
 
-[![Build Status](https://travis-ci.org/Tox-Client/client.svg?branch=master)](https://travis-ci.org/Tox-Client/client)
+[![Build Status](https://travis-ci.org/Tox-Client/client.svg?branch=master)](https://travis-ci.org/Tox-Client/client) [![dependencies Status](https://david-dm.org/Tox-Client/client/status.svg)](https://david-dm.org/Tox-Client/client) [![devDependencies Status](https://david-dm.org/Tox-Client/client/dev-status.svg)](https://david-dm.org/Tox-Client/client?type=dev)
 
 This project is a fresh start of the new Tox client I'm willing to dev. It's shared between platforms with only one codebase and can run easily on Android, iOS, Linux, OSX, Windows 10/UWP, Windows 7/8, and maybe Windows Phone.
 
