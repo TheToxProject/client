@@ -163,16 +163,29 @@ I currently work on this project during my free-time, but also during my work-ti
 
 Anyway, if you consider support me, you can pay me a pack of Monster's cans for moore productive coding, :D.
 
-I accept donations in form of Monero, Bitcoin, Etherum & IntenseCoin (in that order). You can also Patreon me !
+I accept donations in form of Monero, Bitcoin and Etherum. You can also Patreon me !
+
+#### Monero
+
+```
+47XpVhUHahViCZHuZPc2Z6ivLraidX7AxbM8b2StdPcQGwjDGY14eqj9ippW7Pdrqj9d2y4xvwChzePQAqG1NvqQ775FKxg
+```
+
+#### Bitcoin
+
+```
+18BqyV9mNbFLi5HNNnfUprnPJyJDFP59Xh
+```
+
+#### Ethereum
+
+```
+0xe96357E4Dabd51970Bf8fcF9633Cc0c70712466e
+```
+
+#### Patreon
 
 [![Become a patron](https://i.imgur.com/oWouhEe.png)](https://www.patreon.com/bePatron?u=2330345)
-
-```
-1. Monero (XMR): 47XpVhUHahViCZHuZPc2Z6ivLraidX7AxbM8b2StdPcQGwjDGY14eqj9ippW7Pdrqj9d2y4xvwChzePQAqG1NvqQ775FKxg
-2. Bitcoin (BTC/XBT): 18BqyV9mNbFLi5HNNnfUprnPJyJDFP59Xh
-3. Etherum (ETH): 0x56E3273D42B40d47E122fF62108dEDC974A4206e
-4. IntenseCoin (ITNS): iz5F814eDfX7gbUucu17E5YUBGADYGLDRhMfKQjfXwv9S1UDPaJKcgEiUUWm9vDeJ7JVcPWo7kZRmTFtcVcssc1h28zguw8iE
-```
 
 If you wish to support me, but doesn't have money for, you can still message me on Wire and give me some free hugs! :D
 
