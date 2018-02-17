@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Button from "../../components/Button";
-import Input from "../../components/Input";
+import { Input } from "@toxclient/shathui";
 
 export default class AuthRender extends Component {
   render() {

@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@toxclient/shathui@^0.1.0":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@toxclient/shathui/-/shathui-0.1.1.tgz#15d1b584fb8ef806a0ec43785322933bfe47e724"
+
 abab@^1.0.0, abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
