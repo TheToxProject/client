@@ -10,24 +10,25 @@ Behind the hood, it uses React (Web/Desktop) and React Native (Android/iOS) and 
 
 ![](https://0x0.st/sshQ.png)
 
-
 ## Libraries/tools
 
 This project uses libraries and tools like:
-- es6 syntax and [babel](https://babeljs.io)
-- [react](https://facebook.github.io/react) for the Website App and Desktop App,
-- [react-native](https://facebook.github.io/react-native) for the iOS & Android Apps
-- [Electron](http://electron.atom.io) to package the Desktop App
-- [redux](http://redux.js.org/) to organize the data flow management
-- [css-loader](https://github.com/webpack/css-loader) to integrate the styles in the builds
-- [grunt](http://gruntjs.com) to create the builds
-- [webpack](https://webpack.github.io) to help during the development phase with hot reloading
+
+* es6 syntax and [babel](https://babeljs.io)
+* [react](https://facebook.github.io/react) for the Website App and Desktop App,
+* [react-native](https://facebook.github.io/react-native) for the iOS & Android Apps
+* [Electron](http://electron.atom.io) to package the Desktop App
+* [redux](http://redux.js.org/) to organize the data flow management
+* [css-loader](https://github.com/webpack/css-loader) to integrate the styles in the builds
+* [grunt](http://gruntjs.com) to create the builds
+* [webpack](https://webpack.github.io) to help during the development phase with hot reloading
 
 ## Basic philosophy
 
 All the code is contained in the `src` directory, especially the 3 main entry files that are used for the builds:
-- `index.ios.js` & `index.android.js` are the ones used to build the iOS & Android Apps
-- `index.js` is the one used to build the Website App and Desktop App as the code is strictly the same.
+
+* `index.ios.js` & `index.android.js` are the ones used to build the iOS & Android Apps
+* `index.js` is the one used to build the Website App and Desktop App as the code is strictly the same.
 
 ### Redux architecture actions/stores
 
@@ -57,17 +58,17 @@ Screen
 And here is the `MainClass` (`index.js`) file which composes the files.
 
 ```js
-'use strict';
+"use strict";
 
-import Base from './ScreenBase';
-import Render from './ScreenRender';
+import Base from "./ScreenBase";
+import Render from "./ScreenRender";
 
 export default class Screen extends Base {
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     return Render.call(this, this.props, this.state);
   }
 }
@@ -81,14 +82,14 @@ Styles are written in different fashions between React & React Native. This proj
 
 ## General requirements before running any specific project
 
-- `npm install` to install all the dependencies, React and React Native among others.
+* `npm install` to install all the dependencies, React and React Native among others.
 
 ### With some versions of npm (>=v3.3.10 <=v3.6.0)
 
 Some builds from npm included bugs while `npm install`. So if you are using a npm version within the range form 3.3.10 to 3.6.0 included, you must run `npm install` twice. Those versions including npm v3.3.12 are the ones bundled by default with node from version v5.1.0 to v5.5.0.
 
-- `npm install npm`
-- `npm install npm` run it twice, because of the packages won't be installed after the first run [#10985](https://github.com/npm/npm/issues/10985)
+* `npm install npm`
+* `npm install npm` run it twice, because of the packages won't be installed after the first run [#10985](https://github.com/npm/npm/issues/10985)
 
 ## The Mobile Apps (iOS & Android)
 
@@ -96,29 +97,29 @@ Some builds from npm included bugs while `npm install`. So if you are using a np
 
 #### iOS
 
-- OS X
-- Xcode 6.3 or higher is recommended (Xcode only runs on Mac).
-- Homebrew is the recommended way to install node, watchman, and flow.
-- `brew install node`
-- `brew install watchman`. We recommend installing watchman, otherwise you might hit a node file watching bug.
-- `brew install flow`. If you want to use flow.
+* OS X
+* Xcode 6.3 or higher is recommended (Xcode only runs on Mac).
+* Homebrew is the recommended way to install node, watchman, and flow.
+* `brew install node`
+* `brew install watchman`. We recommend installing watchman, otherwise you might hit a node file watching bug.
+* `brew install flow`. If you want to use flow.
 
 #### Android
 
-- Follow the official documentation guide here: http://facebook.github.io/react-native/docs/getting-started.html#android-setup (includes experimental Windows & Linux support)
+* Follow the official documentation guide here: http://facebook.github.io/react-native/docs/getting-started.html#android-setup (includes experimental Windows & Linux support)
 
 ### Running the Mobile Apps
 
 #### iOS
 
-- Open iosApp.xcodeproj and hit run in Xcode.
-- Hit cmd+R in your iOS simulator to reload the app and see your change!
+* Open iosApp.xcodeproj and hit run in Xcode.
+* Hit cmd+R in your iOS simulator to reload the app and see your change!
 
 #### Android
 
-- Open an emulator. (Genymotion or run `android avd`)
-- Run the `react-native run-android` in the root of this project.
-- If trying to run on a device, read the following guide: http://facebook.github.io/react-native/docs/running-on-device-android.html#content
+* Open an emulator. (Genymotion or run `android avd`)
+* Run the `react-native run-android` in the root of this project.
+* If trying to run on a device, read the following guide: http://facebook.github.io/react-native/docs/running-on-device-android.html#content
 
 Congratulations! You've just successfully run the project as an iOS or Android App.
 
@@ -130,8 +131,8 @@ There isn't any additional requirements since you already installed the deps wit
 
 ### Quick start
 
-- `npm run build` to build the project (at least the first time)
-- `npm run serve:web` to preview in the browser at http://localhost:8000/index.web.html or http://localhost:8000/webpack-dev-server/index.web.html with webpack-dev-server and hot reload enabled
+* `npm run build` to build the project (at least the first time)
+* `npm run serve:web` to preview in the browser at http://localhost:8000/index.web.html or http://localhost:8000/webpack-dev-server/index.web.html with webpack-dev-server and hot reload enabled
 
 Congratulations! You've just successfully run the project as a Website App.
 
@@ -143,8 +144,8 @@ There isn't any additional requirements since you already installed the deps wit
 
 ### Quick start
 
-- `npm run build` to build the project (at least the first time)
-- `npm run serve:electron` to launch the desktop app and enable livereload
+* `npm run build` to build the project (at least the first time)
+* `npm run serve:electron` to launch the desktop app and enable livereload
 
 Congratulations! You've just successfully run the project as a Desktop App.
 
@@ -155,3 +156,28 @@ To run the tests, simply run:
 ```
 npm test
 ```
+
+## 💸 Donations
+
+I currently work on this project during my free-time, but also during my work-time. As I'm my own boss, I take work time to work on personnal projects that I really believes in. But during this time, I don't win any money. I'm not doing that for money.
+
+Anyway, if you consider support me, you can pay me a pack of Monster's cans for moore productive coding, :D.
+
+I accept donations in form of Monero, Bitcoin, Etherum & IntenseCoin (in that order). You can also Patreon me !
+
+[![Become a patron](https://i.imgur.com/oWouhEe.png)](https://www.patreon.com/bePatron?u=2330345)
+
+```
+1. Monero (XMR): 47XpVhUHahViCZHuZPc2Z6ivLraidX7AxbM8b2StdPcQGwjDGY14eqj9ippW7Pdrqj9d2y4xvwChzePQAqG1NvqQ775FKxg
+2. Bitcoin (BTC/XBT): 18BqyV9mNbFLi5HNNnfUprnPJyJDFP59Xh
+3. Etherum (ETH): 0x56E3273D42B40d47E122fF62108dEDC974A4206e
+4. IntenseCoin (ITNS): iz5F814eDfX7gbUucu17E5YUBGADYGLDRhMfKQjfXwv9S1UDPaJKcgEiUUWm9vDeJ7JVcPWo7kZRmTFtcVcssc1h28zguw8iE
+```
+
+If you wish to support me, but doesn't have money for, you can still message me on Wire and give me some free hugs! :D
+
+* Wire handle: **@SkyzohKey**
+
+## 📎 License
+
+This project is licensed under [The MIT License](License).
