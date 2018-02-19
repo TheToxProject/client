@@ -51,9 +51,3 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
-
-## App stuffs.
-.tmp
-dist/
-coverage/
-ios/main.jsbundle

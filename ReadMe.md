@@ -1,161 +1,126 @@
-# The Universal Tox Client
+# 🔒 The Universal Tox Client
 
-[![Build Status](https://travis-ci.org/Tox-Client/client.svg?branch=master)](https://travis-ci.org/Tox-Client/client) [![dependencies Status](https://david-dm.org/Tox-Client/client/status.svg)](https://david-dm.org/Tox-Client/client) [![devDependencies Status](https://david-dm.org/Tox-Client/client/dev-status.svg)](https://david-dm.org/Tox-Client/client?type=dev)
+[![Build Status](https://travis-ci.org/Tox-Client/client.svg?branch=master)](https://travis-ci.org/Tox-Client/client) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 This project is a fresh start of the new Tox client I'm willing to dev. It's shared between platforms with only one codebase and can run easily on Android, iOS, Linux, OSX, Windows 10/UWP, Windows 7/8, and maybe Windows Phone.
 
 The main goal of this project is to provide the same experience between platforms by giving users an instant messenger application that is both secure and user-friendly.
 
-Behind the hood, it uses React (Web/Desktop) and React Native (Android/iOS) and a pattern based on `Base` component and `Renderer` components that allows us to share the application logic between every pattern but allowing platform-specific stuff in different files. Compiler (webpack/grunt) then takes care of choosing the right file to resolve depending on which platform it's being built for.
+## Table of Contents
 
-![](https://0x0.st/sshQ.png)
+* [Roadmap](#-roadmap)
+* [Compiling](#-compiling)
+  * [Android](#android)
+  * [iOS](#ios)
+  * [Web](#web)
+  * [Desktop (Electron)](#desktop-electron)
+* [Build for production](#-build-for-production)
+  * [Android/iOS](#androidios)
+  * [Web](#web-1)
+* [Donations](#-donations)
+* [License](#-license)
 
-## Libraries/tools
+## 🍾 Roadmap
 
-This project uses libraries and tools like:
+### Milestone 1 (v0.1.0-alpha)
 
-* es6 syntax and [babel](https://babeljs.io)
-* [react](https://facebook.github.io/react) for the Website App and Desktop App,
-* [react-native](https://facebook.github.io/react-native) for the iOS & Android Apps
-* [Electron](http://electron.atom.io) to package the Desktop App
-* [redux](http://redux.js.org/) to organize the data flow management
-* [css-loader](https://github.com/webpack/css-loader) to integrate the styles in the builds
-* [grunt](http://gruntjs.com) to create the builds
-* [webpack](https://webpack.github.io) to help during the development phase with hot reloading
+Create a library (and publish it on NPM) containing the UI elements that will be used in the client. That means a LOT of small and bigger components that needs to be reusable and that MUST performs/looks the same not depending if that's run on the browser, the desktop client, or the mobile one.
 
-## Basic philosophy
+### Milestone 2 (v0.2.0-alpha to v0.5.0-alpha)
 
-All the code is contained in the `src` directory, especially the 3 main entry files that are used for the builds:
+Create a library (and publish it on NPM) that allows to use c-toxcore on mobile devices. I will need to create a wrapper for Android in Java (I mostly know that language, so shouldn't be too hard) and one for iOS in Obj-C/Swift, which are languages I have never tried nor used, and that I'll have to learn to get this milestone right.
 
-* `index.ios.js` & `index.android.js` are the ones used to build the iOS & Android Apps
-* `index.js` is the one used to build the Website App and Desktop App as the code is strictly the same.
+### Milestone 3 (v0.6.0-alpha to v0.8.0-alpha)
 
-### Redux architecture actions/stores
+Wire's all the components to redux and map redux actions creators to the `react-toxcore` library done in the previous milestone. Have everything properly working on every platform, whether it's in the browser, iOS, Android, Linux, Windows or OSX. Everything has to look exactly the same, and works the same, and even have the same bugs!
 
-All the [redux](http://redux.js.org/) architecture is share to 100% to all the different builds. This means that all the logic and data management code is done only once and reuse everywhere. This allows us to have an easy tests suite as well and to ensure that our code is working properly on all the devices.
+### Milestone 4 (no release)
 
-### Components
+Take a break with the client development and create a small promotional website, with a blog and stuffs to aid in getting the app in user's hands. _This website will need to be clear, simple and attractive. The blog will serves as a distribution channel, and thus needs to be polished and localized._
 
-The real interest of the project is in how the components have been structured to shared most of their logic and only redefined what is specific to every device.
+### Milestone 5 (v0.9.0-beta)
 
-Basically, every component has a `MainClass` which inherits a `BaseClass` containing all the logic. Then, the main component import a different Render function which has been selected during the build. The file extension `.ios.js`, `.android.js` or `.js` is used by the build tool to import only the right file.
+Publish the app on respective App Stores _(App Store, Play Store, Windows Store, and get it in AUR + Fedora + Ubuntu + Solus repos)_ in beta test mode, spread the word and collect users feedbacks.
 
-The `.native.js` files contain code that is shared between both mobile platforms (iOS & Android). Currently, the `.ios.js` and `.android.js` files compose this `.native.js` file since all code is shared right now. However, if a component needed to be different for platform specific reasons, that code would be included in the corresponding platform specific files.
+### Milestone 6 (v1.0.0-rc1)
 
-At the end, every component is defined by 6 files. If we look at the screen component, here is its structure.
+Fix all the issues reported during the beta-test period and update the branding a little bit to gives beta-tester new "features", giving them more enjoyment ! Release a pre-release for 2 weeks extra bugs reports.
 
-```
-Screen
-├── index.js
-├── styles.js (styles of the component)
-├── ScreenBase.js
-├── ScreenRender.ios.js (specific to iOS build
-├── ScreenRender.android.js (specific to Android build)
-├── ScreenRender.native.js (shared mobile app code - iOS & Android)
-└── ScreenRender.js (used during Website and Desktop build)
-```
+### Milestone 7 (v1.0.0-rc2)
 
-And here is the `MainClass` (`index.js`) file which composes the files.
+Finally fixes all the issues from last pre-release 2 weeks time (as they appears) and do release a 1st stable version to peoples.
 
-```js
-"use strict";
+### Milestone 8 (v1.0.0-rc3)
 
-import Base from "./ScreenBase";
-import Render from "./ScreenRender";
+Take some time to build a list of all the app's strings, prepare them for localization (ICU format), setup tooling to enable people to translate in their languages. Wait 2 weeks for translations to be done, then release.
 
-export default class Screen extends Base {
-  constructor(props) {
-    super(props);
-  }
+## 🔬 Compiling
 
-  render() {
-    return Render.call(this, this.props, this.state);
-  }
-}
+Before targeting a specific platform, you need to clone the repository and to install required dependencies.
+
+```bash
+# Clone the directory as `toxclient`.
+$ git clone https://github.com/Tox-Client/client.git toxclient
+$ cd toxclient/
+
+# Now install the dependencies with Yarn:
+$ yarn
+# Or with NPM:
+$ npm install
 ```
 
-### Styles
+### Android
 
-Styles are written in different fashions between React & React Native. This project use [react-native-css](https://github.com/sabeurthabti/react-native-css) to share the stylesheets between web/desktop version and mobile one. This allow for faster iteration cycle and also remove duplicate/not-in-sync styles issues.
-
-# How to build/run the projects
-
-## General requirements before running any specific project
-
-* `npm install` to install all the dependencies, React and React Native among others.
-
-### With some versions of npm (>=v3.3.10 <=v3.6.0)
-
-Some builds from npm included bugs while `npm install`. So if you are using a npm version within the range form 3.3.10 to 3.6.0 included, you must run `npm install` twice. Those versions including npm v3.3.12 are the ones bundled by default with node from version v5.1.0 to v5.5.0.
-
-* `npm install npm`
-* `npm install npm` run it twice, because of the packages won't be installed after the first run [#10985](https://github.com/npm/npm/issues/10985)
-
-## The Mobile Apps (iOS & Android)
-
-### Requirements for React Native
-
-#### iOS
-
-* OS X
-* Xcode 6.3 or higher is recommended (Xcode only runs on Mac).
-* Homebrew is the recommended way to install node, watchman, and flow.
-* `brew install node`
-* `brew install watchman`. We recommend installing watchman, otherwise you might hit a node file watching bug.
-* `brew install flow`. If you want to use flow.
-
-#### Android
-
-* Follow the official documentation guide here: http://facebook.github.io/react-native/docs/getting-started.html#android-setup (includes experimental Windows & Linux support)
-
-### Running the Mobile Apps
-
-#### iOS
-
-* Open iosApp.xcodeproj and hit run in Xcode.
-* Hit cmd+R in your iOS simulator to reload the app and see your change!
-
-#### Android
-
-* Open an emulator. (Genymotion or run `android avd`)
-* Run the `react-native run-android` in the root of this project.
-* If trying to run on a device, read the following guide: http://facebook.github.io/react-native/docs/running-on-device-android.html#content
-
-Congratulations! You've just successfully run the project as an iOS or Android App.
-
-## The Website App
-
-### Requirements for React
-
-There isn't any additional requirements since you already installed the deps with `npm install`.
-
-### Quick start
-
-* `npm run build` to build the project (at least the first time)
-* `npm run serve:web` to preview in the browser at http://localhost:8000/index.web.html or http://localhost:8000/webpack-dev-server/index.web.html with webpack-dev-server and hot reload enabled
-
-Congratulations! You've just successfully run the project as a Website App.
-
-## The Desktop App
-
-### Requirements for Electron
-
-There isn't any additional requirements since you already installed the deps with `npm install`.
-
-### Quick start
-
-* `npm run build` to build the project (at least the first time)
-* `npm run serve:electron` to launch the desktop app and enable livereload
-
-Congratulations! You've just successfully run the project as a Desktop App.
-
-# Run the tests
-
-To run the tests, simply run:
-
+```bash
+$ react-native run-android
 ```
-npm test
+
+### iOS
+
+```bash
+$ react-native run-ios
 ```
+
+### Web
+
+You can use Yarn or NPM for the following step, depending on your preference.
+
+```bash
+# Using Yarn:
+$ yarn web
+
+# Using NPM:
+$ npm run web
+```
+
+### Windows
+
+```bash
+$ react-native windows
+$ react-native run-windows
+```
+
+### Desktop (Electron)
+
+You can use Yarn or NPM for the following step, depending on your preference.
+
+```bash
+# Using Yarn:
+$ yarn electron
+
+# Using NPM:
+$ npm run electron
+```
+
+## 🥁 Build for production
+
+### Android/iOS
+
+[This will help](https://facebook.github.io/react-native/docs/running-on-device.html)
+
+### Web
+
+`npm/yarn run build` (this will build your production ready bundle)
 
 ## 💸 Donations
 

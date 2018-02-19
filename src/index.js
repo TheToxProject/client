@@ -1,49 +1,23 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
+import React from "react";
+import { Provider } from "react-redux";
+import ReactNative from "react-native";
+import store from "./utilities/storage/store";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import Routing, { Router, Switch } from "./utilities/routing/index";
 
-// Redux imports.
-import { createStore, applyMiddleware } from "redux";
-import { Provider, connect } from "react-redux";
-import { composeWithDevTools } from "remote-redux-devtools";
-import thunk from "redux-thunk";
+const Route = Routing.Route;
 
-import { globalRoutes } from "./common/routes";
-import { getRootReducer } from "./common/store/rootReducer";
-import InitialScreen from "./common/screens/InitialScreen";
-
-// CSS
-require("./styles/normalize.css");
-require("./styles/components.css");
-require("./styles/main.css");
-
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-
-    const middlewares = [thunk];
-    const reducer = getRootReducer(null);
-
-    this.store = createStore(
-      reducer,
-      {},
-      window.__REDUX_DEVTOOLS_EXTENSION__
-        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-            applyMiddleware(...middlewares)
-          )
-        : applyMiddleware(...middlewares)
-    );
-  }
-
-  componentWillMount() {}
-
+class App extends React.Component {
   render() {
     return (
-      <Provider store={this.store}>
-        <InitialScreen />
+      <Provider store={store}>
+        <Router>
+          <Route exact path="/" component={LoginScreen} />
+        </Router>
       </Provider>
     );
   }
 }
 
-const content = document.querySelector("#content");
-render(<App />, content);
+ReactNative.render(<App />, document.getElementById("root"));
