@@ -30,6 +30,7 @@ export class Logo extends Component {
           {...this.props}
           style={styles[size] || styles.normal}
           resizeMode={"contain"}
+          fadeDuration={0}
           source={
             Platform.OS === "web"
               ? require("../assets/tox-logo.svg")

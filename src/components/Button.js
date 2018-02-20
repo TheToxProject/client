@@ -23,6 +23,7 @@ export default class Button extends Component {
 
   render() {
     const text = this.props.text ? this.props.text : "Button";
+    const raised = this.props.raised ? this.props.raised : false;
 
     return (
       <Touchable
@@ -38,14 +39,14 @@ export default class Button extends Component {
         <View
           style={[
             styles.button,
-            ...this._getButtonStyles(),
+            this._getButtonStyles(),
             this.props.style ? this.props.style : null
           ]}
         >
           <Text
             style={[
               styles.text,
-              ...this._getTextStyles(),
+              this._getTextStyles(),
               this.props.textStyle ? this.props.textStyle : null
             ]}
           >
@@ -65,11 +66,21 @@ export default class Button extends Component {
   }
 
   _getButtonStyles() {
-    return {};
+    const raised = this.props.raised ? this.props.raised : false;
+    if (raised) {
+      return {
+        backgroundColor: "rgba(0,0,0,0)"
+      };
+    }
   }
 
   _getTextStyles() {
-    return {};
+    const raised = this.props.raised ? this.props.raised : false;
+    if (raised) {
+      return {
+        color: "white"
+      };
+    }
   }
 }
 

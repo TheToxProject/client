@@ -9,8 +9,8 @@
     "build": "node scripts/build.js",
     "test:web": "node scripts/test.js --env=jsdom",
     "electron": "node scripts/start.js & electron .",
-    "storybook": "start-storybook -p 9009 -s storybook",
-    "build-storybook": "build-storybook -s storybook"
+    "storybook": "start-storybook -p 9009 -s ./storybook/",
+    "build-storybook": "build-storybook -s ./storybook/"
   },
   "dependencies": {
     "autoprefixer": "7.1.6",
