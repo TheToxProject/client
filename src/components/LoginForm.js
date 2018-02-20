@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  Image,
-  TextInput,
-  Dimensions
-} from "react-native";
+import { StyleSheet, Text, View, Platform, Dimensions } from "react-native";
 
 import { Link } from "./../utilities/routing/router";
 import Input from "./Input";
@@ -16,12 +8,8 @@ import Logo from "./Logo";
 import FormHeader from "./FormHeader";
 
 export class LoginForm extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
-    const { width, height } = Dimensions.get("window");
+    const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
 
     return (

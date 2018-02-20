@@ -4,8 +4,6 @@ import {
   Text,
   View,
   Platform,
-  Image,
-  TextInput,
   Dimensions
 } from "react-native";
 
@@ -16,12 +14,9 @@ import Logo from "./Logo";
 import FormHeader from "./FormHeader";
 
 export class RegisterForm extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
 
   render() {
-    const { width, height } = Dimensions.get("window");
+    const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
 
     return (

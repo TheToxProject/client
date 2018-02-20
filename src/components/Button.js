@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  StyleSheet,
   View,
   Text,
   Platform,
@@ -17,13 +16,8 @@ const Touchable = Platform.select({
 });
 
 export default class Button extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const text = this.props.text ? this.props.text : "Button";
-    const raised = this.props.raised ? this.props.raised : false;
 
     return (
       <Touchable

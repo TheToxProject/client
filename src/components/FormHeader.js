@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import { Platform, View, Text } from "react-native";
+import { Platform, Text } from "react-native";
 
 export class FormHeader extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
     const { text } = this.props;
 

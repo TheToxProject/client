@@ -5,12 +5,8 @@ const ORIGINAL_WIDTH = 149;
 const ORIGINAL_HEIGHT = 60;
 
 export class Logo extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
-    const { size, variant, align } = this.props;
+    const { size, align } = this.props;
 
     /**
      * TODO: Handle variant (color: white, black, muted, colors).
