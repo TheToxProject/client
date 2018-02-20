@@ -10,8 +10,8 @@
     "test:web": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "react-scripts start & electron .",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "storybook": "start-storybook -p 9009 -s storybook",
+    "build-storybook": "build-storybook -s storybook"
   },
   "dependencies": {
     "react": "16.2.0",
@@ -27,18 +27,18 @@
     "redux-thunk": "2.2.0"
   },
   "devDependencies": {
-    "babel-jest": "22.2.2",
-    "babel-plugin-transform-react-remove-prop-types": "0.4.10",
-    "babel-preset-react-native": "4.0.0",
-    "electron": "1.6.11",
-    "jest": "22.3.0",
-    "react-scripts": "1.1.0",
-    "react-test-renderer": "16.2.0",
-    "@storybook/react": "^3.3.13",
     "@storybook/addon-actions": "^3.3.13",
     "@storybook/addon-links": "^3.3.13",
     "@storybook/addons": "^3.3.13",
-    "babel-core": "^6.26.0"
+    "@storybook/react": "^3.3.13",
+    "babel-core": "^6.26.0",
+    "babel-jest": "22.2.2",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.10",
+    "babel-preset-react-native": "4.0.0",
+    "electron": "1.6.16",
+    "jest": "22.3.0",
+    "react-scripts": "1.1.0",
+    "react-test-renderer": "16.2.0"
   },
   "jest": {
     "preset": "react-native"
