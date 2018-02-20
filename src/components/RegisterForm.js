@@ -12,6 +12,7 @@ export class RegisterForm extends Component {
     const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
     const { disableLinks } = this.props;
+    const ButtonLink = disableLinks ? View : Link;
 
     return (
       <View style={[styles.loginView, { width: formWidth }]}>
@@ -40,11 +41,9 @@ export class RegisterForm extends Component {
             onPressDelay={200}
             text="Sign up"
           />
-          {disableLinks !== true && (
-            <Link to="/">
-              <Text style={styles.backLogin}>Back to login</Text>
-            </Link>
-          )}
+          <ButtonLink to="/">
+            <Text style={styles.backLogin}>Back to login</Text>
+          </ButtonLink>
         </View>
       </View>
     );

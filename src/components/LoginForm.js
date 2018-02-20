@@ -12,6 +12,7 @@ export class LoginForm extends Component {
     const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
     const { disableLinks } = this.props;
+    const ButtonLink = disableLinks ? View : Link;
 
     return (
       <View style={[styles.loginView, { width: formWidth }]}>
@@ -44,11 +45,9 @@ export class LoginForm extends Component {
             onPressDelay={200}
             text="Sign in"
           />
-          {disableLinks !== true && (
-            <Link to="/auth/register">
-              <Text style={styles.createAccount}>Create a profile</Text>
-            </Link>
-          )}
+          <ButtonLink to="/auth/register">
+            <Text style={styles.createAccount}>Create a profile</Text>
+          </ButtonLink>
         </View>
       </View>
     );
