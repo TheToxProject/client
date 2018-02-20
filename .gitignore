@@ -54,4 +54,6 @@ buck-out/
 
 
 # Storybook
+#
 storybook-static/
+storybook-static/*
