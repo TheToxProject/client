@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -10,24 +11,24 @@ import FormHeader from "../components/FormHeader";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
 
+const darkBackgroundStyle = {
+  backgroundColor: "#414141",
+  padding: 16
+};
+
 storiesOf("Logo", module)
   .add("with original size", () => (
-    <Logo
-      style={{ backgroundColor: "#414141", padding: 16 }}
-      size={"original"}
-    />
+    <Logo style={darkBackgroundStyle} size={"original"} />
   ))
   .add("with medium size", () => (
-    <Logo style={{ backgroundColor: "#414141", padding: 16 }} size={"medium"} />
+    <Logo style={darkBackgroundStyle} size={"medium"} />
   ))
   .add("with small size", () => (
-    <Logo style={{ backgroundColor: "#414141", padding: 16 }} size={"small"} />
+    <Logo style={darkBackgroundStyle} size={"small"} />
   ))
-  .add("with big size", () => (
-    <Logo style={{ backgroundColor: "#414141", padding: 16 }} size={"big"} />
-  ))
+  .add("with big size", () => <Logo style={darkBackgroundStyle} size={"big"} />)
   .add("with bigger size", () => (
-    <Logo style={{ backgroundColor: "#414141", padding: 16 }} size={"bigger"} />
+    <Logo style={darkBackgroundStyle} size={"bigger"} />
   ));
 
 storiesOf("Button", module)
@@ -67,28 +68,20 @@ storiesOf("Input", module)
 
 storiesOf("FormHeader", module)
   .add("with base style", () => (
-    <FormHeader
-      style={{ backgroundColor: "#414141", padding: 16 }}
-      text={"My cool form header!"}
-    />
+    <View style={darkBackgroundStyle}>
+      <FormHeader text={"My cool form header!"} />
+    </View>
   ))
   .add("with some emoji", () => (
-    <FormHeader
-      style={{ backgroundColor: "#414141", padding: 16 }}
-      text={"😀 😎 👍 💯"}
-    />
+    <View style={darkBackgroundStyle}>
+      <FormHeader text={"😀 😎 👍 💯"} />
+    </View>
   ));
 
 storiesOf("Forms", module)
   .add("Login form", () => (
-    <LoginForm
-      disableLinks
-      style={{ backgroundColor: "#414141", padding: 16 }}
-    />
+    <LoginForm disableLinks style={darkBackgroundStyle} />
   ))
   .add("Register form", () => (
-    <RegisterForm
-      disableLinks
-      style={{ backgroundColor: "#414141", padding: 16 }}
-    />
+    <RegisterForm disableLinks style={darkBackgroundStyle} />
   ));
