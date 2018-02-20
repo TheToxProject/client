@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { Provider } from "react-redux";
 import store from "./src/utilities/storage/store";
 import LoginScreen from "./src/screens/LoginScreen";
@@ -9,10 +10,17 @@ const Route = Routing.Route;
 
 class App extends React.Component {
   render() {
+    const App = (props, context) => <View>{props.children}</View>;
+
     return (
       <Provider store={store}>
         <Router>
-          <Route exact path="/" component={LoginScreen} />
+          <App>
+            <Switch>
+              <Route exact path="/" component={LoginScreen} />
+              <Route exact path="/auth/register" component={RegisterScreen} />
+            </Switch>
+          </App>
         </Router>
       </Provider>
     );

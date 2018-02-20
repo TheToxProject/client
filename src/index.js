@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import ReactNative from "react-native";
+import ReactNative, { View } from "react-native";
 import store from "./utilities/storage/store";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
@@ -10,10 +10,17 @@ const Route = Routing.Route;
 
 class App extends React.Component {
   render() {
+    const App = (props, context) => <View>{props.children}</View>;
+
     return (
       <Provider store={store}>
         <Router>
-          <Route exact path="/" component={LoginScreen} />
+          <App>
+            <Switch>
+              <Route exact path="/" component={LoginScreen} />
+              <Route exact path="/auth/register" component={RegisterScreen} />
+            </Switch>
+          </App>
         </Router>
       </Provider>
     );

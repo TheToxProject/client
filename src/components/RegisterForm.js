@@ -12,6 +12,7 @@ import {
 import Input from "./Input";
 import Button from "./Button";
 import Logo from "./Logo";
+import FormHeader from "./FormHeader";
 
 export class RegisterForm extends Component {
   constructor(props, context) {
@@ -30,6 +31,7 @@ export class RegisterForm extends Component {
           align={"center"}
           style={styles.logo}
         />
+        <FormHeader text="Create your Tox profile" />
         <Input placeholder={"Choose your username..."} />
         <Input placeholder={"Type your password..."} secureTextEntry={true} />
         <Input

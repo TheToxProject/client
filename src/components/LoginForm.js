@@ -9,9 +9,11 @@ import {
   Dimensions
 } from "react-native";
 
+import { Link } from "./../utilities/routing/router";
 import Input from "./Input";
 import Button from "./Button";
 import Logo from "./Logo";
+import FormHeader from "./FormHeader";
 
 export class LoginForm extends Component {
   constructor(props, context) {
@@ -30,17 +32,21 @@ export class LoginForm extends Component {
           align={"center"}
           style={styles.logo}
         />
-        <Text style={styles.title}>Login to your Tox profile</Text>
+        <FormHeader text="Login to your Tox profile" />
+        {/**
+         * @todo Replace the username input by a profile dropdown.
+         * @body Tox works with profiles files instead of hosted accounts.
+         */}
         <Input
           name="username"
           placeholder={"Username..."}
-          autocomplete={false}
+          autoComplete={false}
         />
         <Input
           name="password"
           placeholder={"Password..."}
           secureTextEntry={true}
-          autocomplete={false}
+          autoComplete={false}
         />
         <View style={styles.actions}>
           <Button
@@ -49,6 +55,7 @@ export class LoginForm extends Component {
             onPressDelay={200}
             text="Sign in"
           />
+          <Link to="/auth/register">Create a profile</Link>
         </View>
       </View>
     );
@@ -68,22 +75,6 @@ const styles = StyleSheet.create({
   logo: {
     marginBottom: 32,
     alignSelf: "center"
-  },
-  title: {
-    color: "rgba(255,255,255,.87)",
-    fontSize: 22,
-    marginBottom: 8,
-    paddingBottom: 12,
-    textAlign: "center",
-    ...Platform.select({
-      web: {
-        borderBottom: "3px solid rgba(255, 255, 255, .2)"
-      },
-      default: {
-        borderBottomColor: "rgba(255, 255, 255, .3)",
-        borderBottomWidth: 2
-      }
-    })
   },
   actions: {
     marginTop: 16,
