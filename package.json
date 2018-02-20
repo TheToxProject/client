@@ -42,8 +42,6 @@
     "react-scripts": "1.1.0",
     "react-test-renderer": "16.2.0"
   },
-  "jest": {
-    "preset": "react-native"
-  },
+
   "main": "index.electron.js"
 }
