@@ -34,9 +34,17 @@ storiesOf("Logo", module)
 storiesOf("Button", module)
   .add("with text", () => (
     <Button
-      style={{ width: 100 }}
+      style={{ width: 110 }}
       onPress={action("clicked")}
       text="Hello Button"
+    />
+  ))
+  .add("with UPPERCASE", () => (
+    <Button
+      style={{ width: 130 }}
+      onPress={action("clicked")}
+      text="Hello Button"
+      uppercase
     />
   ))
   .add("with some emoji", () => (
