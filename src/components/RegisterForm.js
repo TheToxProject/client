@@ -22,7 +22,7 @@ export class RegisterForm extends Component {
           align={"center"}
           style={styles.logo}
         />
-        <FormHeader text="Create your Tox profile" />
+        <FormHeader text="Sign up" />
         <Input name="username" placeholder={"Choose your username..."} />
         <Input
           name="password"
@@ -39,7 +39,7 @@ export class RegisterForm extends Component {
             uppercase={true}
             onPress={() => this.props.onRegisterButtonPress()}
             onPressDelay={200}
-            text="Sign up"
+            text="Register"
           />
           <ButtonLink to="/">
             <Text style={styles.backLogin}>Back to login</Text>
@@ -51,15 +51,6 @@ export class RegisterForm extends Component {
 }
 
 const styles = StyleSheet.create({
-  loginView: {
-    ...Platform.select({
-      web: {
-        backgroundColor: "#555",
-        padding: 32,
-        borderRadius: 5
-      }
-    })
-  },
   logo: {
     width: 150,
     height: 60,

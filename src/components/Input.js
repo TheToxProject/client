@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TextInput, Platform, Animated } from "react-native";
 
-import Style from "../style.js";
+import Colors from "./../styles/colors";
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
@@ -37,7 +37,7 @@ export default class InputRender extends Component {
         ref={"input"}
         {...this.props}
         style={[inputStyles, this.props.style, { backgroundColor, elevation }]}
-        placeholderTextColor={Style.DARK_TEXT_LIGHT_COLOR}
+        placeholderTextColor={Colors.SECONDARY_TEXT}
         placeholder={this.props.placeholder && this.props.placeholder}
         underlineColorAndroid="rgba(255, 255, 255, 0)"
         onFocus={() => this._onFocus()}
@@ -70,7 +70,7 @@ const styles = {
     paddingHorizontal: 16,
     paddingVertical: Platform.OS === "web" ? 12 : 8,
     marginVertical: 8,
-    backgroundColor: Style.PRIMARY_DARK_COLOR,
+    backgroundColor: Colors.PRIMARY_TEXT,
     color: "white",
     borderRadius: 3
   },
@@ -78,7 +78,7 @@ const styles = {
     paddingHorizontal: 16,
     paddingVertical: Platform.OS === "web" ? 12 : 8,
     marginVertical: 8,
-    backgroundColor: Style.PRIMARY_DARK_HOVER_COLOR,
+    backgroundColor: Colors.PRIMARY,
     color: "white",
     borderRadius: 3,
     ...Platform.select({

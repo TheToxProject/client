@@ -1,12 +1,25 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { withRouter } from "./../utilities/routing/router";
+
+import Colors from "./../styles/colors";
 import LoginForm from "./../components/LoginForm";
 
 class LoginScreen extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.onLoginButtonPress = this.onLoginButtonPress.bind(this);
+  }
+
+  onLoginButtonPress() {}
+
   render() {
     return (
       <View style={styles.container}>
-        <LoginForm />
+        <LoginForm
+          onLoginButtonPress={() => this.props.history.push("/recents")}
+        />
       </View>
     );
   }
@@ -22,8 +35,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: "#414141"
+    backgroundColor: Colors.DARK_BACKGROUND
   }
 });
 
-export default LoginScreen;
+export default withRouter(LoginScreen);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Platform, Dimensions } from "react-native";
 
 import { Link } from "./../utilities/routing/router";
+import Colors from "../styles/colors";
 import Input from "./Input";
 import Button from "./Button";
 import Logo from "./Logo";
@@ -22,7 +23,7 @@ export class LoginForm extends Component {
           align={"center"}
           style={styles.logo}
         />
-        <FormHeader text="Login to your Tox profile" />
+        <FormHeader text="Sign in" />
         {/**
          * @todo Replace the username input by a profile dropdown.
          * @body Tox works with profiles files instead of hosted accounts.
@@ -43,7 +44,10 @@ export class LoginForm extends Component {
             uppercase={true}
             onPress={() => this.props.onLoginButtonPress()}
             onPressDelay={200}
-            text="Sign in"
+            text="Login"
+            backgroundColor={Colors.ACCENT}
+            color={Colors.TEXT}
+            size={"normal"}
           />
           <ButtonLink to="/auth/register">
             <Text style={styles.createAccount}>Create a profile</Text>
@@ -56,13 +60,13 @@ export class LoginForm extends Component {
 
 const styles = StyleSheet.create({
   loginView: {
-    ...Platform.select({
+    /*...Platform.select({
       web: {
-        backgroundColor: "#555",
+        backgroundColor: Colors.PRIMARY_TEXT,
         padding: 32,
         borderRadius: 5
       }
-    })
+    })*/
   },
   logo: {
     marginBottom: 32,

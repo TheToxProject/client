@@ -8,7 +8,7 @@ const RouterPackage =
 /*
  * Remove Platform specific exports :/
  * */
-export const { Link, Route, Redirect } = RouterPackage;
+export const { Link, Route, Redirect, withRouter } = RouterPackage;
 export const Router =
   Platform.OS === "web"
     ? RouterPackage.BrowserRouter

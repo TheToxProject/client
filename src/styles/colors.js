@@ -1,0 +1,15 @@
+const Colors = {
+  PRIMARY: "#9C27B0",
+  LIGHT_PRIMARY: "#E1BEE7",
+  DARK_PRIMARY: "#7B1FA2",
+  ACCENT: "#3F51B5",
+  PRIMARY_TEXT: "#212121",
+  SECONDARY_TEXT: "#757575",
+  DIVIDE: "#BDBDBD",
+  ICONS: "#FFFFFF",
+  TEXT: "#FFFFFF",
+  BACKGROUND: "#FAFAFA",
+  DARK_BACKGROUND: "#414141"
+};
+
+export default Colors;

@@ -165,6 +165,14 @@ module.exports = {
               cacheDirectory: true
             }
           },
+          {
+            test: /\.ttf$/,
+            loader: "url-loader", // or directly file-loader
+            include: path.resolve(
+              __dirname,
+              "node_modules/react-native-vector-icons"
+            )
+          },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
           // "style" loader turns CSS into JS modules that inject <style> tags.
