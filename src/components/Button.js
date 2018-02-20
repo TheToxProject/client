@@ -102,7 +102,9 @@ const styles = {
     backgroundColor: "white",
     paddingVertical: 8,
     paddingHorizontal: 16,
-    borderRadius: 3
+    borderRadius: 3,
+    width: "auto",
+    flex: 0
   },
   text: {
     color: "rgba(0, 0, 0, 0.87)",
