@@ -10,7 +10,9 @@ const Route = Routing.Route;
 
 class App extends React.Component {
   render() {
-    const App = (props, context) => <View>{props.children}</View>;
+    const App = (props, context) => (
+      <View style={{ height: "100%" }}>{props.children}</View>
+    );
 
     return (
       <Provider store={store}>

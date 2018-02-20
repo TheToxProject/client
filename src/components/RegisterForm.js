@@ -4,23 +4,19 @@ import {
   Text,
   View,
   Platform,
-  Image,
-  TextInput,
   Dimensions
 } from "react-native";
 
+import { Link } from "./../utilities/routing/router";
 import Input from "./Input";
 import Button from "./Button";
 import Logo from "./Logo";
 import FormHeader from "./FormHeader";
 
 export class RegisterForm extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
 
   render() {
-    const { width, height } = Dimensions.get("window");
+    const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
 
     return (
@@ -32,9 +28,14 @@ export class RegisterForm extends Component {
           style={styles.logo}
         />
         <FormHeader text="Create your Tox profile" />
-        <Input placeholder={"Choose your username..."} />
-        <Input placeholder={"Type your password..."} secureTextEntry={true} />
+        <Input name="username" placeholder={"Choose your username..."} />
         <Input
+          name="password"
+          placeholder={"Type your password..."}
+          secureTextEntry={true}
+        />
+        <Input
+          name="password_confirm"
           placeholder={"Confirm your password..."}
           secureTextEntry={true}
         />
@@ -45,12 +46,9 @@ export class RegisterForm extends Component {
             onPressDelay={200}
             text="Sign up"
           />
-          <Text
-            onPress={() => this.props.onBackLoginButtonPress()}
-            style={styles.backLogin}
-          >
-            Back to login
-          </Text>
+          <Link to="/">
+            <Text style={styles.backLogin}>Back to login</Text>
+          </Link>
         </View>
       </View>
     );
@@ -81,7 +79,10 @@ const styles = StyleSheet.create({
   },
   backLogin: {
     fontSize: 16,
-    color: "white"
+    color: "white",
+    padding: 8,
+    backgroundColor: "transparent",
+    borderRadius: 3
   }
 });
 

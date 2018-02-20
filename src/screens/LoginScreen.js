@@ -3,10 +3,6 @@ import { StyleSheet, View } from "react-native";
 import LoginForm from "./../components/LoginForm";
 
 class LoginScreen extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
     return (
       <View style={styles.container}>

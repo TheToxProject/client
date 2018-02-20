@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  Image,
-  TextInput,
-  Dimensions
-} from "react-native";
+import { StyleSheet, Text, View, Platform, Dimensions } from "react-native";
 
 import { Link } from "./../utilities/routing/router";
 import Input from "./Input";
@@ -16,12 +8,8 @@ import Logo from "./Logo";
 import FormHeader from "./FormHeader";
 
 export class LoginForm extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
-    const { width, height } = Dimensions.get("window");
+    const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
 
     return (
@@ -40,13 +28,13 @@ export class LoginForm extends Component {
         <Input
           name="username"
           placeholder={"Username..."}
-          autoComplete={false}
+          autoComplete={"off"}
         />
         <Input
           name="password"
           placeholder={"Password..."}
           secureTextEntry={true}
-          autoComplete={false}
+          autoComplete={"off"}
         />
         <View style={styles.actions}>
           <Button
@@ -55,7 +43,9 @@ export class LoginForm extends Component {
             onPressDelay={200}
             text="Sign in"
           />
-          <Link to="/auth/register">Create a profile</Link>
+          <Link to="/auth/register">
+            <Text style={styles.createAccount}>Create a profile</Text>
+          </Link>
         </View>
       </View>
     );
@@ -84,7 +74,10 @@ const styles = StyleSheet.create({
   },
   createAccount: {
     fontSize: 16,
-    color: "white"
+    color: "white",
+    padding: 8,
+    backgroundColor: "transparent",
+    borderRadius: 3
   }
 });
 

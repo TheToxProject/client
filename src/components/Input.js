@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, TextInput, Platform, Animated } from "react-native";
+import { TextInput, Platform, Animated } from "react-native";
 
 import Style from "../style.js";
 

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  StyleSheet,
   View,
   Text,
   Platform,
@@ -17,10 +16,6 @@ const Touchable = Platform.select({
 });
 
 export default class Button extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const text = this.props.text ? this.props.text : "Button";
 
@@ -38,14 +33,14 @@ export default class Button extends Component {
         <View
           style={[
             styles.button,
-            ...this._getButtonStyles(),
+            this._getButtonStyles(),
             this.props.style ? this.props.style : null
           ]}
         >
           <Text
             style={[
               styles.text,
-              ...this._getTextStyles(),
+              this._getTextStyles(),
               this.props.textStyle ? this.props.textStyle : null
             ]}
           >
@@ -65,11 +60,21 @@ export default class Button extends Component {
   }
 
   _getButtonStyles() {
-    return {};
+    const raised = this.props.raised ? this.props.raised : false;
+    if (raised) {
+      return {
+        backgroundColor: "rgba(0,0,0,0)"
+      };
+    }
   }
 
   _getTextStyles() {
-    return {};
+    const raised = this.props.raised ? this.props.raised : false;
+    if (raised) {
+      return {
+        color: "white"
+      };
+    }
   }
 }
 
@@ -91,7 +96,9 @@ const styles = {
     backgroundColor: "white",
     paddingVertical: 8,
     paddingHorizontal: 16,
-    borderRadius: 3
+    borderRadius: 3,
+    width: "auto",
+    flex: 0
   },
   text: {
     color: "rgba(0, 0, 0, 0.87)",

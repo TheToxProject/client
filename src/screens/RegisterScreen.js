@@ -3,10 +3,6 @@ import { StyleSheet, View } from "react-native";
 import RegisterForm from "../components/RegisterForm";
 
 class RegisterScreen extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
     return (
       <View style={styles.container}>
