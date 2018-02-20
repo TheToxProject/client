@@ -81,8 +81,14 @@ storiesOf("FormHeader", module)
 
 storiesOf("Forms", module)
   .add("Login form", () => (
-    <LoginForm style={{ backgroundColor: "#414141", padding: 16 }} />
+    <LoginForm
+      disableLinks
+      style={{ backgroundColor: "#414141", padding: 16 }}
+    />
   ))
   .add("Register form", () => (
-    <RegisterForm style={{ backgroundColor: "#414141", padding: 16 }} />
+    <RegisterForm
+      disableLinks
+      style={{ backgroundColor: "#414141", padding: 16 }}
+    />
   ));

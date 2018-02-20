@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  Dimensions
-} from "react-native";
+import { StyleSheet, Text, View, Platform, Dimensions } from "react-native";
 
 import { Link } from "./../utilities/routing/router";
 import Input from "./Input";
@@ -14,10 +8,10 @@ import Logo from "./Logo";
 import FormHeader from "./FormHeader";
 
 export class RegisterForm extends Component {
-
   render() {
     const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
+    const { disableLinks } = this.props;
 
     return (
       <View style={[styles.loginView, { width: formWidth }]}>
@@ -46,9 +40,11 @@ export class RegisterForm extends Component {
             onPressDelay={200}
             text="Sign up"
           />
-          <Link to="/">
-            <Text style={styles.backLogin}>Back to login</Text>
-          </Link>
+          {disableLinks !== true && (
+            <Link to="/">
+              <Text style={styles.backLogin}>Back to login</Text>
+            </Link>
+          )}
         </View>
       </View>
     );
