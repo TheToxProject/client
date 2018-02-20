@@ -9,8 +9,9 @@
     "build": "node scripts/build.js",
     "test:web": "node scripts/test.js --env=jsdom",
     "electron": "node scripts/start.js & electron .",
-    "storybook": "start-storybook -p 9009 -s ./storybook/",
-    "build-storybook": "build-storybook -s ./storybook/"
+    "storybook:start": "start-storybook -p 9009 -s $(pwd)/src/assets/",
+    "storybook:build": "build-storybook -s $(pwd)/src/assets/",
+    "storybook:deploy": "storybook-to-ghpages"
   },
   "dependencies": {
     "autoprefixer": "7.1.6",
@@ -67,6 +68,7 @@
     "@storybook/addon-links": "^3.3.13",
     "@storybook/addons": "^3.3.13",
     "@storybook/react": "^3.3.13",
+    "@storybook/storybook-deployer": "^2.3.0",
     "babel-core": "^6.26.0",
     "babel-jest": "22.2.2",
     "babel-plugin-transform-react-remove-prop-types": "0.4.10",
