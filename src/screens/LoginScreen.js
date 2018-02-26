@@ -12,13 +12,20 @@ class LoginScreen extends React.Component {
     this.onLoginButtonPress = this.onLoginButtonPress.bind(this);
   }
 
-  onLoginButtonPress() {}
+  onLoginButtonPress() {
+    /**
+     * @todo Handle the magic here.
+     */
+
+    const { history } = this.props;
+    history.replace("/recents");
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <LoginForm
-          onLoginButtonPress={() => this.props.history.push("/recents")}
+          onLoginButtonPress={this.onLoginButtonPress}
         />
       </View>
     );

@@ -23,6 +23,7 @@ export default class Button extends Component {
 
     return (
       <Touchable
+        activeOpacity={0.8}
         onPress={() =>
           // This allow for the ripple effect to be visible on press.
           setTimeout(
