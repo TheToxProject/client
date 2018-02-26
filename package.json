@@ -47,6 +47,7 @@
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.2.0",
     "react-native": "0.53.3",
+    "react-native-material-ripple": "^0.8.0",
     "react-native-vector-icons": "^4.5.0",
     "react-native-web": "0.5.1",
     "react-native-windows": "^1.0.0",

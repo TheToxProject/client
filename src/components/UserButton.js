@@ -1,19 +1,7 @@
 import React, { Component } from "react";
-import {
-  View,
-  Image,
-  Platform,
-  TouchableOpacity,
-  TouchableHighlight,
-  TouchableNativeFeedback
-} from "react-native";
+import { View, Image, Platform } from "react-native";
 
-const Touchable = Platform.select({
-  ios: TouchableHighlight,
-  android: TouchableNativeFeedback,
-  windows: TouchableOpacity,
-  web: TouchableOpacity
-});
+import Touchable from "./../components/Touchable";
 
 export class UserButton extends Component {
   render() {
@@ -21,7 +9,7 @@ export class UserButton extends Component {
 
     return (
       <View style={styles.container} {...this.props}>
-        <Touchable activeOpacity={0.8} onPress={onPress}>
+        <Touchable activeOpacity={0.8} onPress={() => setTimeout(onPress, 400)}>
           <Image
             fadeDuration={0}
             source={{
@@ -64,7 +52,7 @@ const styles = {
     width: 36,
     height: 36,
     resizeMode: "contain",
-    borderRadius: 36,
+    borderRadius: 36 * 2,
     overflow: "hidden"
   }
 };

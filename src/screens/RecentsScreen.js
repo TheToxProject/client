@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { withRouter } from "./../utilities/routing/router";
 
 import Colors from "./../styles/colors";
+import Presence from "./../utilities/enums/Presence";
 import Button from "./../components/Button";
 import Logo from "./../components/Logo";
 import UserButton from "./../components/UserButton";
@@ -33,7 +34,6 @@ class RecentsScreen extends React.Component {
   }
 
   render() {
-    const Presence = { OFFLINE: -1, ONLINE: 0, AWAY: 1, BUSY: 2 };
     //const ContactState = { MUTED: 0, BLOCKED: 1, DELETED: 2, NEW: 3 };
 
     return (
@@ -90,7 +90,7 @@ class RecentsScreen extends React.Component {
             <ContactItem
               unread
               username={"Ogromny | FNC"}
-              status={"Vive les vaches normandes! 😈"}
+              status={"Vive les vaches normandes! 🤠 🐮"}
               timestamp={1519659888}
               avatarUri={
                 "https://avatars.githubusercontent.com/Ogromny?size=46"
@@ -121,13 +121,28 @@ class RecentsScreen extends React.Component {
             <ContactItem
               username={"Joan Perez"}
               status={"My students come first in everything I do. 🙂"}
-              timestamp={1519647551}
+              timestamp={1519647032}
               avatarUri={"https://personagenerator.com/user-7.png"}
               presence={Presence.AWAY}
               presenceBackgroundColor={Colors.BACKGROUND}
               onPress={() =>
                 this.onContactItemPress.call(this, {
                   username: "Joan Perez"
+                })
+              }
+            />
+            <ContactItem
+              username={"Ricky Metzger"}
+              status={
+                "I love this idea, and I can't wait to test it with our customers!"
+              }
+              timestamp={1519642102}
+              avatarUri={"https://personagenerator.com/user-ricky.png"}
+              presence={Presence.OFFLINE}
+              presenceBackgroundColor={Colors.BACKGROUND}
+              onPress={() =>
+                this.onContactItemPress.call(this, {
+                  username: "Ricky Metzger"
                 })
               }
             />

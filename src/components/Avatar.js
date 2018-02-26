@@ -1,9 +1,28 @@
 import React, { Component } from "react";
 import { View, Image } from "react-native";
 
-import Colors from "../styles/colors";
+import Presence from "./../utilities/enums/Presence";
 
 export class Avatar extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.getPresenceImage = this.getPresenceImage.bind(this);
+  }
+
+  getPresenceImage(presence) {
+    switch (presence) {
+      case Presence.ONLINE:
+        return require("./../assets/presence/presence-online.png");
+      case Presence.AWAY:
+        return require("./../assets/presence/presence-away.png");
+      case Presence.BUSY:
+        return require("./../assets/presence/presence-busy.png");
+      default:
+        return require("./../assets/presence/presence-offline.png");
+    }
+  }
+
   render() {
     const { presence, presenceBackgroundColor, source, size } = this.props;
     const sizeStyle = size
@@ -12,7 +31,7 @@ export class Avatar extends Component {
     const presenceStyle = presenceBackgroundColor
       ? {
           borderColor: presenceBackgroundColor,
-          backgroundColor: Colors.ACCENT
+          backgroundColor: presenceBackgroundColor
         }
       : null;
 
@@ -23,11 +42,15 @@ export class Avatar extends Component {
           source={source.uri ? { uri: source.uri } : source}
           style={[styles.avatar, sizeStyle]}
         />
-        <View style={[styles.presence, presenceStyle]} presence={presence} />
-        {/*<Presence
-          presence={presence}
-          presenceBackgroundColor={presenceBackgroundColor}
-        />*/}
+        {presence != null && (
+          <View style={[styles.presenceWrapper, presenceStyle]}>
+            <Image
+              fadeDuration={0}
+              source={this.getPresenceImage(presence)}
+              style={styles.presence}
+            />
+          </View>
+        )}
       </View>
     );
   }
@@ -43,17 +66,26 @@ const styles = {
     width: 46,
     height: 46,
     resizeMode: "contain",
-    borderRadius: 100,
+    borderRadius: 46 * 2,
+
     overflow: "hidden",
     marginRight: 16
   },
-  presence: {
-    width: 18,
-    height: 18,
-    borderRadius: 20,
+  presenceWrapper: {
+    width: 22,
+    height: 22,
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
     bottom: 0,
-    right: 8,
-    borderWidth: 3
+    right: 4,
+    overflow: "hidden",
+    borderRadius: 18
+  },
+  presence: {
+    width: 14,
+    height: 14,
+    borderRadius: 14,
+    resizeMode: "contain"
   }
 };

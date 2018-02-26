@@ -1,23 +1,10 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  Platform,
-  TouchableOpacity,
-  TouchableHighlight,
-  TouchableNativeFeedback
-} from "react-native";
+import { View, Text, Platform } from "react-native";
 
 import { unixToDate } from "./../utilities";
 import Colors from "./../styles/colors";
 import Avatar from "./../components/Avatar";
-
-const Touchable = Platform.select({
-  ios: TouchableHighlight,
-  android: TouchableNativeFeedback,
-  windows: TouchableOpacity,
-  web: TouchableOpacity
-});
+import Touchable from "./../components/Touchable";
 
 export class ContactItem extends Component {
   render() {
@@ -33,12 +20,12 @@ export class ContactItem extends Component {
     } = this.props;
 
     const time = timestamp ? unixToDate(timestamp) : null;
-    const timeDisplay = [time.hours, time.minutes, time.seconds].join(":");
+    const timeDisplay = [time.hours, time.minutes].join("h");
     const unreadStyle = unread ? { fontWeight: "bold" } : null;
 
     return (
       <View style={styles.container}>
-        <Touchable activeOpacity={0.8} onPress={onPress}>
+        <Touchable activeOpacity={0.8} onPress={() => setTimeout(onPress, 400)}>
           <View style={[styles.row, styles.noSelect]}>
             <Avatar
               presence={presence}

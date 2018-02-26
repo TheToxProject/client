@@ -1,21 +1,8 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  Platform,
-  TouchableOpacity,
-  TouchableHighlight,
-  TouchableNativeFeedback
-} from "react-native";
+import { View, Text, Platform } from "react-native";
 
 import Colors from "./../styles/colors";
-
-const Touchable = Platform.select({
-  ios: TouchableHighlight,
-  android: TouchableNativeFeedback,
-  windows: TouchableOpacity,
-  web: TouchableOpacity
-});
+import Touchable from "./../components/Touchable";
 
 export default class Button extends Component {
   render() {
@@ -133,7 +120,8 @@ const styles = {
       },
       web: {
         boxShadow:
-          "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"
+          "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)",
+        userSelect: "none"
       }
     }),
     backgroundColor: "white",
