@@ -3,20 +3,28 @@
  */
 
 import React from "react";
-import { View } from "react-native";
+import { View, StatusBar } from "react-native";
 import { Provider } from "react-redux";
 import store from "./src/utilities/storage/store";
 import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import RecentsScreen from "./src/screens/RecentsScreen";
 import Routing, { Router, Switch } from "./src/utilities/routing/index";
+import Colors from "./src/styles/colors";
 
 const Route = Routing.Route;
 
 class App extends React.Component {
   render() {
     const App = (props, context) => (
-      <View style={{ height: "100%" }}>{props.children}</View>
+      <View style={{ height: "100%" }}>
+        <StatusBar
+          animated={true}
+          backgroundColor={Colors.ACCENT}
+          barStyle={"light-content"}
+        />
+        {props.children}
+      </View>
     );
 
     return (

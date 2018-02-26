@@ -88,18 +88,15 @@ class RecentsScreen extends React.Component {
           </View>
           <ScrollView contentContainerStyle={styles.scrolledView}>
             <ContactItem
+              unread
               username={"Ogromny | FNC"}
               status={"Vive les vaches normandes! 😈"}
-              timestamp={1519647578}
+              timestamp={1519659888}
               avatarUri={
                 "https://avatars.githubusercontent.com/Ogromny?size=46"
               }
               presence={Presence.ONLINE}
-              presenceBackgroundColor={
-                Platform.OS === "web"
-                  ? Colors.DARK_BACKGROUND
-                  : Colors.BACKGROUND
-              }
+              presenceBackgroundColor={Colors.BACKGROUND}
               onPress={() =>
                 this.onContactItemPress.call(this, {
                   username: "Ogromny | FNC"
@@ -114,11 +111,7 @@ class RecentsScreen extends React.Component {
               timestamp={1519647578}
               avatarUri={"https://personagenerator.com/user-sean.png"}
               presence={Presence.BUSY}
-              presenceBackgroundColor={
-                Platform.OS === "web"
-                  ? Colors.DARK_BACKGROUND
-                  : Colors.BACKGROUND
-              }
+              presenceBackgroundColor={Colors.BACKGROUND}
               onPress={() =>
                 this.onContactItemPress.call(this, {
                   username: "Sean Perkins"
@@ -131,11 +124,7 @@ class RecentsScreen extends React.Component {
               timestamp={1519647551}
               avatarUri={"https://personagenerator.com/user-7.png"}
               presence={Presence.AWAY}
-              presenceBackgroundColor={
-                Platform.OS === "web"
-                  ? Colors.DARK_BACKGROUND
-                  : Colors.BACKGROUND
-              }
+              presenceBackgroundColor={Colors.BACKGROUND}
               onPress={() =>
                 this.onContactItemPress.call(this, {
                   username: "Joan Perez"
@@ -151,6 +140,7 @@ class RecentsScreen extends React.Component {
             backgroundColor={Colors.ACCENT}
             color={Colors.TEXT}
             size={"medium"}
+            style={{ borderRadius: 0 }}
           />
         </View>
         {Platform.OS === "web" && (
@@ -183,8 +173,7 @@ const styles = StyleSheet.create({
   contactsList: {
     width: Platform.OS === "web" ? 320 : "100%",
     height: "100%",
-    backgroundColor:
-      Platform.OS === "web" ? Colors.DARK_BACKGROUND : Colors.BACKGROUND,
+    backgroundColor: Colors.BACKGROUND,
     zIndex: 900,
     ...Platform.select({
       default: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, StatusBar } from "react-native";
 import { withRouter } from "./../utilities/routing/router";
 
 import Colors from "./../styles/colors";
@@ -24,9 +24,12 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <LoginForm
-          onLoginButtonPress={this.onLoginButtonPress}
+        <StatusBar
+          animated={true}
+          backgroundColor={Colors.DARK_BACKGROUND}
+          barStyle={"light-content"}
         />
+        <LoginForm onLoginButtonPress={this.onLoginButtonPress} />
       </View>
     );
   }

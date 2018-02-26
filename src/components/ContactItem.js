@@ -8,6 +8,7 @@ import {
   TouchableNativeFeedback
 } from "react-native";
 
+import { unixToDate } from "./../utilities";
 import Colors from "./../styles/colors";
 import Avatar from "./../components/Avatar";
 
@@ -27,8 +28,13 @@ export class ContactItem extends Component {
       presence,
       presenceBackgroundColor,
       avatarUri,
-      onPress
+      onPress,
+      unread
     } = this.props;
+
+    const time = timestamp ? unixToDate(timestamp) : null;
+    const timeDisplay = [time.hours, time.minutes, time.seconds].join(":");
+    const unreadStyle = unread ? { fontWeight: "bold" } : null;
 
     return (
       <View style={styles.container}>
@@ -43,12 +49,16 @@ export class ContactItem extends Component {
             />
             <View style={styles.column}>
               <View style={styles.textRow}>
-                <Text numberOfLines={1} style={styles.username}>
+                <Text numberOfLines={1} style={[styles.username, unreadStyle]}>
                   {username}
                 </Text>
-                {timestamp && <Text style={styles.timestamp}>{timestamp}</Text>}
+                {time && (
+                  <Text style={[styles.timestamp, unreadStyle]}>
+                    {timeDisplay}
+                  </Text>
+                )}
               </View>
-              <Text numberOfLines={1} style={styles.status}>
+              <Text numberOfLines={1} style={[styles.status, unreadStyle]}>
                 {status}
               </Text>
             </View>
@@ -103,16 +113,16 @@ const styles = {
     flex: 1
   },
   username: {
-    color: Platform.OS === "web" ? Colors.TEXT : Colors.PRIMARY_TEXT,
+    color: Colors.PRIMARY_TEXT,
     fontWeight: "bold",
     marginBottom: Platform.OS === "web" ? 4 : 2,
     flex: 1
   },
   status: {
-    color: Platform.OS === "web" ? Colors.TEXT : Colors.PRIMARY_TEXT
+    color: Colors.PRIMARY_TEXT
   },
   timestamp: {
-    color: Platform.OS === "web" ? Colors.TEXT : Colors.SECONDARY_TEXT,
+    color: Colors.SECONDARY_TEXT,
     fontSize: 12
   }
 };

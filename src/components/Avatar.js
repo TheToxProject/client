@@ -23,7 +23,7 @@ export class Avatar extends Component {
           source={source.uri ? { uri: source.uri } : source}
           style={[styles.avatar, sizeStyle]}
         />
-        <View style={[styles.presence, presenceStyle]} />
+        <View style={[styles.presence, presenceStyle]} presence={presence} />
         {/*<Presence
           presence={presence}
           presenceBackgroundColor={presenceBackgroundColor}
