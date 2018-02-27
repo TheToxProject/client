@@ -73,7 +73,7 @@ export class ChatScreen extends React.Component {
           )}
           {contact && (
             <ContactItem
-              unread={contact.unread || false}
+              unread={false}
               username={contact.username}
               status={Platform.OS === "web" ? contact.status : null}
               avatarUri={contact.avatarUri}
