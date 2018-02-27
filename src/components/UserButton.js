@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { View, Image, Text, Platform } from "react-native";
 
+import Colors from "./../styles/colors";
 import Touchable from "./../components/Touchable";
-import Colors from "../styles/colors";
+import Avatar from "./../components/Avatar";
 
 export class UserButton extends Component {
   render() {
@@ -10,20 +11,12 @@ export class UserButton extends Component {
 
     return (
       <View style={styles.container} {...this.props}>
-        <Touchable activeOpacity={0.8} onPress={() => setTimeout(onPress, 400)}>
-          {avatarUri ? (
-            <Image
-              fadeDuration={0}
-              source={{
-                uri: avatarUri
-              }}
-              style={[styles.avatar, styles.noSelect]}
-            />
-          ) : username ? (
-            <View style={styles.noAvatar}>
-              <Text style={styles.letter}>{username[0]}</Text>
-            </View>
-          ) : null}
+        <Touchable
+          style={styles.ripple}
+          activeOpacity={0.8}
+          onPress={() => setTimeout(onPress, 400)}
+        >
+          <Avatar source={{ uri: avatarUri }} size={36} username={username} />
         </Touchable>
       </View>
     );
@@ -43,10 +36,11 @@ const styles = {
   container: {
     width: 36,
     height: 36,
-    flexDirection: "row",
+    borderRadius: 36,
+    overflow: "hidden",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 16,
     ...Platform.select({
       web: {
         cursor: "pointer"
@@ -56,26 +50,9 @@ const styles = {
       }
     })
   },
-  avatar: {
+  ripple: {
     width: 36,
     height: 36,
-    resizeMode: "contain",
-    borderRadius: 36 * 2,
-    overflow: "hidden"
-  },
-  noAvatar: {
-    width: 36,
-    height: 36,
-    resizeMode: "contain",
-    borderRadius: 36 * 2,
-    overflow: "hidden",
-    backgroundColor: Colors.LIGHT_PRIMARY,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  letter: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: Colors.ACCENT
+    borderRadius: 36
   }
 };
