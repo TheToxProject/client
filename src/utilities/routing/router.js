@@ -9,6 +9,8 @@ const RouterPackage =
  * Remove Platform specific exports :/
  * */
 export const { Link, Route, Redirect, withRouter } = RouterPackage;
+export const BackButton =
+  Platform.OS === "web" ? props => props.children : RouterPackage.BackButton;
 export const Router =
   Platform.OS === "web"
     ? RouterPackage.BrowserRouter
