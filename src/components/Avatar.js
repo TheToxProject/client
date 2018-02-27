@@ -1,7 +1,12 @@
 import React, { Component } from "react";
-import { View, Image } from "react-native";
+import { View, Image, Text } from "react-native";
 
 import Presence from "./../utilities/enums/Presence";
+import Colors from "./../styles/colors";
+
+const DEFAULT_SIZE = 46;
+const DEFAULT_LETTER_SIZE = 18;
+const SCALE_FACTOR = 0.6;
 
 export class Avatar extends Component {
   constructor(props, context) {
@@ -24,7 +29,13 @@ export class Avatar extends Component {
   }
 
   render() {
-    const { presence, presenceBackgroundColor, source, size } = this.props;
+    const {
+      presence,
+      presenceBackgroundColor,
+      username,
+      source,
+      size
+    } = this.props;
     const sizeStyle = size
       ? { width: size, height: size, borderRadius: size * 2 }
       : null;
@@ -35,13 +46,24 @@ export class Avatar extends Component {
         }
       : null;
 
+    const ratio = styles.letter.fontSize / (size || DEFAULT_SIZE);
+    const letterSizeStyle = {
+      fontSize: DEFAULT_LETTER_SIZE / ratio * SCALE_FACTOR
+    };
+
     return (
       <View style={styles.container}>
-        <Image
-          fadeDuration={0}
-          source={source.uri ? { uri: source.uri } : source}
-          style={[styles.avatar, sizeStyle]}
-        />
+        {source ? (
+          <Image
+            fadeDuration={0}
+            source={source.uri ? { uri: source.uri } : source}
+            style={[styles.avatar, sizeStyle]}
+          />
+        ) : (
+          <View style={[styles.noAvatar, sizeStyle]}>
+            <Text style={[styles.letter, letterSizeStyle]}>{username[0]}</Text>
+          </View>
+        )}
         {presence != null && (
           <View style={[styles.presenceWrapper, presenceStyle]}>
             <Image
@@ -63,10 +85,10 @@ const styles = {
     position: "relative"
   },
   avatar: {
-    width: 46,
-    height: 46,
+    width: DEFAULT_SIZE,
+    height: DEFAULT_SIZE,
     resizeMode: "contain",
-    borderRadius: 46 * 2,
+    borderRadius: DEFAULT_SIZE * 2,
 
     overflow: "hidden",
     marginRight: 16
@@ -87,5 +109,20 @@ const styles = {
     height: 14,
     borderRadius: 14,
     resizeMode: "contain"
+  },
+  noAvatar: {
+    width: DEFAULT_SIZE,
+    height: DEFAULT_SIZE,
+    resizeMode: "contain",
+    borderRadius: DEFAULT_SIZE * 2,
+    overflow: "hidden",
+    backgroundColor: Colors.LIGHT_PRIMARY,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  letter: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: Colors.ACCENT
   }
 };

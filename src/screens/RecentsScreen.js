@@ -49,7 +49,6 @@ class RecentsScreen extends React.Component {
                 username={"SkyzohKey"}
                 avatarUri={"https://avatars2.githubusercontent.com/u/8523159"}
                 onPress={this.onUserButtonPress}
-                hit
               />
               <View style={styles.icons}>
                 <Icon

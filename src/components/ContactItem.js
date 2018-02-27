@@ -20,7 +20,7 @@ export class ContactItem extends Component {
     } = this.props;
 
     const time = timestamp ? unixToDate(timestamp) : null;
-    const timeDisplay = [time.hours, time.minutes].join("h");
+    const timeDisplay = time ? [time.hours, time.minutes].join("h") : null;
     const unreadStyle = unread ? { fontWeight: "bold" } : null;
 
     return (
