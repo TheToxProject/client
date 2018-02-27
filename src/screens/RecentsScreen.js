@@ -1,7 +1,7 @@
 import React from "react";
 import { Platform, StyleSheet, View } from "react-native";
 
-import Routing, { Router, Switch } from "./../utilities/routing";
+import Routing from "./../utilities/routing";
 import { withRouter } from "./../utilities/routing/router";
 import Presence from "./../utilities/enums/Presence";
 import Colors from "./../styles/colors";

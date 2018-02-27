@@ -2,16 +2,11 @@ import React from "react";
 import { Platform, View, Text, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-import Routing, { Router, Switch } from "./../utilities/routing";
-
 import Colors from "./../styles/colors";
-import Presence from "./../utilities/enums/Presence";
 import Button from "./../components/Button";
 import Logo from "./../components/Logo";
 import UserButton from "./../components/UserButton";
 import ContactItem from "./../components/ContactItem";
-
-const Route = Routing.Route;
 
 export class ContactsList extends React.Component {
   render() {

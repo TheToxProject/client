@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { View, Image, Text, Platform } from "react-native";
+import { View, Platform } from "react-native";
 
-import Colors from "./../styles/colors";
 import Touchable from "./../components/Touchable";
 import Avatar from "./../components/Avatar";
 
