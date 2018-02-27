@@ -6,7 +6,6 @@ import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { withRouter } from "./../utilities/routing/router";
 
 import Colors from "./../styles/colors";
-import Button from "./../components/Button";
 import { ContactItem } from "./../components/ContactItem";
 import Touchable from "./../components/Touchable";
 
