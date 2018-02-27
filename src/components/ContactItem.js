@@ -28,9 +28,9 @@ export class ContactItem extends Component {
         <Touchable activeOpacity={0.8} onPress={() => setTimeout(onPress, 400)}>
           <View style={[styles.row, styles.noSelect]}>
             <Avatar
+              username={username}
               presence={presence}
               presenceBackgroundColor={presenceBackgroundColor}
-              fadeDuration={0}
               source={{ uri: avatarUri }}
               style={styles.avatar}
             />
