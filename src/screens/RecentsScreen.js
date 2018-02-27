@@ -87,7 +87,7 @@ export class RecentsScreen extends React.Component {
           onContactLongPress={this.onContactLongPress}
           onUserButtonPress={this.onUserButtonPress}
         />
-        {Platform.OS === "web" && (
+        {Platform.OS === "web" /* Mobile nav is defined in /index.js */ && (
           <View style={styles.section}>
             <Route>
               <Route exact path="/chat/:pubkey" component={ChatScreen} />

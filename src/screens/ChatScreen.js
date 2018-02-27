@@ -12,11 +12,6 @@ export class ChatScreen extends React.Component {
     this.onBackButtonPress = this.onBackButtonPress.bind(this);
   }
 
-  componentDidMount() {
-    //alert(JSON.stringify(this.props));
-    console.log(this.props);
-  }
-
   onBackButtonPress() {
     /**
      * @todo Handle the magic here.
