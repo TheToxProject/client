@@ -107,6 +107,16 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            if (project.hasProperty('TOXCLIENT_RELEASE_STORE_FILE')) {
+                storeFile file(TOXCLIENT_RELEASE_STORE_FILE)
+                storePassword TOXCLIENT_RELEASE_STORE_PASSWORD
+                keyAlias TOXCLIENT_RELEASE_KEY_ALIAS
+                keyPassword TOXCLIENT_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     splits {
         abi {
             reset()
@@ -119,6 +129,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
