@@ -5,7 +5,7 @@ import { withRouter } from "./../utilities/routing/router";
 import Colors from "./../styles/colors";
 import LoginForm from "./../components/LoginForm";
 
-class LoginScreen extends React.Component {
+export class LoginScreen extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -18,7 +18,7 @@ class LoginScreen extends React.Component {
      */
 
     const { history } = this.props;
-    history.replace("/recents");
+    history.replace("/chat");
   }
 
   render() {

@@ -5,12 +5,15 @@
 import React from "react";
 import { View, StatusBar } from "react-native";
 import { Provider } from "react-redux";
+
+import Routing, { Router, Switch } from "./src/utilities/routing/index";
 import store from "./src/utilities/storage/store";
+import Colors from "./src/styles/colors";
+
 import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import RecentsScreen from "./src/screens/RecentsScreen";
-import Routing, { Router, Switch } from "./src/utilities/routing/index";
-import Colors from "./src/styles/colors";
+import { ChatScreen } from "./src/screens/ChatScreen";
 
 const Route = Routing.Route;
 
@@ -34,7 +37,8 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={LoginScreen} />
               <Route exact path="/auth/register" component={RegisterScreen} />
-              <Route exact path="/recents" component={RecentsScreen} />
+              <Route exact path="/chat" component={RecentsScreen} />
+              <Route exact path="/chat/:pubkey" component={ChatScreen} />
             </Switch>
           </App>
         </Router>

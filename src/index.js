@@ -9,7 +9,7 @@ import MaterialIconsFont from "react-native-vector-icons/Fonts/MaterialIcons.ttf
 import MaterialCommunityIconsFont from "react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf";
 
 import store from "./utilities/storage/store";
-import Routing, { Router, Switch } from "./utilities/routing/index";
+import Routing, { Router, Switch } from "./utilities/routing";
 
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
@@ -52,7 +52,8 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={LoginScreen} />
               <Route exact path="/auth/register" component={RegisterScreen} />
-              <Route exact path="/recents" component={RecentsScreen} />
+              <Route exact path="/chat" component={RecentsScreen} />
+              <Route exact path="/chat/:pubkey" component={RecentsScreen} />
             </Switch>
           </App>
         </Router>

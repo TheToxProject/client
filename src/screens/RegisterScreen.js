@@ -4,7 +4,7 @@ import RegisterForm from "../components/RegisterForm";
 
 import Colors from "./../styles/colors";
 
-class RegisterScreen extends React.Component {
+export class RegisterScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>

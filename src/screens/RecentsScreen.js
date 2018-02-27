@@ -1,22 +1,59 @@
 import React from "react";
-import { Platform, StyleSheet, View, Text, ScrollView } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Routing, { Router, Switch } from "./../utilities/routing";
 import { withRouter } from "./../utilities/routing/router";
-
-import Colors from "./../styles/colors";
 import Presence from "./../utilities/enums/Presence";
-import Button from "./../components/Button";
-import Logo from "./../components/Logo";
-import UserButton from "./../components/UserButton";
-import ContactItem from "./../components/ContactItem";
+import Colors from "./../styles/colors";
 
-class RecentsScreen extends React.Component {
+import ContactsList from "./../components/ContactsList";
+import { ChatScreen } from "./ChatScreen";
+
+const Route = Routing.Route;
+
+const fakeUsers = [
+  {
+    username: "Ogromny | FNC",
+    status: "Vive les vaches normandes! 🤠 🐮",
+    presence: Presence.ONLINE,
+    avatarUri: "https://avatars.githubusercontent.com/Ogromny?size=46",
+    lastMessageTimestamp: 1519659888,
+    unread: true
+  },
+  {
+    username: "Sean Perkins",
+    status:
+      "I think this idea could work, I just need to put more energy into it.",
+    presence: Presence.BUSY,
+    avatarUri: "https://personagenerator.com/user-sean.png",
+    lastMessageTimestamp: 1519647578,
+    unread: false
+  },
+  {
+    username: "Joan Perez",
+    status: "My students come first in everything I do. 🙂",
+    presence: Presence.AWAY,
+    avatarUri: "https://personagenerator.com/user-7.png",
+    lastMessageTimestamp: 1519647032,
+    unread: false
+  },
+  {
+    username: "Ricky Metzger",
+    status: "I love this idea, and I can't wait to test it with our customers!",
+    presence: Presence.OFFLINE,
+    avatarUri: "https://personagenerator.com/user-ricky.png",
+    lastMessageTimestamp: 1519642102,
+    unread: false
+  }
+];
+
+export class RecentsScreen extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.onUserButtonPress = this.onUserButtonPress.bind(this);
-    this.onContactItemPress = this.onContactItemPress.bind(this);
+    this.onContactSelectionChange = this.onContactSelectionChange.bind(this);
+    this.onContactLongPress = this.onContactLongPress.bind(this);
   }
 
   onUserButtonPress() {
@@ -26,11 +63,17 @@ class RecentsScreen extends React.Component {
     alert("Navigate to the user profile.");
   }
 
-  onContactItemPress(contact) {
+  onContactSelectionChange(contact) {
     /**
      * @todo Navigate to the contact chat screen.
      */
-    alert("Navigate to " + contact.username + " chat screen.");
+    //alert("Navigate to " + contact.username + " chat screen.");
+    const { history } = this.props;
+    history.push("/chat/" + contact.username, { contact: contact });
+  }
+
+  onContactLongPress(contact) {
+    alert("Long pressed " + contact.username);
   }
 
   render() {
@@ -38,128 +81,17 @@ class RecentsScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.contactsList}>
-          <View style={styles.header}>
-            <View style={styles.appBar}>
-              <Logo
-                size={"small"}
-                style={[{ paddingLeft: 16, width: "auto" }, styles.noSelect]}
-              />
-              <UserButton
-                username={"SkyzohKey"}
-                avatarUri={"https://avatars2.githubusercontent.com/u/8523159"}
-                onPress={this.onUserButtonPress}
-              />
-              <View style={styles.icons}>
-                <Icon
-                  name="search"
-                  size={24}
-                  color={Colors.ICONS}
-                  style={styles.icon}
-                  title={"Search"}
-                />
-                <Icon
-                  name="more-vert"
-                  size={24}
-                  color={Colors.ICONS}
-                  style={styles.icon}
-                  title={"More"}
-                />
-              </View>
-            </View>
-            <View style={styles.tabs}>
-              <View style={[styles.tab, styles.selectedTab]}>
-                <Text style={styles.tabText}>
-                  <Icon name="access-time" size={24} title={"Recent"} />
-                </Text>
-              </View>
-              <View style={styles.tab}>
-                <Text style={styles.tabText}>
-                  <Icon name="group" size={24} title={"Contacts"} />
-                </Text>
-              </View>
-              <View style={styles.tab}>
-                <Text style={styles.tabText}>
-                  <Icon name="call-missed" size={24} title={"Missed calls"} />
-                </Text>
-              </View>
-            </View>
-          </View>
-          <ScrollView contentContainerStyle={styles.scrolledView}>
-            <ContactItem
-              unread
-              username={"Ogromny | FNC"}
-              status={"Vive les vaches normandes! 🤠 🐮"}
-              timestamp={1519659888}
-              avatarUri={
-                "https://avatars.githubusercontent.com/Ogromny?size=46"
-              }
-              presence={Presence.ONLINE}
-              presenceBackgroundColor={Colors.BACKGROUND}
-              onPress={() =>
-                this.onContactItemPress.call(this, {
-                  username: "Ogromny | FNC"
-                })
-              }
-            />
-            <ContactItem
-              username={"Sean Perkins"}
-              status={
-                "I think this idea could work, I just need to put more energy into it."
-              }
-              timestamp={1519647578}
-              avatarUri={"https://personagenerator.com/user-sean.png"}
-              presence={Presence.BUSY}
-              presenceBackgroundColor={Colors.BACKGROUND}
-              onPress={() =>
-                this.onContactItemPress.call(this, {
-                  username: "Sean Perkins"
-                })
-              }
-            />
-            <ContactItem
-              username={"Joan Perez"}
-              status={"My students come first in everything I do. 🙂"}
-              timestamp={1519647032}
-              avatarUri={"https://personagenerator.com/user-7.png"}
-              presence={Presence.AWAY}
-              presenceBackgroundColor={Colors.BACKGROUND}
-              onPress={() =>
-                this.onContactItemPress.call(this, {
-                  username: "Joan Perez"
-                })
-              }
-            />
-            <ContactItem
-              username={"Ricky Metzger"}
-              status={
-                "I love this idea, and I can't wait to test it with our customers!"
-              }
-              timestamp={1519642102}
-              avatarUri={"https://personagenerator.com/user-ricky.png"}
-              presence={Presence.OFFLINE}
-              presenceBackgroundColor={Colors.BACKGROUND}
-              onPress={() =>
-                this.onContactItemPress.call(this, {
-                  username: "Ricky Metzger"
-                })
-              }
-            />
-          </ScrollView>
-          <Button
-            uppercase={true}
-            onPress={() => this.props.history.replace("/")}
-            onPressDelay={200}
-            text="Back to login"
-            backgroundColor={Colors.ACCENT}
-            color={Colors.TEXT}
-            size={"medium"}
-            style={{ borderRadius: 0 }}
-          />
-        </View>
+        <ContactsList
+          contacts={fakeUsers}
+          onContactSelectionChange={this.onContactSelectionChange}
+          onContactLongPress={this.onContactLongPress}
+          onUserButtonPress={this.onUserButtonPress}
+        />
         {Platform.OS === "web" && (
           <View style={styles.section}>
-            <Text style={styles.itworks}>It works!</Text>
+            <Route>
+              <Route exact path="/chat/:pubkey" component={ChatScreen} />
+            </Route>
           </View>
         )}
       </View>
@@ -183,90 +115,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "flex-end"
-  },
-  contactsList: {
-    width: Platform.OS === "web" ? 320 : "100%",
-    height: "100%",
-    backgroundColor: Colors.BACKGROUND,
-    zIndex: 900,
-    ...Platform.select({
-      default: {
-        boxShadow:
-          "0 9px 18px rgba(0, 0, 0, 0.16), 0 9px 18px rgba(0, 0, 0, 0.23)"
-      },
-      android: {
-        elevation: 6
-      }
-    })
-  },
-  scrolledView: {
-    paddingVertical: 8
-  },
-  header: {
-    height: 48 + (Platform.OS === "web" ? 64 : 56),
-    flexDirection: "column",
-    alignItems: "stretch",
-    justifyContent: "center",
-    backgroundColor: Colors.ACCENT,
-    ...Platform.select({
-      ios: {
-        boxShadow:
-          "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"
-      },
-      android: {
-        elevation: 4
-      },
-      web: {
-        boxShadow:
-          "0 2px 6px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.23)"
-      }
-    })
-  },
-  icons: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  icon: {
-    ...Platform.select({
-      web: {
-        userSelect: "none",
-        cursor: "pointer"
-      }
-    }),
-    padding: 10
-  },
-  appBar: {
-    height: Platform.OS === "web" ? 64 : 56,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  tabs: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end"
-  },
-  tab: {
-    flex: 1,
-    height: 48,
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      web: {
-        userSelect: "none",
-        cursor: "pointer"
-      }
-    })
-  },
-  tabText: {
-    color: Colors.TEXT,
-    textAlign: "center",
-    fontSize: 14
-  },
-  selectedTab: {
-    borderBottomWidth: 2,
-    borderBottomColor: Colors.TEXT
   },
   section: {
     height: "100%",
