@@ -25,7 +25,7 @@ const iconFontStyles = `@font-face {
 }
 @font-face {
   src: url(${MaterialCommunityIconsFont});
-  font-family: Material Community Icons; 
+  font-family: Material Design Icons; 
 }`;
 
 // Create stylesheet

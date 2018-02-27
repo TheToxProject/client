@@ -54,6 +54,7 @@ export class RecentsScreen extends React.Component {
     this.onUserButtonPress = this.onUserButtonPress.bind(this);
     this.onContactSelectionChange = this.onContactSelectionChange.bind(this);
     this.onContactLongPress = this.onContactLongPress.bind(this);
+    this.onLogoutButtonPress = this.onLogoutButtonPress.bind(this);
   }
 
   onUserButtonPress() {
@@ -76,6 +77,11 @@ export class RecentsScreen extends React.Component {
     alert("Long pressed " + contact.username);
   }
 
+  onLogoutButtonPress() {
+    const { history } = this.props;
+    history.replace("/");
+  }
+
   render() {
     //const ContactState = { MUTED: 0, BLOCKED: 1, DELETED: 2, NEW: 3 };
 
@@ -86,6 +92,7 @@ export class RecentsScreen extends React.Component {
           onContactSelectionChange={this.onContactSelectionChange}
           onContactLongPress={this.onContactLongPress}
           onUserButtonPress={this.onUserButtonPress}
+          onLogoutButtonPress={this.onLogoutButtonPress}
         />
         {Platform.OS === "web" /* Mobile nav is defined in /index.js */ && (
           <View style={styles.section}>
@@ -120,15 +127,7 @@ const styles = StyleSheet.create({
     height: "100%",
     flex: 1,
     backgroundColor: Colors.BACKGROUND,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
     zIndex: 400
-  },
-  itworks: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: Colors.PRIMARY_TEXT,
-    margin: 16
   }
 });
 

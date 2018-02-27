@@ -27,6 +27,7 @@ export class Logo extends Component {
           style={styles[size] || styles.normal}
           resizeMode={"contain"}
           fadeDuration={0}
+          draggable={false}
           source={
             Platform.OS === "web"
               ? require("../assets/tox-logo.svg")

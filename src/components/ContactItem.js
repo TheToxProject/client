@@ -15,17 +15,25 @@ export class ContactItem extends Component {
       presence,
       presenceBackgroundColor,
       avatarUri,
+      avatarSize,
+      color,
       onPress,
+      onLongPress,
       unread
     } = this.props;
 
     const time = timestamp ? unixToDate(timestamp) : null;
     const timeDisplay = time ? [time.hours, time.minutes].join("h") : null;
     const unreadStyle = unread ? { fontWeight: "bold" } : null;
+    const colorStyle = color ? { color: color } : null;
 
     return (
       <View style={styles.container}>
-        <Touchable activeOpacity={0.8} onPress={() => setTimeout(onPress, 400)}>
+        <Touchable
+          activeOpacity={0.8}
+          onPress={() => setTimeout(onPress, 400)}
+          onLongPress={onLongPress}
+        >
           <View style={[styles.row, styles.noSelect]}>
             <Avatar
               username={username}
@@ -33,21 +41,30 @@ export class ContactItem extends Component {
               presenceBackgroundColor={presenceBackgroundColor}
               source={{ uri: avatarUri }}
               style={styles.avatar}
+              size={avatarSize}
             />
             <View style={styles.column}>
               <View style={styles.textRow}>
-                <Text numberOfLines={1} style={[styles.username, unreadStyle]}>
+                <Text
+                  numberOfLines={1}
+                  style={[styles.username, unreadStyle, colorStyle]}
+                >
                   {username}
                 </Text>
                 {time && (
-                  <Text style={[styles.timestamp, unreadStyle]}>
+                  <Text style={[styles.timestamp, unreadStyle, colorStyle]}>
                     {timeDisplay}
                   </Text>
                 )}
               </View>
-              <Text numberOfLines={1} style={[styles.status, unreadStyle]}>
-                {status}
-              </Text>
+              {status && (
+                <Text
+                  numberOfLines={1}
+                  style={[styles.status, unreadStyle, colorStyle]}
+                >
+                  {status}
+                </Text>
+              )}
             </View>
           </View>
         </Touchable>

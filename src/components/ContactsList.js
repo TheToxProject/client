@@ -9,11 +9,23 @@ import UserButton from "./../components/UserButton";
 import ContactItem from "./../components/ContactItem";
 
 export class ContactsList extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.onPopupEvent = this.onPopupEvent.bind(this);
+  }
+
+  onPopupEvent = (eventName, index) => {
+    if (eventName !== "itemSelected") return;
+    alert("Press item " + index);
+  };
+
   render() {
     const {
       onUserButtonPress,
       onContactSelectionChange,
       onContactLongPress,
+      onLogoutButtonPress,
       contacts
     } = this.props;
 
@@ -39,11 +51,11 @@ export class ContactsList extends React.Component {
                 title={"Search"}
               />
               <Icon
-                name="more-vert"
+                name={Platform.OS === "web" ? "settings" : "more-vert"}
                 size={24}
                 color={Colors.ICONS}
                 style={styles.icon}
-                title={"More"}
+                title={Platform.OS === "web" ? "Settings" : "More"}
               />
             </View>
           </View>
@@ -83,7 +95,7 @@ export class ContactsList extends React.Component {
         </ScrollView>
         <Button
           uppercase={true}
-          onPress={() => this.props.history.replace("/")}
+          onPress={onLogoutButtonPress}
           onPressDelay={200}
           text="Back to login"
           backgroundColor={Colors.ACCENT}

@@ -61,6 +61,7 @@ export class Avatar extends Component {
           <View style={[styles.avatarWrapper, sizeStyle]}>
             <Image
               fadeDuration={0}
+              draggable={false}
               source={source.uri ? { uri: source.uri } : source}
               style={[styles.avatar, sizeStyle]}
             />
@@ -74,6 +75,7 @@ export class Avatar extends Component {
           <View style={[styles.presenceWrapper, presenceStyle]}>
             <Image
               fadeDuration={0}
+              draggable={false}
               source={this.getPresenceImage(presence)}
               style={styles.presence}
             />
