@@ -11,7 +11,7 @@ export class UserButton extends Component {
     return (
       <View style={styles.container} {...this.props}>
         <Touchable activeOpacity={0.8} onPress={() => setTimeout(onPress, 400)}>
-          {avatarUri && (
+          {avatarUri ? (
             <Image
               fadeDuration={0}
               source={{
@@ -19,13 +19,11 @@ export class UserButton extends Component {
               }}
               style={[styles.avatar, styles.noSelect]}
             />
-          )}
-          {avatarUri == null &&
-            username && (
-              <View style={styles.noAvatar}>
-                <Text style={styles.letter}>{username[0]}</Text>
-              </View>
-            )}
+          ) : username ? (
+            <View style={styles.noAvatar}>
+              <Text style={styles.letter}>{username[0]}</Text>
+            </View>
+          ) : null}
         </Touchable>
       </View>
     );
