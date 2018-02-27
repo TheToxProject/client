@@ -10,11 +10,18 @@ import Button from "./../components/Button";
 import { ContactItem } from "./../components/ContactItem";
 import Touchable from "./../components/Touchable";
 
+const MAX_INPUT_EXPAND = 120;
+
 export class ChatScreen extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    this.state = {
+      inputHeight: 35
+    };
+
     this.onBackButtonPress = this.onBackButtonPress.bind(this);
+    this.onContentSizeChange = this.onContentSizeChange.bind(this);
   }
 
   onBackButtonPress() {
@@ -24,6 +31,29 @@ export class ChatScreen extends React.Component {
 
     const { history } = this.props;
     history.goBack();
+  }
+
+  onContentSizeChange(event) {
+    if (Platform.OS === "web") {
+      const { nativeEvent: { target } } = event;
+      if (target) {
+        const height =
+          target.scrollHeight <= MAX_INPUT_EXPAND
+            ? target.scrollHeight
+            : MAX_INPUT_EXPAND;
+        target.style.height = 0;
+        target.style.height = `${height}px`;
+      }
+    } else if (Platform.OS === "android" || Platform.OS === "ios") {
+      const { nativeEvent: { contentSize } } = event;
+      if (contentSize) {
+        const height =
+          contentSize.height <= MAX_INPUT_EXPAND
+            ? contentSize.height
+            : MAX_INPUT_EXPAND;
+        this.setState({ inputHeight: height });
+      }
+    }
   }
 
   render() {
@@ -64,25 +94,58 @@ export class ChatScreen extends React.Component {
         </View>
         <View style={styles.inputView}>
           <View style={styles.actions}>
-            <Icon name={"photo-camera"} size={24} color={Colors.PRIMARY_TEXT} />
-            <Icon name={"videocam"} size={24} color={Colors.PRIMARY_TEXT} />
+            <Icon
+              name={"photo-camera"}
+              size={24}
+              color={Colors.SECONDARY_TEXT}
+            />
+            <Icon name={"videocam"} size={24} color={Colors.SECONDARY_TEXT} />
             <CommunityIcon
               name={"sticker-emoji"}
               size={24}
-              color={Colors.PRIMARY_TEXT}
+              color={Colors.SECONDARY_TEXT}
             />
-            <Icon name={"gif"} size={24} color={Colors.PRIMARY_TEXT} />
-            <Icon name={"mic"} size={24} color={Colors.PRIMARY_TEXT} />
-            {Platform.OS !== "web" && (
-              <Icon name={"more-horiz"} size={24} color={Colors.PRIMARY_TEXT} />
+            <Icon name={"gif"} size={24} color={Colors.SECONDARY_TEXT} />
+            <Icon name={"mic"} size={24} color={Colors.SECONDARY_TEXT} />
+            {Platform.OS !== "web" ? (
+              <Icon
+                name={"more-horiz"}
+                size={24}
+                color={Colors.SECONDARY_TEXT}
+              />
+            ) : (
+              <Icon
+                name={"send"}
+                size={Platform.OS === "web" ? 36 : 24}
+                color={Colors.SECONDARY_TEXT}
+              />
             )}
-            <Icon
-              name={"send"}
-              size={Platform.OS === "web" ? 36 : 24}
-              color={Colors.PRIMARY_TEXT}
-            />
           </View>
-          <TextInput style={styles.input} placeholder={"Enter a message..."} />
+          <View style={styles.inputRow}>
+            {Platform.OS !== "web" ? (
+              <CommunityIcon
+                name={"emoticon-happy"}
+                size={24}
+                color={Colors.SECONDARY_TEXT}
+              />
+            ) : null}
+            <TextInput
+              multiline={true}
+              underlineColorAndroid={"rgba(0,0,0,0)"}
+              style={[
+                styles.input,
+                Platform.OS !== "web"
+                  ? { height: Math.max(35, this.state.inputHeight) }
+                  : null
+              ]}
+              placeholder={"Enter a message..."}
+              onContentSizeChange={this.onContentSizeChange}
+              onChange={Platform.OS === "web" ? this.onContentSizeChange : null}
+            />
+            {Platform.OS !== "web" ? (
+              <Icon name={"send"} size={24} color={Colors.SECONDARY_TEXT} />
+            ) : null}
+          </View>
         </View>
       </View>
     );
@@ -127,19 +190,28 @@ const styles = StyleSheet.create({
   },
   chatView: {
     flex: 1,
-    width: "100%"
+    width: "100%",
+    padding: 16
   },
   inputView: {
     width: "100%",
-    flexDirection: Platform.OS === "web" ? "row-reverse" : "column",
+    flexDirection: Platform.OS === "web" ? "row-reverse" : "column-reverse",
     borderTopColor: Colors.DIVIDE,
     borderTopWidth: 1
+  },
+  inputRow: {
+    flex: Platform.OS === "web" ? 1 : 0,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 4,
+    paddingHorizontal: 16
   },
   input: {
     backgroundColor: Colors.BACKGROUND,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    flex: Platform.OS === "web" ? 1 : 0
+    flex: 1
   },
   actions: {
     flexDirection: "row",
