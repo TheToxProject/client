@@ -5,6 +5,8 @@ import Colors from "./../styles/colors";
 import Touchable from "./../components/Touchable";
 import Avatar from "./../components/Avatar";
 
+const DEFAULT_SIZE = 36;
+
 export class UserButton extends Component {
   render() {
     const { avatarUri, username, onPress } = this.props;
@@ -16,7 +18,11 @@ export class UserButton extends Component {
           activeOpacity={0.8}
           onPress={() => setTimeout(onPress, 400)}
         >
-          <Avatar source={{ uri: avatarUri }} size={36} username={username} />
+          <Avatar
+            source={{ uri: avatarUri }}
+            size={DEFAULT_SIZE}
+            username={username}
+          />
         </Touchable>
       </View>
     );
@@ -34,13 +40,10 @@ const styles = {
     })
   },
   container: {
-    width: 36,
-    height: 36,
-    borderRadius: 36,
+    width: DEFAULT_SIZE,
+    height: DEFAULT_SIZE,
+    borderRadius: DEFAULT_SIZE,
     overflow: "hidden",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
     ...Platform.select({
       web: {
         cursor: "pointer"
@@ -51,8 +54,8 @@ const styles = {
     })
   },
   ripple: {
-    width: 36,
-    height: 36,
-    borderRadius: 36
+    width: DEFAULT_SIZE,
+    height: DEFAULT_SIZE,
+    borderRadius: DEFAULT_SIZE
   }
 };
