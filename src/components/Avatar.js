@@ -54,11 +54,13 @@ export class Avatar extends Component {
     return (
       <View style={styles.container}>
         {source ? (
-          <Image
-            fadeDuration={0}
-            source={source.uri ? { uri: source.uri } : source}
-            style={[styles.avatar, sizeStyle]}
-          />
+          <View style={styles.avatarWrapper}>
+            <Image
+              fadeDuration={0}
+              source={source.uri ? { uri: source.uri } : source}
+              style={[styles.avatar, sizeStyle]}
+            />
+          </View>
         ) : (
           <View style={[styles.noAvatar, sizeStyle]}>
             <Text style={[styles.letter, letterSizeStyle]}>{username[0]}</Text>
@@ -84,14 +86,19 @@ const styles = {
   container: {
     position: "relative"
   },
+  avatarWrapper: {
+    width: DEFAULT_SIZE,
+    height: DEFAULT_SIZE,
+    borderRadius: DEFAULT_SIZE,
+    overflow: "hidden",
+    marginRight: 16
+  },
   avatar: {
     width: DEFAULT_SIZE,
     height: DEFAULT_SIZE,
     resizeMode: "contain",
     borderRadius: DEFAULT_SIZE * 2,
-
-    overflow: "hidden",
-    marginRight: 16
+    overflow: "hidden"
   },
   presenceWrapper: {
     width: 22,
