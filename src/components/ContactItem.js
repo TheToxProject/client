@@ -31,7 +31,7 @@ export class ContactItem extends Component {
       <View style={styles.container}>
         <Touchable
           activeOpacity={0.8}
-          onPress={() => setTimeout(onPress, 400)}
+          onPress={() => setTimeout(onPress, 200)}
           onLongPress={onLongPress}
         >
           <View style={[styles.row, styles.noSelect]}>

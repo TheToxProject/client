@@ -13,6 +13,7 @@ const Route = Routing.Route;
 
 const fakeUsers = [
   {
+    pubkey: "3GE0HU76J6KHHNMBKPYD3S7LOJ5PFLFPIIEHFXDKV0KFQCPRZP2HDTGNLS9ZAF26",
     username: "Ogromny | FNC",
     status: "Vive les vaches normandes! 🤠 🐮",
     presence: Presence.ONLINE,
@@ -21,6 +22,7 @@ const fakeUsers = [
     unread: true
   },
   {
+    pubkey: "14DDWYA1XW454N564PQ1LV5JJD44NWFJWCPUEDFG9FV6MB0FKTFCFVEDADKO5HXS",
     username: "Sean Perkins",
     status:
       "I think this idea could work, I just need to put more energy into it.",
@@ -30,6 +32,7 @@ const fakeUsers = [
     unread: false
   },
   {
+    pubkey: "IWJK4K5VZZ70E9X1DA724PFX3THR6N7GTHN4UKXZAVLKPNRJTEARS649QQ6M8JC3",
     username: "Joan Perez",
     status: "My students come first in everything I do. 🙂",
     presence: Presence.AWAY,
@@ -38,6 +41,7 @@ const fakeUsers = [
     unread: false
   },
   {
+    pubkey: "NOYGLAIMCQL5IJKQIGPEOBJI7APNJC1BIZFR6VK2JSFZRV01NNMYZSVULTKXUNIW",
     username: "Ricky Metzger",
     status: "I love this idea, and I can't wait to test it with our customers!",
     presence: Presence.OFFLINE,
@@ -70,7 +74,7 @@ export class RecentsScreen extends React.Component {
      */
     //alert("Navigate to " + contact.username + " chat screen.");
     const { history } = this.props;
-    history.push("/chat/" + contact.username, { contact: contact });
+    history.push("/chat/" + contact.pubkey, { contact: contact });
   }
 
   onContactLongPress(contact) {

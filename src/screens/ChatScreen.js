@@ -16,7 +16,7 @@ export class ChatScreen extends React.Component {
     super(props, context);
 
     this.state = {
-      inputHeight: 35
+      inputHeight: 24
     };
 
     this.onBackButtonPress = this.onBackButtonPress.bind(this);
@@ -34,15 +34,13 @@ export class ChatScreen extends React.Component {
 
   onContentSizeChange(event) {
     if (Platform.OS === "web") {
-      const { nativeEvent: { target } } = event;
-      if (target) {
-        const height =
-          target.scrollHeight <= MAX_INPUT_EXPAND
-            ? target.scrollHeight
-            : MAX_INPUT_EXPAND;
-        target.style.height = 0;
-        target.style.height = `${height}px`;
-      }
+      const height =
+        this.input._node.scrollHeight <= MAX_INPUT_EXPAND
+          ? this.input._node.scrollHeight
+          : MAX_INPUT_EXPAND;
+      this.setState({ inputHeight: 1 }, () => {
+        this.setState({ inputHeight: height });
+      });
     } else if (Platform.OS === "android" || Platform.OS === "ios") {
       const { nativeEvent: { contentSize } } = event;
       if (contentSize) {
@@ -113,11 +111,7 @@ export class ChatScreen extends React.Component {
                 color={Colors.SECONDARY_TEXT}
               />
             ) : (
-              <Icon
-                name={"send"}
-                size={Platform.OS === "web" ? 36 : 24}
-                color={Colors.SECONDARY_TEXT}
-              />
+              <Icon name={"send"} size={24} color={Colors.SECONDARY_TEXT} />
             )}
           </View>
           <View style={styles.inputRow}>
@@ -129,13 +123,15 @@ export class ChatScreen extends React.Component {
               />
             ) : null}
             <TextInput
+              ref={input => (this.input = input)}
               multiline={true}
+              autoFocus={true}
+              autoCapitalize={true}
+              autoCorrect={true}
               underlineColorAndroid={"rgba(0,0,0,0)"}
               style={[
                 styles.input,
-                Platform.OS !== "web"
-                  ? { height: Math.max(35, this.state.inputHeight) }
-                  : null
+                { height: Math.max(24, this.state.inputHeight) }
               ]}
               placeholder={"Enter a message..."}
               onContentSizeChange={this.onContentSizeChange}
@@ -207,8 +203,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16
   },
   input: {
+    minHeight: 44,
     backgroundColor: Colors.BACKGROUND,
-    paddingVertical: 8,
+    color: Colors.PRIMARY_TEXT,
+    paddingVertical: 12,
     paddingHorizontal: 16,
     flex: 1
   },
@@ -220,7 +218,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     ...Platform.select({
       web: {
-        width: "30%"
+        width: 260
       }
     })
   }
