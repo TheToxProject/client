@@ -38,7 +38,11 @@ export class Avatar extends Component {
     } = this.props;
     const sizeStyle = size
       ? { width: size, height: size, borderRadius: size * 2 }
-      : null;
+      : {
+          width: DEFAULT_SIZE,
+          height: DEFAULT_SIZE,
+          borderRadius: DEFAULT_SIZE * 2
+        };
     const presenceStyle = presenceBackgroundColor
       ? {
           borderColor: presenceBackgroundColor,
@@ -54,7 +58,7 @@ export class Avatar extends Component {
     return (
       <View style={styles.container}>
         {source ? (
-          <View style={styles.avatarWrapper}>
+          <View style={[styles.avatarWrapper, sizeStyle]}>
             <Image
               fadeDuration={0}
               source={source.uri ? { uri: source.uri } : source}
@@ -87,17 +91,11 @@ const styles = {
     position: "relative"
   },
   avatarWrapper: {
-    width: DEFAULT_SIZE,
-    height: DEFAULT_SIZE,
-    borderRadius: DEFAULT_SIZE,
     overflow: "hidden",
     marginRight: 16
   },
   avatar: {
-    width: DEFAULT_SIZE,
-    height: DEFAULT_SIZE,
     resizeMode: "contain",
-    borderRadius: DEFAULT_SIZE * 2,
     overflow: "hidden"
   },
   presenceWrapper: {
