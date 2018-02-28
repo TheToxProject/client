@@ -55,6 +55,15 @@ export class ChatScreen extends React.Component {
 
   render() {
     const { contact } = this.props.location.state || { contact: null };
+
+    if (!contact) {
+      return (
+        <View style={styles.container}>
+          <Text>Welcome on Konv !</Text>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -73,6 +82,7 @@ export class ChatScreen extends React.Component {
           )}
           {contact && (
             <ContactItem
+              style={{ flex: 1, width: "100%" }}
               unread={false}
               username={contact.username}
               status={Platform.OS === "web" ? contact.status : null}
@@ -85,6 +95,24 @@ export class ChatScreen extends React.Component {
               }
             />
           )}
+          <Icon
+            style={styles.headerIcon}
+            name={"call"}
+            size={24}
+            color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
+          />
+          <Icon
+            style={styles.headerIcon}
+            name={"videocam"}
+            size={24}
+            color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
+          />
+          <Icon
+            style={styles.headerIcon}
+            name={"info-outline"}
+            size={24}
+            color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
+          />
         </View>
         <View style={styles.chatView}>
           <Text>Chat happens here</Text>
@@ -111,7 +139,18 @@ export class ChatScreen extends React.Component {
                 color={Colors.SECONDARY_TEXT}
               />
             ) : (
-              <Icon name={"send"} size={24} color={Colors.SECONDARY_TEXT} />
+              <View
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 36,
+                  backgroundColor: "rgba(0,0,0,.1)",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <Icon name={"send"} size={16} color={Colors.DARK_BACKGROUND} />
+              </View>
             )}
           </View>
           <View style={styles.inputRow}>
@@ -126,7 +165,7 @@ export class ChatScreen extends React.Component {
               ref={input => (this.input = input)}
               multiline={true}
               autoFocus={true}
-              autoCapitalize={true}
+              autoCapitalize={"sentences"}
               autoCorrect={true}
               underlineColorAndroid={"rgba(0,0,0,0)"}
               style={[
@@ -162,9 +201,10 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     backgroundColor: Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT,
     paddingHorizontal: Platform.OS === "web" ? 0 : 16,
+    paddingRight: Platform.OS === "web" ? 8 : 12,
     ...Platform.select({
       ios: {
         boxShadow:
@@ -180,8 +220,11 @@ const styles = StyleSheet.create({
     })
   },
   backIcon: {
-    marginLeft: 24,
+    marginLeft: 0,
     justifyContent: "center"
+  },
+  headerIcon: {
+    paddingHorizontal: 8
   },
   chatView: {
     flex: 1,

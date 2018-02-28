@@ -31,7 +31,7 @@ export class ContactItem extends Component {
       <View style={styles.container}>
         <Touchable
           activeOpacity={0.8}
-          onPress={() => setTimeout(onPress, 200)}
+          onPress={() => onPress && setTimeout(onPress, 200)}
           onLongPress={onLongPress}
         >
           <View style={[styles.row, styles.noSelect]}>
@@ -46,6 +46,7 @@ export class ContactItem extends Component {
             <View style={styles.column}>
               <View style={styles.textRow}>
                 <Text
+                  title={username}
                   numberOfLines={1}
                   style={[styles.username, unreadStyle, colorStyle]}
                 >
@@ -59,6 +60,7 @@ export class ContactItem extends Component {
               </View>
               {status && (
                 <Text
+                  title={status}
                   numberOfLines={1}
                   style={[styles.status, unreadStyle, colorStyle]}
                 >
@@ -84,13 +86,12 @@ const styles = {
     })
   },
   container: {
+    flex: 1,
     ...Platform.select({
       web: {
         cursor: "pointer"
       }
-    }),
-    width: "100%",
-    maxWidth: "100%"
+    })
   },
   avatar: {
     width: 46,
