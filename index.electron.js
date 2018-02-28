@@ -7,6 +7,8 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const url = require("url");
 
+const Colors = require("./src/styles/colors");
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -16,14 +18,27 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 900,
     height: 500,
-    autoHideMenuBar: true
+    autoHideMenuBar: true,
+    show: false,
+    backgroundColor: Colors.DARK_BACKGROUND,
+    center: true,
+    title: "Konv - Modern secure Instant Messaging",
+    webPreferences: {
+      devTools: process.env.DEV,
+      webSecurity: true,
+      allowRunningInsecureContent: false
+    }
+  });
+
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show();
   });
 
   // and load the index.html of the app.
   mainWindow.loadURL("http://localhost:3000");
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  process.env.DEV && mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on("closed", function() {

@@ -21,14 +21,79 @@
     work correctly both with client-side routing and a non-root public URL.
     Learn how to configure a non-root public URL by running `npm run build`.
   -->
-  <title>toxclient</title>
+  <title>Konv - Modern secure Instant Messaging</title>
 </head>
 
 <body>
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Loader until the page is ready-to-show -->
+    <div style="height:100vh;display:flex;justify-content:center;align-items:center;">
+      <div class="lds-css ng-scope">
+        <div style="width:100%;height:100%" class="lds-rolling">
+          <div></div>
+        </div>
+        <style type="text/css">
+          @keyframes lds-rolling {
+            0% {
+              -webkit-transform: translate(-50%, -50%) rotate(0deg);
+              transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+              -webkit-transform: translate(-50%, -50%) rotate(360deg);
+              transform: translate(-50%, -50%) rotate(360deg);
+            }
+          }
+
+          @-webkit-keyframes lds-rolling {
+            0% {
+              -webkit-transform: translate(-50%, -50%) rotate(0deg);
+              transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+              -webkit-transform: translate(-50%, -50%) rotate(360deg);
+              transform: translate(-50%, -50%) rotate(360deg);
+            }
+          }
+
+          .lds-rolling {
+            position: relative;
+          }
+
+          .lds-rolling div,
+          .lds-rolling div:after {
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            border: 4px solid #fdfdfd;
+            border-top-color: transparent;
+            border-radius: 50%;
+          }
+
+          .lds-rolling div {
+            -webkit-animation: lds-rolling 1s linear infinite;
+            animation: lds-rolling 1s linear infinite;
+            top: 100px;
+            left: 100px;
+          }
+
+          .lds-rolling div:after {
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+          }
+
+          .lds-rolling {
+            width: 200px !important;
+            height: 200px !important;
+            -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+            transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+          }
+        </style>
+      </div>
+    </div>
+  </div>
   <!--
   This HTML file is a template.
   If you open it directly in the browser, you will see an empty page.

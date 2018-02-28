@@ -1,6 +1,6 @@
 {
-  "short_name": "toxclient",
-  "name": "Re-base, a re-start template",
+  "short_name": "Konv",
+  "name": "Konv - Modern secure Instant Messaging",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,5 +11,5 @@
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#414141"
 }

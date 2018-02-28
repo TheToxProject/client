@@ -12,4 +12,4 @@ const Colors = {
   DARK_BACKGROUND: "#414141"
 };
 
-export default Colors;
+module.exports = Colors;
