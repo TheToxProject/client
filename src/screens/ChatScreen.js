@@ -1,5 +1,13 @@
 import React from "react";
-import { Platform, StyleSheet, View, Text, TextInput } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  TextInput,
+  Keyboard
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -21,6 +29,7 @@ export class ChatScreen extends React.Component {
 
     this.onBackButtonPress = this.onBackButtonPress.bind(this);
     this.onContentSizeChange = this.onContentSizeChange.bind(this);
+    this.onKeyboardHideRequest = this.onKeyboardHideRequest.bind(this);
   }
 
   onBackButtonPress() {
@@ -51,6 +60,10 @@ export class ChatScreen extends React.Component {
         this.setState({ inputHeight: height });
       }
     }
+  }
+
+  onKeyboardHideRequest() {
+    Keyboard.dismiss();
   }
 
   render() {
@@ -114,9 +127,12 @@ export class ChatScreen extends React.Component {
             color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
           />
         </View>
-        <View style={styles.chatView}>
+        <ScrollView
+          contentContainerStyle={styles.chatView}
+          onMomentumScrollBegin={this.onKeyboardHideRequest}
+        >
           <Text>Chat happens here</Text>
-        </View>
+        </ScrollView>
         <View style={styles.inputView}>
           <View style={styles.actions}>
             <Icon
@@ -175,6 +191,7 @@ export class ChatScreen extends React.Component {
               placeholder={"Enter a message..."}
               onContentSizeChange={this.onContentSizeChange}
               onChange={Platform.OS === "web" ? this.onContentSizeChange : null}
+              onBlur={this.onKeyboardHideRequest}
             />
             {Platform.OS !== "web" ? (
               <Icon name={"send"} size={24} color={Colors.SECONDARY_TEXT} />
