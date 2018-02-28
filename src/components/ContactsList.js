@@ -51,7 +51,7 @@ export class ContactsList extends React.Component {
                 title={"Search"}
               />
               <Icon
-                name={Platform.OS === "web" ? "settings" : "more-vert"}
+                name={Platform.OS === "web" ? "more-vert" : "more-vert"}
                 size={24}
                 color={Colors.ICONS}
                 style={styles.icon}
