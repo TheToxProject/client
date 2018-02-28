@@ -7,6 +7,7 @@ import { View, StatusBar } from "react-native";
 import { Provider } from "react-redux";
 
 import Routing, { Router, Switch } from "./src/utilities/routing/index";
+import { BackButton } from "./src/utilities/routing/router";
 import store from "./src/utilities/storage/store";
 import Colors from "./src/styles/colors";
 
@@ -34,6 +35,7 @@ class App extends React.Component {
       <Provider store={store}>
         <Router>
           <App>
+            <BackButton />
             <Switch>
               <Route exact path="/" component={LoginScreen} />
               <Route exact path="/auth/register" component={RegisterScreen} />
