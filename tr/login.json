@@ -1,8 +1,8 @@
 {
   "header": "Glad to see you back! 🤘",
   "fields": {
-    "username": "Username...",
-    "password": "Password..."
+    "username": "Kullanıcı adı...",
+    "password": "Şifre..."
   },
   "actions": {
     "login": "Login",
