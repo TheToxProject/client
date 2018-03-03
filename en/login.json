@@ -1,0 +1,11 @@
+{
+  "header": "Glad to see you back! 🤘",
+  "fields": {
+    "username": "Username...",
+    "password": "Password..."
+  },
+  "actions": {
+    "login": "Login",
+    "register": "Create a profile"
+  }
+}
