@@ -1,12 +1,12 @@
 {
-  "header": "Create your Tox profile 🤠",
+  "header": "Tox profilinizi oluşturun 🤠",
   "fields": {
     "username": "Kullanıcı adınızı seçin...",
     "password": "Parolanızı yazın...",
     "password_confirm": "Parolanızı doğrulayın..."
   },
   "actions": {
-    "register": "Register",
-    "login": "Back to login"
+    "register": "Üye ol",
+    "login": "Giriş ekranına geri dönün"
   }
 }
