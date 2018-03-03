@@ -1,11 +1,11 @@
 {
-  "header": "Glad to see you back! 🤘",
+  "header": "Seni tekrar gördüğüme çok sevindim! 🤘",
   "fields": {
     "username": "Kullanıcı adı...",
     "password": "Şifre..."
   },
   "actions": {
-    "login": "Login",
-    "register": "Create a profile"
+    "login": "Giriş Yap",
+    "register": "Profil oluştur"
   }
 }
