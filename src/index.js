@@ -12,7 +12,7 @@ import store from "./utilities/storage/store";
 import Routing, { Router, Switch } from "./utilities/routing";
 import { BackButton } from "./utilities/routing/router";
 
-import LoginScreen from "./screens/LoginScreen";
+import LoginScreen from "./containers/LoginScreenContainer";
 import RegisterScreen from "./screens/RegisterScreen";
 import RecentsScreen from "./screens/RecentsScreen";
 

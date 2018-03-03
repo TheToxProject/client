@@ -11,7 +11,7 @@ import { BackButton } from "./src/utilities/routing/router";
 import store from "./src/utilities/storage/store";
 import Colors from "./src/styles/colors";
 
-import LoginScreen from "./src/screens/LoginScreen";
+import LoginScreen from "./src/containers/LoginScreenContainer";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import RecentsScreen from "./src/screens/RecentsScreen";
 import { ChatScreen } from "./src/screens/ChatScreen";

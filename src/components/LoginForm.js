@@ -5,25 +5,21 @@ import { Link } from "./../utilities/routing/router";
 import Colors from "../styles/colors";
 import Input from "./Input";
 import Button from "./Button";
-import Logo from "./Logo";
 import FormHeader from "./FormHeader";
 
 export class LoginForm extends Component {
   render() {
     const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
-    const { disableLinks } = this.props;
+    const { disableLinks, onLayout } = this.props;
     const ButtonLink = disableLinks ? View : Link;
 
     return (
-      <View style={[styles.loginView, { width: formWidth }]}>
-        <Logo
-          size={"normal"}
-          variant={"white"}
-          align={"center"}
-          style={styles.logo}
-        />
-        <FormHeader text="Sign in" />
+      <View
+        onLayout={onLayout}
+        style={[this.props.style, styles.loginView, { width: formWidth }]}
+      >
+        <FormHeader text="Glad to see you back! 🤘" />
         {/**
          * @todo Replace the username input by a profile dropdown.
          * @body Tox works with profiles files instead of hosted accounts.
@@ -67,10 +63,6 @@ const styles = StyleSheet.create({
         borderRadius: 5
       }
     })*/
-  },
-  logo: {
-    marginBottom: 32,
-    alignSelf: "center"
   },
   actions: {
     marginTop: 16,

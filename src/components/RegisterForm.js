@@ -22,7 +22,7 @@ export class RegisterForm extends Component {
           align={"center"}
           style={styles.logo}
         />
-        <FormHeader text="Sign up" />
+        <FormHeader text="Create your Tox account 🤠" />
         <Input name="username" placeholder={"Choose your username..."} />
         <Input
           name="password"

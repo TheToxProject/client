@@ -57,3 +57,8 @@ buck-out/
 #
 storybook-static/
 storybook-static/*
+
+# Electron-Builder distributables
+#
+dist/
+dist/*
