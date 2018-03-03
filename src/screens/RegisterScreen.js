@@ -6,6 +6,8 @@ import Colors from "./../styles/colors";
 
 export class RegisterScreen extends React.Component {
   render() {
+    const { t } = this.props;
+
     return (
       <View style={styles.container}>
         <StatusBar
@@ -13,7 +15,7 @@ export class RegisterScreen extends React.Component {
           backgroundColor={Colors.DARK_BACKGROUND}
           barStyle={"light-content"}
         />
-        <RegisterForm />
+        <RegisterForm t={t} />
       </View>
     );
   }

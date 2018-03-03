@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { translate } from "react-i18next";
 
 import { withRouter } from "./../utilities/routing/router";
 import LoginScreen from "./../screens/LoginScreen";
@@ -18,6 +19,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default translate(["login"], { wait: true })(
+  withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginScreen))
 );

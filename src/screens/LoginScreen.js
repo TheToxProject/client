@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  StatusBar,
-  Animated,
-  Easing,
-  Platform
-} from "react-native";
+import { StyleSheet, View, StatusBar, Animated, Platform } from "react-native";
 
 import Colors from "./../styles/colors";
 import SimpleLogo from "./../components/Logo";
@@ -130,6 +123,8 @@ export class LoginScreen extends React.Component {
       outputRange: [0, 1]
     });
 
+    const { t } = this.props;
+
     return (
       <View style={styles.container} onLayout={this.onLayout}>
         <StatusBar
@@ -147,6 +142,7 @@ export class LoginScreen extends React.Component {
           ]}
         />
         <LoginForm
+          t={t}
           style={{ opacity: formOpacity, paddingTop: 32 }}
           onLayout={this.onLoginFormLayout}
           onLoginButtonPress={this.onLoginButtonPress}
