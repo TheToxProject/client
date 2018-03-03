@@ -1,11 +1,11 @@
 {
   "header": "Ravis de vous revoir! 🤘",
   "fields": {
-    "username": "Username...",
-    "password": "Password..."
+    "username": "Nom d'utilisateur...",
+    "password": "Mot de passe..."
   },
   "actions": {
-    "login": "Login",
-    "register": "Create a profile"
+    "login": "Se connecter",
+    "register": "Créer un profil"
   }
 }
