@@ -122,7 +122,7 @@ export class LoginScreen extends React.Component {
       outputRange: [
         this.state.selfHeight / 2 - DEFAULT_LOGO_HEIGHT / 2,
         this.state.formY - (Platform.OS === "web" ? 58 : 58)
-      ] // 32px margin bottom
+      ]
     });
 
     const formOpacity = this.state.showValue.interpolate({
