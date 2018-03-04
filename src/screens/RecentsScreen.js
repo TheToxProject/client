@@ -7,7 +7,7 @@ import Presence from "./../utilities/enums/Presence";
 import Colors from "./../styles/colors";
 
 import ContactsList from "./../components/ContactsList";
-import { ChatScreen } from "./ChatScreen";
+import ChatScreen from "./../containers/ChatScreenContainer";
 
 const Route = Routing.Route;
 

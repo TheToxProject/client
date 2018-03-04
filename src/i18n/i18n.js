@@ -3,8 +3,9 @@ import { Platform } from "react-native";
 import { reactI18nextModule } from "react-i18next";
 
 // Language Folders
-import en from "./en";
-import fr from "./fr";
+import en from "./en/index";
+import fr from "./fr/index";
+import tr from "./tr/index";
 
 /**
  * @todo Android/iOS/WindowsPhone language detection
@@ -35,7 +36,8 @@ i18n.use(reactI18nextModule).init({
   defaultNS: "login",
   resources: {
     en,
-    fr
+    fr,
+    tr
   },
   interpolation: {
     function(value, format, lng) {
@@ -54,5 +56,7 @@ i18n.use(reactI18nextModule).init({
 i18n.on("languageChanged", currentLang => {
   moment.locale(currentLang);
 });
+
+moment.locale(defaultLanguage);
 
 export default i18n;

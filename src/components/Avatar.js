@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Image, Text } from "react-native";
+import { Platform, View, Image, Text } from "react-native";
 
 import Presence from "./../utilities/enums/Presence";
 import Colors from "./../styles/colors";
@@ -60,7 +60,10 @@ export class Avatar extends Component {
         {source ? (
           <View style={[styles.avatarWrapper, sizeStyle]}>
             <Image
-              fadeDuration={0}
+              {...Platform.select({
+                android: { fadeDuration: 0 },
+                ios: { fadeDuration: 0 }
+              })}
               draggable={false}
               source={source.uri ? { uri: source.uri } : source}
               style={[styles.avatar, sizeStyle]}
@@ -74,7 +77,10 @@ export class Avatar extends Component {
         {presence != null && (
           <View style={[styles.presenceWrapper, presenceStyle]}>
             <Image
-              fadeDuration={0}
+              {...Platform.select({
+                android: { fadeDuration: 0 },
+                ios: { fadeDuration: 0 }
+              })}
               draggable={false}
               source={this.getPresenceImage(presence)}
               style={styles.presence}

@@ -1,16 +1,10 @@
-import {
-  TouchableOpacity,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  Platform
-} from "react-native";
-
+import { TouchableNativeFeedback, Platform } from "react-native";
 import TouchableRipple from "react-native-material-ripple";
 
 const Touchable = Platform.select({
-  ios: TouchableHighlight,
+  ios: TouchableRipple,
   android: TouchableNativeFeedback,
-  windows: TouchableOpacity,
+  windows: TouchableRipple,
   web: TouchableRipple
 });
 
