@@ -11,7 +11,7 @@ export class RegisterForm extends Component {
   render() {
     const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
-    const { disableLinks } = this.props;
+    const { disableLinks, t } = this.props;
     const ButtonLink = disableLinks ? View : Link;
 
     return (
@@ -22,16 +22,16 @@ export class RegisterForm extends Component {
           align={"center"}
           style={styles.logo}
         />
-        <FormHeader text="Sign up" />
-        <Input name="username" placeholder={"Choose your username..."} />
+        <FormHeader text={t("register:header")} />
+        <Input name="username" placeholder={t("register:fields.username")} />
         <Input
           name="password"
-          placeholder={"Type your password..."}
+          placeholder={t("register:fields.password")}
           secureTextEntry={true}
         />
         <Input
           name="password_confirm"
-          placeholder={"Confirm your password..."}
+          placeholder={t("register:fields.password_confirm")}
           secureTextEntry={true}
         />
         <View style={styles.actions}>
@@ -39,10 +39,10 @@ export class RegisterForm extends Component {
             uppercase={true}
             onPress={() => this.props.onRegisterButtonPress()}
             onPressDelay={200}
-            text="Register"
+            text={t("register:actions.register")}
           />
           <ButtonLink to="/">
-            <Text style={styles.backLogin}>Back to login</Text>
+            <Text style={styles.backLogin}>{t("register:actions.login")}</Text>
           </ButtonLink>
         </View>
       </View>

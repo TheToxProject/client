@@ -1,6 +1,10 @@
 {
-  "name": "toxclient",
+  "name": "tox-universal-client",
+  "description": "Modern, secure, private & fun Instant Messaging for the 21th century",
+  "homepage": "./",
   "version": "0.2.4",
+  "author": "SkyzohKey <skyzohkey@protonmail.com>",
+  "main": "public/index.js",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -8,13 +12,39 @@
     "web": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test:web": "node scripts/test.js --env=jsdom",
-    "electron": "node scripts/start.js & electron .",
+    "electron": "BROWSER=none node scripts/start.js & electron .",
     "storybook:start": "start-storybook -p 9009 -s $(pwd)/src/assets/",
     "storybook:build": "build-storybook -s $(pwd)/src/assets/",
-    "storybook:deploy": "storybook-to-ghpages"
+    "storybook:deploy": "storybook-to-ghpages",
+    "package:pre": "npm run build",
+    "package:all": "npm run package:pre && electron-builder build -mwl",
+    "package:linux": "npm run package:pre && electron-builder build --linux AppImage snap deb pacman tar.bz2 dir",
+    "package:freebsd": "npm run package:pre && electron-builder build --linux freebsd",
+    "package:win32": "npm run package:pre && electron-builder build --win --ia32 nsis msi zip portable",
+    "package:win64": "npm run package:pre && electron-builder build --win --x64 nsis msi zip portable",
+    "package:osx": "npm run package:pre && electron-builder build --macos dmg mas mas-dev tar.bz2 pkg",
+    "package:android": "react-native run-android --variant=release"
+  },
+  "build": {
+    "appId": "chat.tox.universal.client",
+    "productName": "Tox",
+    "copyright": "Copyright © 2016-2018 SkyzohLabs.be and contributors",
+    "files": [
+      "public/index.js",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    },
+    "linux": {
+      "category": "Network"
+    },
+    "mac": {
+      "category": "public.app-category.social-networking"
+    }
   },
   "dependencies": {
-    "autoprefixer": "7.1.6",
+    "autoprefixer": "8.1.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.2",
     "babel-jest": "22.4.1",
@@ -22,22 +52,26 @@
     "babel-preset-react-app": "^3.1.1",
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
-    "chalk": "1.1.3",
+    "chalk": "2.3.2",
     "css-loader": "0.28.10",
-    "dotenv": "4.0.0",
+    "dotenv": "5.0.1",
     "dotenv-expand": "4.0.1",
-    "eslint": "4.18.1",
+    "eslint": "4.18.2",
+    "electron-is-dev": "^0.3.0",
+    "electron-settings": "^3.1.4",
     "eslint-config-react-app": "^2.1.0",
-    "eslint-loader": "1.9.0",
+    "eslint-loader": "2.0.0",
     "eslint-plugin-flowtype": "2.46.0",
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.4.0",
     "extract-text-webpack-plugin": "3.0.2",
-    "file-loader": "1.1.9",
+    "file-loader": "1.1.10",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "3.0.0",
+    "i18next": "^10.5.0",
     "jest": "20.0.4",
+    "moment": "^2.21.0",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.1.1",
@@ -46,7 +80,8 @@
     "react": "16.2.0",
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.2.0",
-    "react-native": "0.53.3",
+    "react-native": "0.54.0",
+    "react-i18next": "^7.4.0",
     "react-native-material-ripple": "^0.8.0",
     "react-native-vector-icons": "^4.5.0",
     "react-native-web": "0.5.1",
@@ -62,7 +97,7 @@
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",
-    "webpack-manifest-plugin": "1.3.2",
+    "webpack-manifest-plugin": "2.0.0-rc.2",
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
@@ -78,10 +113,10 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-native": "4.0.0",
     "electron": "1.8.2",
+    "electron-builder": "^20.2.0",
     "jest": "22.3.0",
     "react-test-renderer": "16.2.0"
   },
-  "main": "index.electron.js",
   "jest": {
     "preset": "react-native",
     "collectCoverageFrom": [
