@@ -11,7 +11,7 @@ export class LoginForm extends Component {
   render() {
     const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
-    const { disableLinks, onLayout } = this.props;
+    const { disableLinks, onLayout, t } = this.props;
     const ButtonLink = disableLinks ? View : Link;
 
     return (
@@ -19,19 +19,19 @@ export class LoginForm extends Component {
         onLayout={onLayout}
         style={[this.props.style, styles.loginView, { width: formWidth }]}
       >
-        <FormHeader text="Glad to see you back! 🤘" />
+        <FormHeader text={t("login:header")} />
         {/**
          * @todo Replace the username input by a profile dropdown.
          * @body Tox works with profiles files instead of hosted accounts.
          */}
         <Input
           name="username"
-          placeholder={"Username..."}
+          placeholder={t("login:fields.username")}
           autoComplete={"off"}
         />
         <Input
           name="password"
-          placeholder={"Password..."}
+          placeholder={t("login:fields.password")}
           secureTextEntry={true}
           autoComplete={"off"}
         />
@@ -40,13 +40,15 @@ export class LoginForm extends Component {
             uppercase={true}
             onPress={() => this.props.onLoginButtonPress()}
             onPressDelay={200}
-            text="Login"
+            text={t("login:actions.login")}
             backgroundColor={Colors.ACCENT}
             color={Colors.TEXT}
             size={"normal"}
           />
           <ButtonLink to="/auth/register">
-            <Text style={styles.createAccount}>Create a profile</Text>
+            <Text style={styles.createAccount}>
+              {t("login:actions.register")}
+            </Text>
           </ButtonLink>
         </View>
       </View>
