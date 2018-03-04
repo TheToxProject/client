@@ -111,21 +111,21 @@ export class ChatScreen extends React.Component {
             style={styles.headerIcon}
             title={t("chat:labels.start_audio_call")}
             name={"call"}
-            size={24}
+            size={Platform.OS === "web" ? 30 : 24}
             color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
           />
           <IconButton
             style={styles.headerIcon}
-            title={t("chat:labels.start_video_calls")}
+            title={t("chat:labels.start_video_call")}
             name={"videocam"}
-            size={24}
+            size={Platform.OS === "web" ? 30 : 24}
             color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
           />
           <IconButton
             style={styles.headerIcon}
             title={t("chat:labels.more_infos")}
             name={"info-outline"}
-            size={24}
+            size={Platform.OS === "web" ? 30 : 24}
             color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
           />
         </View>

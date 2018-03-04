@@ -34,6 +34,7 @@ export class UserButton extends Component {
           style={{ ...styles.ripple, ...sizeStyle }}
           borderless={borderless || false}
           onPress={() => setTimeout(onPress, DEFAULT_PRESS_DELAY)}
+          title={title}
         >
           <Icon
             name={name}
