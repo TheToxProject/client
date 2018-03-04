@@ -1,13 +1,12 @@
 const electron = require("electron");
-// Module to control application life.
 const app = electron.app;
-// Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
 const path = require("path");
 const url = require("url");
+//const Colors = require("../src/styles/colors");
 
-const Colors = require("./src/styles/colors");
+const isDev = true;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -16,17 +15,17 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 500,
+    width: 960,
+    height: 600,
     autoHideMenuBar: true,
     show: false,
-    backgroundColor: Colors.DARK_BACKGROUND,
+    backgroundColor: "#414141", // Colors.DARK_BACKGROUND,
     center: true,
     title: "Konv - Modern secure Instant Messaging",
     webPreferences: {
-      devTools: process.env.DEV,
-      webSecurity: true,
-      allowRunningInsecureContent: false
+      devTools: isDev,
+      webSecurity: false, // Dumb electron that won't run react release if true...
+      allowRunningInsecureContent: true
     }
   });
 
@@ -35,11 +34,19 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL("http://localhost:3000");
-
-  // Open the DevTools.
-  process.env.DEV && mainWindow.webContents.openDevTools();
-
+  if (isDev) {
+    mainWindow.loadURL("http://localhost:3000");
+    mainWindow.webContents.openDevTools();
+  } else {
+    const startUrl =
+      process.env.ELECTRON_START_URL ||
+      url.format({
+        pathname: path.join(__dirname, "/build/index.html"),
+        protocol: "file:",
+        slashes: true
+      });
+    mainWindow.loadURL(startUrl);
+  }
   // Emitted when the window is closed.
   mainWindow.on("closed", function() {
     // Dereference the window object, usually you would store windows
@@ -52,7 +59,9 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", createWindow);
+app.on("ready", function() {
+  createWindow();
+});
 
 // Quit when all windows are closed.
 app.on("window-all-closed", function() {
