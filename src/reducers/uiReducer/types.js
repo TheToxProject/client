@@ -1,0 +1,1 @@
+export const LOGIN_ANIMATION_RAN = "ui/LOGIN_ANIMATION_RAN";

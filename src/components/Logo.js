@@ -3,10 +3,26 @@ import { Platform, View, Image } from "react-native";
 
 const ORIGINAL_WIDTH = 149;
 const ORIGINAL_HEIGHT = 60;
+const SCALE_RATIO = ORIGINAL_WIDTH / ORIGINAL_HEIGHT;
+
+const VARIANTS = {
+  ...Platform.select({
+    web: {
+      muted: require("../assets/logo-muted.svg"),
+      white: require("../assets/logo-white.svg"),
+      black: require("../assets/logo-black.svg")
+    },
+    default: {
+      muted: require("../assets/logo-muted.png"),
+      white: require("../assets/logo-white.png"),
+      black: require("../assets/logo-black.png")
+    }
+  })
+};
 
 export class Logo extends Component {
   render() {
-    const { size, align } = this.props;
+    const { size, align, variant, height } = this.props;
 
     /**
      * TODO: Handle variant (color: white, black, muted, colors).
@@ -24,15 +40,15 @@ export class Logo extends Component {
       >
         <Image
           {...this.props}
-          style={styles[size] || styles.normal}
+          style={
+            height
+              ? { height: height, width: height * SCALE_RATIO }
+              : styles[size] || styles.normal
+          }
           resizeMode={"contain"}
           fadeDuration={0}
           draggable={false}
-          source={
-            Platform.OS === "web"
-              ? require("../assets/tox-logo.svg")
-              : require("../assets/tox-logo.png")
-          }
+          source={VARIANTS[variant] || VARIANTS.white}
         />
       </View>
     );
