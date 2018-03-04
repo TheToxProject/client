@@ -1,0 +1,11 @@
+{
+  "header": "Seni tekrar gördüğüme çok sevindim! 🤘",
+  "fields": {
+    "username": "Kullanıcı adı...",
+    "password": "Şifre..."
+  },
+  "actions": {
+    "login": "Giriş Yap",
+    "register": "Profil oluştur"
+  }
+}
