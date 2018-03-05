@@ -14,6 +14,7 @@ import { withRouter } from "./../utilities/routing/router";
 import Colors from "./../styles/colors";
 import ContactItem from "./../components/ContactItem";
 import IconButton from "./../components/IconButton";
+import WelcomePlaceholder from "./../components/WelcomePlaceholder";
 
 const MAX_INPUT_EXPAND = 120;
 
@@ -68,17 +69,8 @@ export class ChatScreen extends React.Component {
     const { t } = this.props;
     const { contact } = this.props.location.state || { contact: null };
 
-    console.log(this.props);
-
-    if (this.props === null || this.props.location.state === null || !contact) {
-      return (
-        <View style={styles.emptyContainer}>
-          <Text style={styles.tagline}>{t("chat:headers.welcome_back")}</Text>
-          <Text style={styles.infoText}>
-            {t("chat:headers.info_text").toUpperCase()}
-          </Text>
-        </View>
-      );
+    if (contact == null) {
+      return <WelcomePlaceholder t={t} />;
     }
 
     return (
@@ -229,15 +221,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: Colors.BACKGROUND
   },
-  emptyContainer: {
-    flex: 1,
-    height: "100%",
-    width: "100%",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: Colors.BACKGROUND
-  },
   header: {
     height: Platform.OS === "web" ? 64 : 56,
     width: "100%",
@@ -306,18 +289,6 @@ const styles = StyleSheet.create({
         width: 260
       }
     })
-  },
-  tagline: {
-    fontSize: 30,
-    fontWeight: "lighter",
-    color: Colors.PRIMARY_TEXT,
-    padding: 12
-  },
-  infoText: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: Colors.SECONDARY_TEXT,
-    padding: 4
   }
 });
 

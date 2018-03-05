@@ -16,7 +16,7 @@ import { BackButton } from "./utilities/routing/router";
 
 import LoginScreen from "./containers/LoginScreenContainer";
 import RegisterScreen from "./containers/RegisterScreenContainer";
-import RecentsScreen from "./screens/RecentsScreen";
+import RecentsScreen from "./containers/RecentsScreenContainer";
 
 const Route = Routing.Route;
 

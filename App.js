@@ -15,7 +15,7 @@ import Colors from "./src/styles/colors";
 
 import LoginScreen from "./src/containers/LoginScreenContainer";
 import RegisterScreen from "./src/containers/RegisterScreenContainer";
-import RecentsScreen from "./src/screens/RecentsScreen";
+import RecentsScreen from "./src/containers/RecentsScreenContainer";
 import ChatScreen from "./src/containers/ChatScreenContainer";
 
 const Route = Routing.Route;

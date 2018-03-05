@@ -8,6 +8,7 @@ import Colors from "./../styles/colors";
 
 import ContactsList from "./../components/ContactsList";
 import ChatScreen from "./../containers/ChatScreenContainer";
+import WelcomePlaceholder from "./../components/WelcomePlaceholder";
 
 const Route = Routing.Route;
 
@@ -61,6 +62,10 @@ export class RecentsScreen extends React.Component {
     this.onLogoutButtonPress = this.onLogoutButtonPress.bind(this);
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   onUserButtonPress() {
     /**
      * @todo Navigate to the user profile screen.
@@ -88,7 +93,7 @@ export class RecentsScreen extends React.Component {
 
   render() {
     //const ContactState = { MUTED: 0, BLOCKED: 1, DELETED: 2, NEW: 3 };
-
+    const { match: { isExact, path }, t } = this.props;
     return (
       <View style={styles.container}>
         <ContactsList
@@ -98,13 +103,17 @@ export class RecentsScreen extends React.Component {
           onUserButtonPress={this.onUserButtonPress}
           onLogoutButtonPress={this.onLogoutButtonPress}
         />
-        {Platform.OS === "web" /* Mobile nav is defined in /index.js */ && (
-          <View style={styles.section}>
-            <Route>
-              <Route exact path="/chat/:pubkey" component={ChatScreen} />
-            </Route>
-          </View>
-        )}
+        {Platform.OS === "web" /* Mobile nav is defined in /index.js */ ? (
+          isExact && path === "/chat" ? (
+            <WelcomePlaceholder t={t} />
+          ) : (
+            <View style={styles.section}>
+              <Route>
+                <Route exact path="/chat/:pubkey" component={ChatScreen} />
+              </Route>
+            </View>
+          )
+        ) : null}
       </View>
     );
   }
