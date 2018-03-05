@@ -8,6 +8,8 @@ The main goal of this project is to provide the same experience between platform
 
 You can live preview most of the components on [The Storybook](https://tox-client.github.io/client)!
 
+![The Universal Tox Client running on multiple platforms](misc/tox-client-multiple-platforms.png)
+
 ## Table of Contents
 
 * [Roadmap](#-roadmap)
