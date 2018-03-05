@@ -1,6 +1,7 @@
 {
   "name": "tox-universal-client",
-  "description": "Modern, secure, private & fun Instant Messaging for the 21th century",
+  "description":
+    "Modern, secure, private & fun Instant Messaging for the 21th century",
   "homepage": "./",
   "version": "0.2.4",
   "author": "SkyzohKey <skyzohkey@protonmail.com>",
@@ -18,11 +19,16 @@
     "storybook:deploy": "storybook-to-ghpages",
     "package:pre": "npm run build",
     "package:all": "npm run package:pre && electron-builder build -mwl",
-    "package:linux": "npm run package:pre && electron-builder build --linux AppImage snap deb pacman tar.bz2 dir",
-    "package:freebsd": "npm run package:pre && electron-builder build --linux freebsd",
-    "package:win32": "npm run package:pre && electron-builder build --win --ia32 nsis msi zip portable",
-    "package:win64": "npm run package:pre && electron-builder build --win --x64 nsis msi zip portable",
-    "package:osx": "npm run package:pre && electron-builder build --macos dmg mas mas-dev tar.bz2 pkg",
+    "package:linux":
+      "npm run package:pre && electron-builder build --linux AppImage snap deb pacman tar.bz2 dir",
+    "package:freebsd":
+      "npm run package:pre && electron-builder build --linux freebsd",
+    "package:win32":
+      "npm run package:pre && electron-builder build --win --ia32 nsis msi zip portable",
+    "package:win64":
+      "npm run package:pre && electron-builder build --win --x64 nsis msi zip portable",
+    "package:osx":
+      "npm run package:pre && electron-builder build --macos dmg mas mas-dev tar.bz2 pkg",
     "package:android": "react-native run-android --variant=release"
   },
   "build": {
@@ -30,8 +36,10 @@
     "productName": "Tox",
     "copyright": "Copyright © 2016-2018 SkyzohLabs.be and contributors",
     "files": [
+      "public/**/*",
       "public/index.js",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "src/**/*"
     ],
     "directories": {
       "buildResources": "public"
@@ -119,12 +127,8 @@
   },
   "jest": {
     "preset": "react-native",
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
+    "setupFiles": ["<rootDir>/config/polyfills.js"],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
@@ -134,11 +138,10 @@
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)":
+        "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
+    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
@@ -153,9 +156,7 @@
     ]
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "presets": ["react-app"]
   },
   "eslintConfig": {
     "extends": "react-app"

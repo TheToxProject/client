@@ -46,7 +46,10 @@ export class Logo extends Component {
               : styles[size] || styles.normal
           }
           resizeMode={"contain"}
-          fadeDuration={0}
+          {...Platform.select({
+            android: { fadeDuration: 0 },
+            ios: { fadeDuration: 0 }
+          })}
           draggable={false}
           source={VARIANTS[variant] || VARIANTS.white}
         />

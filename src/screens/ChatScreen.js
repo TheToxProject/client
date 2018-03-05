@@ -8,14 +8,13 @@ import {
   TextInput,
   Keyboard
 } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { withRouter } from "./../utilities/routing/router";
 
 import Colors from "./../styles/colors";
-import { ContactItem } from "./../components/ContactItem";
-import Touchable from "./../components/Touchable";
+import ContactItem from "./../components/ContactItem";
+import IconButton from "./../components/IconButton";
+import WelcomePlaceholder from "./../components/WelcomePlaceholder";
 
 const MAX_INPUT_EXPAND = 120;
 
@@ -67,31 +66,23 @@ export class ChatScreen extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     const { contact } = this.props.location.state || { contact: null };
 
-    if (!contact) {
-      return (
-        <View style={styles.container}>
-          <Text>Welcome on Konv !</Text>
-        </View>
-      );
+    if (contact == null) {
+      return <WelcomePlaceholder t={t} />;
     }
 
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           {Platform.OS !== "web" && (
-            <Touchable
+            <IconButton
+              title={t("chat:labels.back_button")}
+              name={"arrow-back"}
+              style={styles.backIcon}
               onPress={() => requestAnimationFrame(this.onBackButtonPress)}
-              style={{ backgroundColor: Colors.ACCENT }}
-            >
-              <Icon
-                style={styles.backIcon}
-                name={"arrow-back"}
-                size={24}
-                color={Colors.TEXT}
-              />
-            </Touchable>
+            />
           )}
           {contact && (
             <ContactItem
@@ -108,22 +99,25 @@ export class ChatScreen extends React.Component {
               }
             />
           )}
-          <Icon
+          <IconButton
             style={styles.headerIcon}
+            title={t("chat:labels.start_audio_call")}
             name={"call"}
-            size={24}
+            size={Platform.OS === "web" ? 30 : 24}
             color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
           />
-          <Icon
+          <IconButton
             style={styles.headerIcon}
+            title={t("chat:labels.start_video_call")}
             name={"videocam"}
-            size={24}
+            size={Platform.OS === "web" ? 30 : 24}
             color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
           />
-          <Icon
+          <IconButton
             style={styles.headerIcon}
+            title={t("chat:labels.more_infos")}
             name={"info-outline"}
-            size={24}
+            size={Platform.OS === "web" ? 30 : 24}
             color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
           />
         </View>
@@ -135,21 +129,26 @@ export class ChatScreen extends React.Component {
         </ScrollView>
         <View style={styles.inputView}>
           <View style={styles.actions}>
-            <Icon
+            <IconButton
               name={"photo-camera"}
               size={24}
               color={Colors.SECONDARY_TEXT}
             />
-            <Icon name={"videocam"} size={24} color={Colors.SECONDARY_TEXT} />
-            <CommunityIcon
-              name={"sticker-emoji"}
+            <IconButton
+              name={"videocam"}
               size={24}
               color={Colors.SECONDARY_TEXT}
             />
-            <Icon name={"gif"} size={24} color={Colors.SECONDARY_TEXT} />
-            <Icon name={"mic"} size={24} color={Colors.SECONDARY_TEXT} />
+            <IconButton
+              name={"sticker-emoji"}
+              size={24}
+              color={Colors.SECONDARY_TEXT}
+              pack={"community"}
+            />
+            <IconButton name={"gif"} size={24} color={Colors.SECONDARY_TEXT} />
+            <IconButton name={"mic"} size={24} color={Colors.SECONDARY_TEXT} />
             {Platform.OS !== "web" ? (
-              <Icon
+              <IconButton
                 name={"more-horiz"}
                 size={24}
                 color={Colors.SECONDARY_TEXT}
@@ -165,16 +164,21 @@ export class ChatScreen extends React.Component {
                   alignItems: "center"
                 }}
               >
-                <Icon name={"send"} size={16} color={Colors.DARK_BACKGROUND} />
+                <IconButton
+                  name={"send"}
+                  size={20}
+                  color={Colors.DARK_BACKGROUND}
+                />
               </View>
             )}
           </View>
           <View style={styles.inputRow}>
             {Platform.OS !== "web" ? (
-              <CommunityIcon
+              <IconButton
                 name={"emoticon-happy"}
                 size={24}
                 color={Colors.SECONDARY_TEXT}
+                pack={"community"}
               />
             ) : null}
             <TextInput
@@ -194,7 +198,11 @@ export class ChatScreen extends React.Component {
               onBlur={this.onKeyboardHideRequest}
             />
             {Platform.OS !== "web" ? (
-              <Icon name={"send"} size={24} color={Colors.SECONDARY_TEXT} />
+              <IconButton
+                name={"send"}
+                size={24}
+                color={Colors.SECONDARY_TEXT}
+              />
             ) : null}
           </View>
         </View>

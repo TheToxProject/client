@@ -5,17 +5,17 @@ import Touchable from "./../components/Touchable";
 import Avatar from "./../components/Avatar";
 
 const DEFAULT_SIZE = 36;
+const DEFAULT_PRESS_DELAY = 300;
 
 export class UserButton extends Component {
   render() {
     const { avatarUri, username, onPress } = this.props;
 
     return (
-      <View style={styles.container} {...this.props}>
+      <View style={styles.container}>
         <Touchable
           style={styles.ripple}
-          activeOpacity={0.8}
-          onPress={() => setTimeout(onPress, 400)}
+          onPress={() => setTimeout(onPress, DEFAULT_PRESS_DELAY)}
         >
           <Avatar
             source={{ uri: avatarUri }}

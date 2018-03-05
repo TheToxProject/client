@@ -77,6 +77,18 @@ export class LoginScreen extends React.Component {
       selfHeight: layout.height,
       selfWidth: layout.width
     });
+
+    const { loadValue } = this.state;
+    const { loginAnimationRan } = this.props;
+
+    if (loginAnimationRan) {
+      Animated.timing(loadValue, {
+        delay: 0,
+        duration: 400,
+        toValue: 1,
+        useNativeDriver: false
+      }).start();
+    }
   }
 
   onLoginFormLayout({ nativeEvent: { layout } }) {
@@ -87,7 +99,6 @@ export class LoginScreen extends React.Component {
       formY: layout.y,
       showForm: false
     });
-    console.log(this.props);
   }
 
   onLoginButtonPress() {

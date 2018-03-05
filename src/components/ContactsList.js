@@ -1,11 +1,11 @@
 import React from "react";
 import { Platform, View, Text, ScrollView } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
 
 import Colors from "./../styles/colors";
 import Button from "./../components/Button";
 import Logo from "./../components/Logo";
 import UserButton from "./../components/UserButton";
+import IconButton from "./../components/IconButton";
 import ContactItem from "./../components/ContactItem";
 
 export class ContactsList extends React.Component {
@@ -43,36 +43,38 @@ export class ContactsList extends React.Component {
               onPress={onUserButtonPress}
             />
             <View style={styles.icons}>
-              <Icon
-                name="search"
-                size={24}
-                color={Colors.ICONS}
-                style={styles.icon}
+              <IconButton
                 title={"Search"}
-              />
-              <Icon
-                name={Platform.OS === "web" ? "more-vert" : "more-vert"}
-                size={24}
-                color={Colors.ICONS}
+                name="search"
                 style={styles.icon}
+                onPress={() => alert("Trigger searchbar opening")}
+              />
+              <IconButton
                 title={Platform.OS === "web" ? "Settings" : "More"}
+                name={Platform.OS === "web" ? "more-vert" : "more-vert"}
+                style={styles.icon}
+                onPress={() => alert("More...")}
               />
             </View>
           </View>
           <View style={styles.tabs}>
             <View style={[styles.tab, styles.selectedTab]}>
               <Text style={styles.tabText}>
-                <Icon name="access-time" size={24} title={"Recent"} />
+                <IconButton name="access-time" size={24} title={"Recent"} />
               </Text>
             </View>
             <View style={styles.tab}>
               <Text style={styles.tabText}>
-                <Icon name="group" size={24} title={"Contacts"} />
+                <IconButton name="group" size={24} title={"Contacts"} />
               </Text>
             </View>
             <View style={styles.tab}>
               <Text style={styles.tabText}>
-                <Icon name="call-missed" size={24} title={"Missed calls"} />
+                <IconButton
+                  name="call-missed"
+                  size={24}
+                  title={"Missed calls"}
+                />
               </Text>
             </View>
           </View>
@@ -155,12 +157,6 @@ const styles = {
     alignItems: "center"
   },
   icon: {
-    ...Platform.select({
-      web: {
-        userSelect: "none",
-        cursor: "pointer"
-      }
-    }),
     padding: 10
   },
   appBar: {
