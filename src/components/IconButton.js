@@ -12,7 +12,7 @@ const SCALE_RATIO = DEFAULT_SIZE / DEFAULT_ICON_SIZE;
 
 export class UserButton extends Component {
   render() {
-    const { name, title, size, color, pack, borderless, onPress } = this.props;
+    const { name, title, size, color, pack, onPress } = this.props;
     const iconPack = pack ? pack : DEFAULT_ICON_PACK;
 
     const Icon =
@@ -32,7 +32,6 @@ export class UserButton extends Component {
       <View style={{ ...styles.container, ...sizeStyle }}>
         <Touchable
           style={{ ...styles.ripple, ...sizeStyle }}
-          borderless={borderless || false}
           onPress={() => setTimeout(onPress, DEFAULT_PRESS_DELAY)}
           title={title}
         >

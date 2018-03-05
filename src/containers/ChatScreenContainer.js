@@ -19,6 +19,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default translate(["chat"], { wait: true })(
-  withRouter(connect(mapStateToProps, mapDispatchToProps)(ChatScreen))
+export default withRouter(
+  translate(["chat"], { wait: true })(
+    connect(mapStateToProps, mapDispatchToProps)(ChatScreen)
+  )
 );

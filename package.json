@@ -41,15 +41,17 @@
     "appId": "chat.tox.universal.client",
     "productName": "Tox",
     "copyright": "Copyright © 2016-2018 SkyzohLabs.be and contributors",
-    "asar": true,
+    "asar": false,
     "files": [
       "public/**/*",
       "public/index.js",
       "node_modules/**/*",
-      "src/**/*"
+      "src/**/*",
+      "build/**/*"
     ],
     "directories": {
-      "buildResources": "public"
+      "buildResources": "public",
+      "output": "packages"
     },
     "linux": {
       "category": "Network"

@@ -9,8 +9,6 @@ import {
   Keyboard
 } from "react-native";
 
-import { withRouter } from "./../utilities/routing/router";
-
 import Colors from "./../styles/colors";
 import ContactItem from "./../components/ContactItem";
 import IconButton from "./../components/IconButton";
@@ -69,7 +67,7 @@ export class ChatScreen extends React.Component {
     const { t } = this.props;
     const { contact } = this.props.location.state || { contact: null };
 
-    if (contact == null) {
+    if (Platform.OS === "web" && contact == null) {
       return <WelcomePlaceholder t={t} />;
     }
 
@@ -292,4 +290,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withRouter(ChatScreen);
+export default ChatScreen;

@@ -2,7 +2,6 @@ import React from "react";
 import { Platform, StyleSheet, View } from "react-native";
 
 import Routing from "./../utilities/routing";
-import { withRouter } from "./../utilities/routing/router";
 import Presence from "./../utilities/enums/Presence";
 import Colors from "./../styles/colors";
 
@@ -62,10 +61,6 @@ export class RecentsScreen extends React.Component {
     this.onLogoutButtonPress = this.onLogoutButtonPress.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   onUserButtonPress() {
     /**
      * @todo Navigate to the user profile screen.
@@ -91,29 +86,38 @@ export class RecentsScreen extends React.Component {
     history.replace("/");
   }
 
-  render() {
-    //const ContactState = { MUTED: 0, BLOCKED: 1, DELETED: 2, NEW: 3 };
+  renderSection() {
+    if (Platform.OS !== "web") {
+      return <View />;
+    }
+
     const { match: { isExact, path }, t } = this.props;
+    if (isExact && path === "/chat") {
+      return <WelcomePlaceholder t={t} />;
+    } else {
+      return (
+        <View style={styles.section}>
+          <Route>
+            <Route exact path="/chat/:pubkey" component={ChatScreen} />
+          </Route>
+        </View>
+      );
+    }
+  }
+
+  render() {
+    const { t } = this.props;
     return (
       <View style={styles.container}>
         <ContactsList
+          t={t}
           contacts={fakeUsers}
           onContactSelectionChange={this.onContactSelectionChange}
           onContactLongPress={this.onContactLongPress}
           onUserButtonPress={this.onUserButtonPress}
           onLogoutButtonPress={this.onLogoutButtonPress}
         />
-        {Platform.OS === "web" /* Mobile nav is defined in /index.js */ ? (
-          isExact && path === "/chat" ? (
-            <WelcomePlaceholder t={t} />
-          ) : (
-            <View style={styles.section}>
-              <Route>
-                <Route exact path="/chat/:pubkey" component={ChatScreen} />
-              </Route>
-            </View>
-          )
-        ) : null}
+        {this.renderSection()}
       </View>
     );
   }
@@ -144,4 +148,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withRouter(RecentsScreen);
+export default RecentsScreen;

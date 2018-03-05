@@ -6,12 +6,12 @@ import Colors from "./../styles/colors";
 
 const BACKGROUND_PATTERN = require("./../assets/playstation-pattern.png");
 
-export class UserButton extends Component {
+export class WelcomePlaceholder extends Component {
   render() {
     const { t } = this.props;
     return (
       <View style={styles.emptyContainer}>
-        <View style={[StyleSheet.absoluteFill, { zIndex: -10 }]}>
+        <View style={{ zIndex: -10 }}>
           <Image source={BACKGROUND_PATTERN} style={styles.background} />
         </View>
         <Icon name={"emoticon-happy"} size={120} color={Colors.DIVIDE} />
@@ -24,7 +24,7 @@ export class UserButton extends Component {
   }
 }
 
-export default UserButton;
+export default WelcomePlaceholder;
 
 const styles = {
   emptyContainer: {
@@ -37,7 +37,7 @@ const styles = {
     backgroundColor: Colors.BACKGROUND
   },
   background: {
-    ...StyleSheet.absoluteFill,
+    ...StyleSheet.absoluteFillObject,
     flex: 1,
     resizeMode: "repeat"
   },
@@ -51,6 +51,9 @@ const styles = {
     fontSize: 14,
     fontWeight: "bold",
     color: Colors.SECONDARY_TEXT,
-    padding: 4
+    padding: 4,
+    width: "60%",
+    textAlign: "center",
+    lineHeight: 24
   }
 };
