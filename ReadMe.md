@@ -13,6 +13,7 @@ You can live preview most of the components on [The Storybook](https://tox-clien
 ## Table of Contents
 
 * [Roadmap](#-roadmap)
+* [Translating](#-translating)
 * [Compiling](#-compiling)
   * [Android](#android)
   * [iOS](#ios)
@@ -57,6 +58,12 @@ Finally fixes all the issues from last pre-release 2 weeks time (as they appears
 ### Milestone 8 (v1.0.0-rc3)
 
 Take some time to build a list of all the app's strings, prepare them for localization (ICU format), setup tooling to enable people to translate in their languages. Wait 2 weeks for translations to be done, then release.
+
+## 😛 Translating
+
+This project uses Crowdin to manage translations, you are free (and encouraged) to contribute by localizing it in your very own language!
+
+* [Get started localizing the project](https://crowdin.com/project/tox-client)
 
 ## 🔬 Compiling
 
