@@ -1,7 +1,6 @@
 {
   "name": "tox-universal-client",
-  "description":
-    "Modern, secure, private & fun Instant Messaging for the 21th century",
+  "description": "Modern, secure, private & fun Instant Messaging for the 21th century",
   "homepage": "./",
   "version": "0.2.4",
   "author": "SkyzohKey <skyzohkey@protonmail.com>",
@@ -18,23 +17,17 @@
     "storybook:build": "build-storybook -s $(pwd)/src/assets/",
     "storybook:deploy": "storybook-to-ghpages",
     "package:all": "npm run dist && electron-builder build -mwl",
-    "package:linux":
-      "electron-builder build --linux AppImage snap deb pacman tar.bz2 dir",
+    "package:linux": "electron-builder build --linux AppImage snap deb pacman tar.bz2 dir",
     "package:freebsd": "electron-builder build --linux freebsd",
-    "package:win32":
-      "electron-builder build --win --ia32 nsis msi zip portable",
+    "package:win32": "electron-builder build --win --ia32 nsis msi zip portable",
     "package:win64": "electron-builder build --win --x64 nsis msi zip portable",
     "package:osx": "electron-builder build --macos dmg mas mas-dev tar.bz2 pkg",
     "release:all": "npm run dist && electron-builder build -mwl",
-    "release:linux":
-      "npm run dist && electron-builder build --linux AppImage snap deb pacman tar.bz2 dir",
+    "release:linux": "npm run dist && electron-builder build --linux AppImage snap deb pacman tar.bz2 dir",
     "release:freebsd": "npm run dist && electron-builder build --linux freebsd",
-    "release:win32":
-      "npm run dist && electron-builder build --win --ia32 nsis msi zip portable",
-    "release:win64":
-      "npm run dist && electron-builder build --win --x64 nsis msi zip portable",
-    "release:osx":
-      "npm run dist && electron-builder build --macos dmg mas mas-dev tar.bz2 pkg",
+    "release:win32": "npm run dist && electron-builder build --win --ia32 nsis msi zip portable",
+    "release:win64": "npm run dist && electron-builder build --win --x64 nsis msi zip portable",
+    "release:osx": "npm run dist && electron-builder build --macos dmg mas mas-dev tar.bz2 pkg",
     "release:android": "react-native run-android --variant=release"
   },
   "build": {
@@ -73,9 +66,9 @@
     "css-loader": "0.28.11",
     "dotenv": "5.0.1",
     "dotenv-expand": "4.0.1",
-    "eslint": "4.19.0",
     "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.1.4",
+    "eslint": "4.19.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-loader": "2.0.0",
     "eslint-plugin-flowtype": "2.46.0",
@@ -85,7 +78,7 @@
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.10",
     "fs-extra": "3.0.1",
-    "html-webpack-plugin": "3.0.0",
+    "html-webpack-plugin": "^3.0.7",
     "i18next": "^10.5.0",
     "jest": "20.0.4",
     "moment": "^2.21.0",
@@ -97,8 +90,8 @@
     "react": "16.2.0",
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.2.0",
-    "react-native": "0.54.2",
     "react-i18next": "^7.4.0",
+    "react-native": "0.54.2",
     "react-native-material-ripple": "^0.8.0",
     "react-native-vector-icons": "^4.5.0",
     "react-native-web": "0.5.3",
@@ -136,8 +129,12 @@
   },
   "jest": {
     "preset": "react-native",
-    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
@@ -147,10 +144,11 @@
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)":
-        "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
@@ -165,7 +163,9 @@
     ]
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
