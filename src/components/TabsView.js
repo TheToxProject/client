@@ -253,11 +253,11 @@ class TabsView extends Component {
           style={{
             flex: 1,
             flexDirection: "row",
-            overflowX: "hidden",
             transform: [{ translateX }],
             width: tabsCount * width,
             maxWidth: tabsCount * width,
-            minWidth: tabsCount * width
+            minWidth: tabsCount * width,
+            ...Platform.select({ web: { overflowX: "hidden" } })
           }}
         >
           {childrens.map((view, index, tabs) => {
