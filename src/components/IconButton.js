@@ -6,7 +6,6 @@ import Touchable from "./../components/Touchable";
 
 const DEFAULT_SIZE = 36;
 const DEFAULT_ICON_SIZE = 24;
-const DEFAULT_PRESS_DELAY = 300;
 const DEFAULT_ICON_PACK = "material";
 const SCALE_RATIO = DEFAULT_SIZE / DEFAULT_ICON_SIZE;
 
@@ -30,18 +29,16 @@ export class UserButton extends Component {
 
     return (
       <View style={[styles.container, sizeStyle]}>
-        <Touchable
-          style={{ ...styles.ripple, ...sizeStyle }}
-          onPress={() => setTimeout(onPress, DEFAULT_PRESS_DELAY)}
-          title={title}
-        >
-          <Icon
-            name={name}
-            size={size || DEFAULT_ICON_SIZE}
-            color={color || Colors.ICONS}
-            style={styles.icon}
-            title={title}
-          />
+        <Touchable onPress={onPress}>
+          <View style={[styles.ripple, sizeStyle]}>
+            <Icon
+              name={name}
+              size={size || DEFAULT_ICON_SIZE}
+              color={color || Colors.ICONS}
+              style={styles.icon}
+              title={title}
+            />
+          </View>
         </Touchable>
       </View>
     );
@@ -56,6 +53,8 @@ const styles = {
     height: DEFAULT_SIZE,
     borderRadius: DEFAULT_SIZE,
     overflow: "hidden",
+    justifyContent: "center",
+    alignItems: "center",
     ...Platform.select({
       web: {
         cursor: "pointer"
