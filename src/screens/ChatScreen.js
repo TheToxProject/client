@@ -4,7 +4,6 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,
   TextInput,
   Keyboard
 } from "react-native";
@@ -28,6 +27,25 @@ export class ChatScreen extends React.Component {
     this.onBackButtonPress = this.onBackButtonPress.bind(this);
     this.onContentSizeChange = this.onContentSizeChange.bind(this);
     this.onKeyboardHideRequest = this.onKeyboardHideRequest.bind(this);
+    this.onKeyboardShow = this.onKeyboardShow.bind(this);
+    this.scrollToEnd = this.scrollToEnd.bind(this);
+  }
+
+  componentWillMount() {
+    if (Platform.OS !== "web") {
+      Keyboard.addListener("keyboardDidShow", this.onKeyboardShow);
+    }
+  }
+
+  componentDidMount() {}
+  componentDidUpdate() {
+    this.scrollToEnd();
+  }
+
+  scrollToEnd() {
+    this._chatView &&
+      this._chatView.scrollToEnd &&
+      this._chatView.scrollToEnd({ animated: true });
   }
 
   onBackButtonPress() {
@@ -62,6 +80,17 @@ export class ChatScreen extends React.Component {
 
   onKeyboardHideRequest() {
     Keyboard.dismiss();
+  }
+
+  onKeyboardShow() {
+    /**
+     * @todo Check if scrollview bottom is reached
+     * @body If the scrollview has reached the bottom, when the keyboard shows
+     *       it should makes the scrollview to scroll to bottom again. If the
+     *       scrollview content was NOT full bottom, then we don't scroll.
+     */
+
+    this._chatView.scrollToEnd({ animated: true });
   }
 
   render() {
@@ -121,38 +150,147 @@ export class ChatScreen extends React.Component {
           />
         </View>
         <ScrollView
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", flex: 1 }}
           contentContainerStyle={styles.chatView}
           onMomentumScrollBegin={this.onKeyboardHideRequest}
+          ref={scrollview => (this._chatView = scrollview)}
         >
           <Message
+            key={Math.random()}
             author={{
               name: "SkyzohKey",
               avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
             }}
             fromSelf={true}
             showAvatar
-            message="This is a cool message yay!"
+            message={{ type: "text", text: "This is a cool message yay!" }}
             time={Date.now()}
           />
           <Message
+            key={Math.random()}
             author={{
               name: "SkyzohKey",
               avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
             }}
             fromSelf={true}
             showAvatar={false}
-            message="eheh."
+            message={{ type: "text", text: "🐒🐒🐒" }}
             time={Date.now()}
           />
           <Message
+            key={Math.random()}
             author={{
               name: contact.username,
               avatarUri: contact.avatarUri
             }}
             fromSelf={false}
             showAvatar
-            message={contact.status}
+            message={{ type: "text", text: contact.status }}
+            time={Date.now()}
+          />
+          <Message
+            key={Math.random()}
+            author={{
+              name: "SkyzohKey",
+              avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
+            }}
+            fromSelf={true}
+            showAvatar
+            message={{ type: "text", text: "This is a cool message yay!" }}
+            time={Date.now()}
+          />
+          <Message
+            key={Math.random()}
+            author={{
+              name: "SkyzohKey",
+              avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
+            }}
+            fromSelf={true}
+            showAvatar={false}
+            message={{ type: "text", text: "eheh. 🐒" }}
+            time={Date.now()}
+          />
+          <Message
+            key={Math.random()}
+            author={{
+              name: contact.username,
+              avatarUri: contact.avatarUri
+            }}
+            fromSelf={false}
+            showAvatar
+            message={{ type: "text", text: contact.status }}
+            time={Date.now()}
+          />
+          <Message
+            key={Math.random()}
+            author={{
+              name: "SkyzohKey",
+              avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
+            }}
+            fromSelf={true}
+            showAvatar
+            message={{ type: "text", text: "This is a cool message yay!" }}
+            time={Date.now()}
+          />
+          <Message
+            key={Math.random()}
+            author={{
+              name: "SkyzohKey",
+              avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
+            }}
+            fromSelf={true}
+            showAvatar={false}
+            message={{ type: "text", text: "eheh. 🐒" }}
+            time={Date.now()}
+          />
+          <Message
+            key={Math.random()}
+            author={{
+              name: "SkyzohKey",
+              avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
+            }}
+            fromSelf={true}
+            showAvatar
+            message={{
+              type: "image",
+              source: { uri: "https://i.imgur.com/M6fUBgV.png" }
+            }}
+            time={Date.now()}
+          />
+          <Message
+            key={Math.random()}
+            author={{
+              name: "SkyzohKey",
+              avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
+            }}
+            fromSelf={true}
+            showAvatar
+            message={{
+              type: "text",
+              text: "Pretty nice! *-*\nMaybe we can make this multiline!"
+            }}
+            time={Date.now()}
+          />
+          <Message
+            key={Math.random()}
+            author={{
+              name: contact.username,
+              avatarUri: contact.avatarUri
+            }}
+            fromSelf={false}
+            showAvatar
+            message={{ type: "text", text: contact.status }}
+            time={Date.now()}
+          />
+          <Message
+            key={Math.random()}
+            author={{
+              name: "SkyzohKey",
+              avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
+            }}
+            fromSelf={true}
+            showAvatar={true}
+            message={{ type: "text", text: "😂 😂 😂" }}
             time={Date.now()}
           />
         </ScrollView>
@@ -219,11 +357,18 @@ export class ChatScreen extends React.Component {
               underlineColorAndroid={"rgba(0,0,0,0)"}
               style={[
                 styles.input,
-                { height: Math.max(24, this.state.inputHeight) }
+                {
+                  height:
+                    Platform.OS !== "web"
+                      ? Math.max(24, this.state.inputHeight)
+                      : 80
+                }
               ]}
               placeholder={"Enter a message..."}
-              onContentSizeChange={this.onContentSizeChange}
-              onChange={Platform.OS === "web" ? this.onContentSizeChange : null}
+              onContentSizeChange={
+                Platform.OS !== "web" ? this.onContentSizeChange : null
+              }
+              //onChange={Platform.OS === "web" ? this.onContentSizeChange : null}
               onBlur={this.onKeyboardHideRequest}
             />
             {Platform.OS !== "web" ? (
@@ -281,7 +426,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8
   },
   chatView: {
-    flex: 1,
+    //flex: 1,
+    alignItems: "flex-start",
     width: "100%",
     padding: 16,
     ...Platform.select({
@@ -308,7 +454,7 @@ const styles = StyleSheet.create({
   input: {
     minHeight: 44,
     backgroundColor: Colors.BACKGROUND,
-    color: Colors.PRIMARY_TEXT,
+    color: "rgba(0,0,0,.87)",
     paddingVertical: 12,
     paddingHorizontal: 16,
     flex: 1

@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     height: "100%",
     flex: 1,
     backgroundColor: Colors.BACKGROUND,
-    zIndex: 400
+    zIndex: 4000
   }
 });
 
