@@ -8,6 +8,8 @@ const url = require("url");
 
 const isDev = true;
 
+const PORT = process.env.PORT || 3000;
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -35,7 +37,7 @@ function createWindow() {
 
   // and load the index.html of the app.
   if (isDev) {
-    mainWindow.loadURL("http://localhost:3000");
+    mainWindow.loadURL("http://localhost:" + PORT);
     mainWindow.webContents.openDevTools();
   } else {
     const startUrl =
