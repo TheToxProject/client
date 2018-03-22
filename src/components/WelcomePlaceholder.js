@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { View, Text, Image } from "react-native";
 
 import Colors from "./../styles/colors";
-
 const TOX_ILLUSTRATION = require("./../assets/tox-illustration.png");
 
 export class WelcomePlaceholder extends Component {
