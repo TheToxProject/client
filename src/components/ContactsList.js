@@ -1,12 +1,13 @@
 import React from "react";
-import { Platform, View, Text, ScrollView } from "react-native";
+import { Platform, View, ScrollView } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 import Colors from "./../styles/colors";
-import Button from "./../components/Button";
 import Logo from "./../components/Logo";
 import UserButton from "./../components/UserButton";
 import IconButton from "./../components/IconButton";
 import ContactItem from "./../components/ContactItem";
+import TabsView from "./TabsView";
 
 export class ContactsList extends React.Component {
   constructor(props, context) {
@@ -53,58 +54,76 @@ export class ContactsList extends React.Component {
                 title={Platform.OS === "web" ? "Settings" : "More"}
                 name={Platform.OS === "web" ? "more-vert" : "more-vert"}
                 style={styles.icon}
-                onPress={() => alert("More...")}
+                onPress={onLogoutButtonPress}
               />
             </View>
           </View>
-          <View style={styles.tabs}>
-            <View style={[styles.tab, styles.selectedTab]}>
-              <View style={styles.tabText}>
-                <IconButton name="access-time" size={24} title={"Recent"} />
-              </View>
-            </View>
-            <View style={styles.tab}>
-              <View style={styles.tabText}>
-                <IconButton name="group" size={24} title={"Contacts"} />
-              </View>
-            </View>
-            <View style={styles.tab}>
-              <View style={styles.tabText}>
-                <IconButton
-                  name="call-missed"
-                  size={24}
-                  title={"Missed calls"}
-                />
-              </View>
-            </View>
-          </View>
         </View>
-        <ScrollView contentContainerStyle={styles.scrolledView}>
-          {contacts.map(contact => (
-            <ContactItem
-              key={contact.username}
-              unread={contact.unread}
-              username={contact.username}
-              status={contact.status}
-              timestamp={contact.lastMessageTimestamp}
-              avatarUri={contact.avatarUri}
-              presence={contact.presence}
-              presenceBackgroundColor={Colors.BACKGROUND}
-              onPress={() => onContactSelectionChange(contact)}
-              onLongPress={() => onContactLongPress(contact)}
-            />
-          ))}
-        </ScrollView>
-        <Button
-          uppercase={true}
-          onPress={onLogoutButtonPress}
-          onPressDelay={200}
-          text="Back to login"
-          backgroundColor={Colors.ACCENT}
-          color={Colors.TEXT}
-          size={"medium"}
-          style={{ borderRadius: 0 }}
-        />
+        <TabsView>
+          <View
+            icon={<Icon name="access-time" size={24} title={"Recent"} />}
+            text={"Recent"}
+          >
+            <ScrollView contentContainerStyle={styles.scrolledView}>
+              {contacts.map(contact => (
+                <ContactItem
+                  key={contact.username}
+                  unread={contact.unread}
+                  username={contact.username}
+                  status={contact.status}
+                  timestamp={contact.lastMessageTimestamp}
+                  avatarUri={contact.avatarUri}
+                  presence={contact.presence}
+                  presenceBackgroundColor={Colors.BACKGROUND}
+                  onPress={() => onContactSelectionChange(contact)}
+                  onLongPress={() => onContactLongPress(contact)}
+                />
+              ))}
+            </ScrollView>
+          </View>
+          <View
+            icon={<Icon name="group" size={24} title={"Contacts"} />}
+            text={"Contacts"}
+          >
+            <ScrollView contentContainerStyle={styles.scrolledView}>
+              {contacts
+                .reverse()
+                .map(contact => (
+                  <ContactItem
+                    key={contact.username}
+                    unread={contact.unread}
+                    username={contact.username}
+                    status={contact.status}
+                    timestamp={contact.lastMessageTimestamp}
+                    avatarUri={contact.avatarUri}
+                    presence={contact.presence}
+                    presenceBackgroundColor={Colors.BACKGROUND}
+                    onPress={() => onContactSelectionChange(contact)}
+                    onLongPress={() => onContactLongPress(contact)}
+                  />
+                ))}
+            </ScrollView>
+          </View>
+          <View
+            icon={<Icon name="call-missed" size={24} title={"Missed calls"} />}
+            text={"Calls"}
+          >
+            <ScrollView contentContainerStyle={styles.scrolledView}>
+              <ContactItem
+                key={contacts[1].username}
+                unread={contacts[1].unread}
+                username={contacts[1].username}
+                status={contacts[1].status}
+                timestamp={contacts[1].lastMessageTimestamp}
+                avatarUri={contacts[1].avatarUri}
+                presence={contacts[1].presence}
+                presenceBackgroundColor={Colors.BACKGROUND}
+                onPress={() => onContactSelectionChange(contacts[1])}
+                onLongPress={() => onContactLongPress(contacts[1])}
+              />
+            </ScrollView>
+          </View>
+        </TabsView>
       </View>
     );
   }
@@ -136,7 +155,7 @@ const styles = {
     paddingVertical: 8
   },
   header: {
-    height: 48 + (Platform.OS === "web" ? 64 : 56),
+    height: Platform.OS === "web" ? 64 : 56,
     flexDirection: "column",
     alignItems: "stretch",
     justifyContent: "center",
@@ -154,10 +173,11 @@ const styles = {
   icons: {
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    padding: 8
   },
   icon: {
-    padding: 10
+    margin: 8
   },
   appBar: {
     height: Platform.OS === "web" ? 64 : 56,
