@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
 
+import { noSelect } from "./../utilities";
 import Colors from "./../styles/colors";
 const TOX_ILLUSTRATION = require("./../assets/tox-illustration.png");
 
@@ -34,13 +35,15 @@ const styles = {
   illustration: {
     height: 200,
     width: "60%",
-    resizeMode: "contain"
+    resizeMode: "contain",
+    ...noSelect
   },
   tagline: {
     fontSize: 30,
     fontWeight: "lighter",
     color: Colors.PRIMARY_TEXT,
-    padding: 12
+    padding: 12,
+    ...noSelect
   },
   infoText: {
     fontSize: 14,
@@ -49,6 +52,7 @@ const styles = {
     padding: 4,
     width: "60%",
     textAlign: "center",
-    lineHeight: 24
+    lineHeight: 24,
+    ...noSelect
   }
 };

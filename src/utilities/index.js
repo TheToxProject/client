@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 /**
  * Given an UNIX timestamp, returns a date (yyyy-mm-dd)
  *
@@ -19,6 +21,15 @@ export const unixToDate = timestamp => {
     date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
 
   return { year, month, day, hours, minutes, seconds };
+};
+
+export const noSelect = {
+  ...Platform.select({
+    web: {
+      userSelect: "none",
+      "-webkit-user-drag": "none"
+    }
+  })
 };
 
 export const containsEmojis = str => {

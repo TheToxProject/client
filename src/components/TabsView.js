@@ -1,56 +1,190 @@
 import React, { Component } from "react";
 import {
   Animated,
-  Easing,
-  ScrollView,
   View,
   Text,
   Platform,
-  Dimensions
+  Dimensions,
+  PanResponder
 } from "react-native";
 import PropTypes from "prop-types";
+
 import Touchable from "./../components/Touchable";
 import Colors from "./../styles/colors";
+import { noSelect } from "./../utilities";
+
+const DEAD_ZONE = 12;
 
 class TabsView extends Component {
-  state = {
-    tabsCount: 0,
-    selectedIndex: 0,
-    previousIndex: -1,
-    animated: new Animated.Value(0)
-  };
-
   constructor(props) {
     super(props);
 
     this.selectTab = this.selectTab.bind(this);
+    this._canMoveScreen = this._canMoveScreen.bind(this);
+    this._startGesture = this._startGesture.bind(this);
+    this._respondToGesture = this._respondToGesture.bind(this);
+    this._terminateGesture = this._terminateGesture.bind(this);
+
+    this.state = {
+      tabsCount: 0,
+      selectedIndex: 0,
+      previousIndex: 0,
+      pendingIndex: null,
+      animated: new Animated.Value(0),
+      offsetX: new Animated.Value(0)
+    };
   }
 
   componentWillMount() {
     const { defaultTabIndex, children } = this.props;
+    const { width } =
+      Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
+    const tabsCount = React.Children.toArray(children).length;
+
     this.setState({
       selectedIndex: defaultTabIndex,
-      tabsCount: React.Children.toArray(children).length
+      tabsCount,
+      offsetX: new Animated.Value(tabsCount * width)
+    });
+
+    this._panResponder = PanResponder.create({
+      onMoveShouldSetPanResponder: this._canMoveScreen,
+      onMoveShouldSetPanResponderCapture: this._canMoveScreen,
+      onPanResponderGrant: this._startGesture,
+      onPanResponderMove: this._respondToGesture,
+      onPanResponderTerminate: this._terminateGesture,
+      onPanResponderRelease: this._terminateGesture,
+      onPanResponderTerminationRequest: () => true
     });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { previousIndex } = this.state;
-    if (previousIndex == null) {
+    const { previousIndex, selectedIndex } = this.state;
+    if (previousIndex == null || selectedIndex !== nextProps.selectedIndex) {
       return false;
     }
 
     return true;
   }
 
-  selectTab(index, selectedIndex) {
+  _isMovingHorizontally(evt, gestureState) {
+    return (
+      Math.abs(gestureState.dx) > Math.abs(gestureState.dy * 2) &&
+      Math.abs(gestureState.vx) > Math.abs(gestureState.vy * 2)
+    );
+  }
+
+  _canMoveScreen(evt, gestureState) {
+    const { tabsCount, selectedIndex } = this.state;
+
+    return (
+      this._isMovingHorizontally(evt, gestureState) &&
+      ((gestureState.dx >= DEAD_ZONE && selectedIndex > 0) ||
+        (gestureState.dx <= -DEAD_ZONE && selectedIndex < tabsCount - 1))
+    );
+  }
+
+  _startGesture(evt, gestureState) {
+    if (typeof this.props.onSwipeStart === "function") {
+      this.props.onSwipeStart(evt, gestureState);
+    }
+
+    this.state.animated.stopAnimation();
+  }
+
+  _respondToGesture(evt, gestureState) {
+    const { tabsCount, selectedIndex } = this.state;
+
+    if (
+      // swiping left
+      (gestureState.dx > 0 && selectedIndex <= 0) ||
+      // swiping right
+      (gestureState.dx < 0 && selectedIndex >= tabsCount - 1)
+    ) {
+      return;
+    }
+
+    this.state.animated.setValue(gestureState.dx);
+  }
+
+  _terminateGesture(evt, gestureState) {
+    const { tabsCount, selectedIndex, pendingIndex } = this.state;
     const { width } =
       Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
 
-    if (index === this.state.selectedIndex) {
-      return; // Avoid useless re-render.
+    let swipeDistanceThreshold = width / 1.75;
+    let swipeVelocityThreshold = 0.15;
+
+    if (typeof this.props.onSwipeEnd === "function") {
+      this.props.onSwipeEnd(evt, gestureState);
     }
 
+    /**
+     * On Android, velocity is way lower due to timestamp being in nanosecond
+     * we MUST normalize it to have the same velocity on both iOS and Android
+     */
+    if (Platform.OS === "android") {
+      swipeVelocityThreshold /= 1000000;
+    }
+
+    const currentIndex = pendingIndex ? pendingIndex : selectedIndex;
+    let nextIndex = currentIndex;
+
+    if (
+      Math.abs(gestureState.dx) > Math.abs(gestureState.dy) &&
+      Math.abs(gestureState.vx) > Math.abs(gestureState.vy) &&
+      (Math.abs(gestureState.dx) > swipeDistanceThreshold ||
+        Math.abs(gestureState.vx) > swipeVelocityThreshold)
+    ) {
+      nextIndex = Math.round(
+        Math.min(
+          Math.max(
+            0,
+            currentIndex - gestureState.dx / Math.abs(gestureState.dx)
+          ),
+          tabsCount - 1
+        )
+      );
+      this.setState({ selectedIndex: nextIndex });
+    }
+
+    if (!isFinite(nextIndex)) {
+      nextIndex = currentIndex;
+    }
+
+    this._transitionTo(nextIndex);
+  }
+
+  _transitionTo(index) {
+    const { width } =
+      Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
+    const offset = -index * width;
+
+    const animationConfig = {
+      useNativeDriver: true,
+      tension: 300,
+      friction: 35
+    };
+
+    Animated.parallel([
+      Animated.spring(this.state.animated, {
+        toValue: 0,
+        ...animationConfig
+      }),
+      Animated.spring(this.state.offsetX, {
+        toValue: offset,
+        ...animationConfig
+      })
+    ]).start(({ finished }) => {
+      if (finished) {
+        this.setState({ pendingIndex: null });
+      }
+    });
+
+    this.setState({ pendingIndex: index });
+  }
+
+  selectTab(index) {
     this.setState({ previousIndex: this.state.selectedIndex });
     this.setState({ selectedIndex: index });
 
@@ -62,47 +196,25 @@ class TabsView extends Component {
     }).start();
   }
 
-  outputX() {
-    const { tabsCount, selectedIndex, previousIndex } = this.state;
-    const { width } =
-      Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
-
-    let offset = 0;
-    if (previousIndex > selectedIndex) {
-      offset = selectedIndex * width;
-    } else {
-      offset = -(selectedIndex * width);
-    }
-
-    if (offset === 0) {
-      offset = -(previousIndex * width);
-    }
-
-    return selectedIndex === tabsCount - 1 || selectedIndex === 0
-      ? offset
-      : offset * 2;
-  }
-
   render() {
     const { width } =
       Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
-    const { children, previousIndex } = this.props;
-    const { tabsCount, selectedIndex, animated } = this.state;
+    const { children } = this.props;
+    const { tabsCount, animated, offsetX } = this.state;
     const childrens = React.Children.toArray(children);
+    const maxTranslate = width * (tabsCount - 1);
 
-    const swipeInterpolateX = animated.interpolate({
-      inputRange: [0, tabsCount - 1],
-      outputRange: [1, this.outputX()],
+    const tabLineTranslateX = Animated.add(animated, offsetX).interpolate({
+      inputRange: [-maxTranslate, 0],
+      outputRange: [maxTranslate / tabsCount, 0],
       extrapolate: "clamp"
     });
 
-    const tabLineInterpolateX = animated.interpolate({
-      inputRange: [0, tabsCount - 1],
-      outputRange: [0, this.outputX() / tabsCount * -1], // Reverse the number, we go left-to-right.
+    const translateX = Animated.add(animated, offsetX).interpolate({
+      inputRange: [-maxTranslate, 0],
+      outputRange: [-maxTranslate, 0],
       extrapolate: "clamp"
     });
-
-    //console.log(tabLineInterpolateX);
 
     return (
       <View style={styles.container}>
@@ -111,8 +223,9 @@ class TabsView extends Component {
             {childrens.map((view, index, tabs) => {
               return (
                 <Touchable
+                  key={view}
                   style={{ flex: 1 }}
-                  onPress={() => this.selectTab(index, selectedIndex)}
+                  onPress={() => this._transitionTo(index)}
                 >
                   <View style={[styles.tab, { width: width / tabsCount }]}>
                     <Text style={{ color: "white" }}>{view.props.icon}</Text>
@@ -126,8 +239,7 @@ class TabsView extends Component {
               style={{
                 backgroundColor: Colors.BACKGROUND,
                 transform: [
-                  // We need a positive number because we go left to right while the swipe value is right to left.
-                  { translateX: tabLineInterpolateX },
+                  { translateX: tabLineTranslateX },
                   { translateY: -3 }
                 ],
                 height: 3,
@@ -137,11 +249,12 @@ class TabsView extends Component {
           </View>
         </View>
         <Animated.View
+          {...this._panResponder.panHandlers}
           style={{
             flex: 1,
             flexDirection: "row",
             overflowX: "hidden",
-            transform: [{ translateX: swipeInterpolateX }],
+            transform: [{ translateX }],
             width: tabsCount * width,
             maxWidth: tabsCount * width,
             minWidth: tabsCount * width
@@ -149,7 +262,10 @@ class TabsView extends Component {
         >
           {childrens.map((view, index, tabs) => {
             return (
-              <View style={{ width: width, maxWidth: width }}>
+              <View
+                key={view.props}
+                style={{ width: width, maxWidth: width, ...noSelect }}
+              >
                 {view.props.children}
               </View>
             );

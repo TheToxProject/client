@@ -48,7 +48,11 @@ class App extends React.Component {
       const { t } = props;
       document.title = t("commons:defaultAppTitle");
 
-      return <View style={{ height: "100%" }}>{props.children}</View>;
+      return (
+        <View style={{ height: "100%", width: "100%", overflow: "hidden" }}>
+          {props.children}
+        </View>
+      );
     });
 
     return (
