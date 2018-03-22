@@ -8,7 +8,7 @@ const Colors = {
   DIVIDE: "#BDBDBD",
   ICONS: "#FFFFFF",
   TEXT: "#FFFFFF",
-  BACKGROUND: "#FAFAFA",
+  BACKGROUND: "#FFFFFF",
   DARK_BACKGROUND: "#414141"
 };
 
