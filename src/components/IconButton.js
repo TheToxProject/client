@@ -29,7 +29,7 @@ export class UserButton extends Component {
       : null;
 
     return (
-      <View style={{ ...styles.container, ...sizeStyle }}>
+      <View style={[styles.container, sizeStyle]}>
         <Touchable
           style={{ ...styles.ripple, ...sizeStyle }}
           onPress={() => setTimeout(onPress, DEFAULT_PRESS_DELAY)}
@@ -61,7 +61,7 @@ const styles = {
         cursor: "pointer"
       },
       default: {
-        elevation: 2
+        //elevation: 2
       }
     })
   },

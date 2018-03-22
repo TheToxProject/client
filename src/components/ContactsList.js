@@ -59,23 +59,23 @@ export class ContactsList extends React.Component {
           </View>
           <View style={styles.tabs}>
             <View style={[styles.tab, styles.selectedTab]}>
-              <Text style={styles.tabText}>
+              <View style={styles.tabText}>
                 <IconButton name="access-time" size={24} title={"Recent"} />
-              </Text>
+              </View>
             </View>
             <View style={styles.tab}>
-              <Text style={styles.tabText}>
+              <View style={styles.tabText}>
                 <IconButton name="group" size={24} title={"Contacts"} />
-              </Text>
+              </View>
             </View>
             <View style={styles.tab}>
-              <Text style={styles.tabText}>
+              <View style={styles.tabText}>
                 <IconButton
                   name="call-missed"
                   size={24}
                   title={"Missed calls"}
                 />
-              </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -120,6 +120,10 @@ const styles = {
     zIndex: 900,
     ...Platform.select({
       default: {
+        borderRightWidth: 1,
+        borderRightColor: Colors.DIVIDE
+      },
+      ios: {
         boxShadow:
           "0 9px 18px rgba(0, 0, 0, 0.16), 0 9px 18px rgba(0, 0, 0, 0.23)"
       },
@@ -144,10 +148,6 @@ const styles = {
       },
       android: {
         elevation: 4
-      },
-      web: {
-        boxShadow:
-          "0 2px 6px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.23)"
       }
     })
   },

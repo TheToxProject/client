@@ -4,17 +4,14 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import Colors from "./../styles/colors";
 
-const BACKGROUND_PATTERN = require("./../assets/playstation-pattern.png");
+const TOX_ILLUSTRATION = require("./../assets/tox-illustration.png");
 
 export class WelcomePlaceholder extends Component {
   render() {
     const { t } = this.props;
     return (
       <View style={styles.emptyContainer}>
-        <View style={{ zIndex: -10 }}>
-          <Image source={BACKGROUND_PATTERN} style={styles.background} />
-        </View>
-        <Icon name={"emoticon-happy"} size={120} color={Colors.DIVIDE} />
+        <Image source={TOX_ILLUSTRATION} style={styles.illustration} />
         <Text style={styles.tagline}>{t("chat:headers.welcome_back")}</Text>
         <Text style={styles.infoText}>
           {t("chat:headers.info_text").toUpperCase()}
@@ -36,10 +33,10 @@ const styles = {
     alignItems: "center",
     backgroundColor: Colors.BACKGROUND
   },
-  background: {
-    ...StyleSheet.absoluteFillObject,
-    flex: 1,
-    resizeMode: "repeat"
+  illustration: {
+    height: 200,
+    width: "60%",
+    resizeMode: "contain"
   },
   tagline: {
     fontSize: 30,

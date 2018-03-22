@@ -13,6 +13,7 @@ import Colors from "./../styles/colors";
 import ContactItem from "./../components/ContactItem";
 import IconButton from "./../components/IconButton";
 import WelcomePlaceholder from "./../components/WelcomePlaceholder";
+import Message from "./../components/Message";
 
 const MAX_INPUT_EXPAND = 120;
 
@@ -120,10 +121,40 @@ export class ChatScreen extends React.Component {
           />
         </View>
         <ScrollView
+          style={{ width: "100%", height: "100%" }}
           contentContainerStyle={styles.chatView}
           onMomentumScrollBegin={this.onKeyboardHideRequest}
         >
-          <Text>Chat happens here</Text>
+          <Message
+            author={{
+              name: "SkyzohKey",
+              avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
+            }}
+            fromSelf={true}
+            showAvatar
+            message="This is a cool message yay!"
+            time={Date.now()}
+          />
+          <Message
+            author={{
+              name: "SkyzohKey",
+              avatarUri: "https://avatars2.githubusercontent.com/u/8523159"
+            }}
+            fromSelf={true}
+            showAvatar={false}
+            message="eheh."
+            time={Date.now()}
+          />
+          <Message
+            author={{
+              name: contact.username,
+              avatarUri: contact.avatarUri
+            }}
+            fromSelf={false}
+            showAvatar
+            message={contact.status}
+            time={Date.now()}
+          />
         </ScrollView>
         <View style={styles.inputView}>
           <View style={styles.actions}>
@@ -237,8 +268,8 @@ const styles = StyleSheet.create({
         elevation: 4
       },
       web: {
-        boxShadow:
-          "0 2px 6px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.23)"
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.DIVIDE
       }
     })
   },
@@ -252,7 +283,13 @@ const styles = StyleSheet.create({
   chatView: {
     flex: 1,
     width: "100%",
-    padding: 16
+    padding: 16,
+    ...Platform.select({
+      web: {
+        overflowY: "auto",
+        overflowX: "none"
+      }
+    })
   },
   inputView: {
     width: "100%",

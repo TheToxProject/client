@@ -67,6 +67,7 @@ export class Avatar extends Component {
               draggable={false}
               source={source.uri ? { uri: source.uri } : source}
               style={[styles.avatar, sizeStyle]}
+              title={username}
             />
           </View>
         ) : (
@@ -131,7 +132,8 @@ const styles = {
     overflow: "hidden",
     backgroundColor: Colors.LIGHT_PRIMARY,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginRight: 16
   },
   letter: {
     fontSize: 18,

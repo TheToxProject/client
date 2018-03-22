@@ -88,7 +88,7 @@ export class RecentsScreen extends React.Component {
 
   renderSection() {
     if (Platform.OS !== "web") {
-      return <View />;
+      return null;
     }
 
     const { match: { isExact, path }, t } = this.props;
