@@ -90,7 +90,7 @@ export class ChatScreen extends React.Component {
      *       scrollview content was NOT full bottom, then we don't scroll.
      */
 
-    this._chatView.scrollToEnd({ animated: true });
+    this.scrollToEnd();
   }
 
   render() {
