@@ -22,7 +22,8 @@ export class Message extends Component {
     this.animateTime = this.animateTime.bind(this);
 
     this.state = {
-      timeAnimated: new Animated.Value(0)
+      timeAnimated: new Animated.Value(0),
+      timeShown: false
     };
   }
 
@@ -35,7 +36,16 @@ export class Message extends Component {
         tension: 4,
         useNativeDriver: false,
         easing: Easing.in(Easing.elastic(1.2))
-      }).start(() => this.setState({ timeShown: !this.state.timeShown }));
+      }).start(({ finished }) => {
+        if (finished) {
+          this.setState({ timeShown: !this.state.timeShown });
+          if (this.state.timeShown) {
+            setTimeout(() => {
+              this.animateTime();
+            }, 3000);
+          }
+        }
+      });
     });
   }
 
@@ -45,16 +55,20 @@ export class Message extends Component {
         return (
           <Touchable
             onPress={() => Platform.OS !== "web" && this.animateTime}
-            style={{ borderRadius: 16, overflow: "hidden" }}
+            style={{
+              maxWidth: Platform.OS !== "web" ? "100%" : "90%",
+              borderRadius: 12,
+              overflow: "hidden"
+            }}
           >
             <View style={[styles.imageBubble, bubbleStyle]}>
               <Image
                 source={message.source}
                 resizeMode={"cover"}
                 style={{
-                  width: 300,
-                  maxWidth: 300,
-                  height: 300 * (18 / 9)
+                  maxWidth: "100%",
+                  width: 250,
+                  height: 250
                 }}
               />
             </View>
@@ -65,7 +79,11 @@ export class Message extends Component {
           return (
             <Touchable
               onPress={() => Platform.OS !== "web" && this.animateTime}
-              style={{ borderRadius: 0, overflow: "hidden" }}
+              style={{
+                maxWidth: Platform.OS !== "web" ? "100%" : "90%",
+                borderRadius: 0,
+                overflow: "hidden"
+              }}
             >
               <View style={styles.emojiBubble}>
                 <Text style={styles.emojiTextStyle} selectable={true}>
@@ -78,7 +96,11 @@ export class Message extends Component {
           return (
             <Touchable
               onPress={() => Platform.OS !== "web" && this.animateTime}
-              style={{ borderRadius: 16, overflow: "hidden" }}
+              style={{
+                maxWidth: Platform.OS !== "web" ? "100%" : "90%",
+                borderRadius: 12,
+                overflow: "hidden"
+              }}
             >
               <View style={[styles.messageBubble, bubbleStyle]}>
                 <Text style={bubbleTextStyle} selectable={true}>
@@ -154,7 +176,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    marginVertical: 8,
+    marginVertical: 4,
     width: "100%"
   },
   messageWrapper: {
@@ -162,19 +184,20 @@ const styles = StyleSheet.create({
     flexDirection: Platform.OS === "web" ? "row" : "column",
     alignItems: Platform.OS === "web" ? "flex-start" : "flex-start",
     justifyContent: Platform.OS === "web" ? "space-between" : "flex-start",
-    flex: 1
+    flex: 1,
+    maxWidth: "98%"
   },
   messageBubble: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 12,
     width: "auto",
     overflow: "hidden"
   },
   imageBubble: {
     paddingVertical: 0,
     paddingHorizontal: 0,
-    borderRadius: 16,
+    borderRadius: 12,
     width: "auto",
     overflow: "hidden",
     maxWidth: "100%"
