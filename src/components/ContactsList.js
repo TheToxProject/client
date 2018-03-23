@@ -27,6 +27,7 @@ export class ContactsList extends React.Component {
       onContactSelectionChange,
       onContactLongPress,
       onLogoutButtonPress,
+      selectedContactPubkey,
       contacts
     } = this.props;
 
@@ -67,7 +68,7 @@ export class ContactsList extends React.Component {
             <ScrollView contentContainerStyle={styles.scrolledView}>
               {contacts.map(contact => (
                 <ContactItem
-                  key={contact.username}
+                  key={contact.username + Math.random()}
                   unread={contact.unread}
                   username={contact.username}
                   status={contact.status}
@@ -75,6 +76,7 @@ export class ContactsList extends React.Component {
                   avatarUri={contact.avatarUri}
                   presence={contact.presence}
                   presenceBackgroundColor={Colors.BACKGROUND}
+                  active={selectedContactPubkey === contact.pubkey}
                   onPress={() => onContactSelectionChange(contact)}
                   onLongPress={() => onContactLongPress(contact)}
                 />
@@ -98,6 +100,7 @@ export class ContactsList extends React.Component {
                     avatarUri={contact.avatarUri}
                     presence={contact.presence}
                     presenceBackgroundColor={Colors.BACKGROUND}
+                    active={selectedContactPubkey === contact.pubkey}
                     onPress={() => onContactSelectionChange(contact)}
                     onLongPress={() => onContactLongPress(contact)}
                   />
@@ -118,6 +121,7 @@ export class ContactsList extends React.Component {
                 avatarUri={contacts[1].avatarUri}
                 presence={contacts[1].presence}
                 presenceBackgroundColor={Colors.BACKGROUND}
+                active={selectedContactPubkey === contacts[1].pubkey}
                 onPress={() => onContactSelectionChange(contacts[1])}
                 onLongPress={() => onContactLongPress(contacts[1])}
               />

@@ -75,6 +75,7 @@ export class RecentsScreen extends React.Component {
     //alert("Navigate to " + contact.username + " chat screen.");
     const { history } = this.props;
     history.push("/chat/" + contact.pubkey, { contact: contact });
+    this.setState({ updated: true }); // Force update.
   }
 
   onContactLongPress(contact) {
@@ -106,7 +107,10 @@ export class RecentsScreen extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, match: { isExact, path, params } } = this.props;
+    const selectedContactPubkey =
+      isExact && path !== "/chat" ? params.pubkey : null;
+
     return (
       <View style={styles.container}>
         <ContactsList
@@ -116,6 +120,7 @@ export class RecentsScreen extends React.Component {
           onContactLongPress={this.onContactLongPress}
           onUserButtonPress={this.onUserButtonPress}
           onLogoutButtonPress={this.onLogoutButtonPress}
+          selectedContactPubkey={selectedContactPubkey}
         />
         {this.renderSection()}
       </View>

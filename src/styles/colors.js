@@ -9,7 +9,8 @@ const Colors = {
   ICONS: "#FFFFFF",
   TEXT: "#FFFFFF",
   BACKGROUND: "#FFFFFF",
-  DARK_BACKGROUND: "#414141"
+  DARK_BACKGROUND: "#414141",
+  ACTIVE_ITEM: "#ccc"
 };
 
 module.exports = Colors;
