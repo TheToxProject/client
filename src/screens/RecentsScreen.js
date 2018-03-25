@@ -94,7 +94,7 @@ export class RecentsScreen extends React.Component {
 
     const { match: { isExact, path }, t } = this.props;
     if (isExact && path === "/chat") {
-      return <WelcomePlaceholder t={t} />;
+      return <WelcomePlaceholder t={t} style={{zIndex:9000}} />;
     } else {
       return (
         <View style={styles.section}>
