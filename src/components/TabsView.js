@@ -204,7 +204,8 @@ class TabsView extends Component {
       backgroundColor,
       tabsColor,
       iconsColor,
-      underlineColor
+      underlineColor,
+      underlineHeight
     } = this.props;
     const { tabsCount, animated, offsetX } = this.state;
     const childrens = React.Children.toArray(children);
@@ -254,9 +255,9 @@ class TabsView extends Component {
               backgroundColor: underlineColor,
               transform: [
                 { translateX: tabLineTranslateX },
-                { translateY: -3 }
+                { translateY: -underlineHeight }
               ],
-              height: 3,
+              height: underlineHeight,
               width: width / tabsCount - 1
             }}
           />
@@ -295,7 +296,8 @@ TabsView.propTypes = {
   backgroundColor: PropTypes.string,
   tabsColor: PropTypes.string,
   iconsColor: PropTypes.string,
-  underlineColor: PropTypes.string
+  underlineColor: PropTypes.string,
+  underlineHeight: PropTypes.number
 };
 
 TabsView.defaultProps = {
@@ -303,7 +305,8 @@ TabsView.defaultProps = {
   underlineColor: Colors.BACKGROUND,
   iconsColor: Colors.BACKGROUND,
   tabsColor: Colors.ACCENT,
-  backgroundColor: Colors.BACKGROUND
+  backgroundColor: Colors.BACKGROUND,
+  underlineHeight: 3
 };
 
 export default TabsView;
