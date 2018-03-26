@@ -199,7 +199,13 @@ class TabsView extends Component {
   render() {
     const { width } =
       Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
-    const { children } = this.props;
+    const {
+      children,
+      backgroundColor,
+      tabsColor,
+      iconsColor,
+      underlineColor
+    } = this.props;
     const { tabsCount, animated, offsetX } = this.state;
     const childrens = React.Children.toArray(children);
     const maxTranslate = width * (tabsCount - 1);
@@ -217,7 +223,7 @@ class TabsView extends Component {
     });
 
     return (
-      <View style={styles.container}>
+      <View style={{ ...styles.container, backgroundColor: backgroundColor }}>
         <View style={styles.tabBar}>
           <View style={styles.tabs}>
             {childrens.map((view, index, tabs) => {
@@ -227,26 +233,33 @@ class TabsView extends Component {
                   style={{ flex: 1 }}
                   onPress={() => this._transitionTo(index)}
                 >
-                  <View style={[styles.tab, { width: width / tabsCount }]}>
-                    <Text style={{ color: "white" }}>{view.props.icon}</Text>
+                  <View
+                    style={[
+                      styles.tab,
+                      {
+                        width: width / tabsCount,
+                        backgroundColor: tabsColor
+                      }
+                    ]}
+                  >
+                    <Text style={{ color: iconsColor }}>{view.props.icon}</Text>
                   </View>
                 </Touchable>
               );
             })}
           </View>
-          <View style={{ width }}>
-            <Animated.View
-              style={{
-                backgroundColor: Colors.BACKGROUND,
-                transform: [
-                  { translateX: tabLineTranslateX },
-                  { translateY: -3 }
-                ],
-                height: 3,
-                width: width / tabsCount - 1
-              }}
-            />
-          </View>
+
+          <Animated.View
+            style={{
+              backgroundColor: underlineColor,
+              transform: [
+                { translateX: tabLineTranslateX },
+                { translateY: -3 }
+              ],
+              height: 3,
+              width: width / tabsCount - 1
+            }}
+          />
         </View>
         <Animated.View
           {...this._panResponder.panHandlers}
@@ -278,11 +291,19 @@ class TabsView extends Component {
 
 TabsView.propTypes = {
   children: PropTypes.array.isRequired,
-  defaultTabIndex: PropTypes.number
+  defaultTabIndex: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  tabsColor: PropTypes.string,
+  iconsColor: PropTypes.string,
+  underlineColor: PropTypes.string
 };
 
 TabsView.defaultProps = {
-  defaultTabIndex: 0
+  defaultTabIndex: 0,
+  underlineColor: Colors.BACKGROUND,
+  iconsColor: Colors.BACKGROUND,
+  tabsColor: Colors.ACCENT,
+  backgroundColor: Colors.BACKGROUND
 };
 
 export default TabsView;
@@ -297,13 +318,15 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     width: "100%",
+    height: 48,
     ...Platform.select({
-      ios: {
+      default: {
         boxShadow:
           "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"
       },
       android: {
-        elevation: 4
+        elevation: 4,
+        zIndex: 800
       }
     })
   },
@@ -322,7 +345,6 @@ const styles = {
     height: 48,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.ACCENT,
     ...Platform.select({
       web: {
         userSelect: "none",

@@ -30,7 +30,8 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.BACKGROUND
+    backgroundColor: Colors.BACKGROUND,
+    zIndex: 9000
   },
   illustration: {
     height: 200,
