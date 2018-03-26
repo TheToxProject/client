@@ -5,7 +5,8 @@ import {
   ScrollView,
   View,
   TextInput,
-  Keyboard
+  Keyboard,
+  StatusBar
 } from "react-native";
 
 import { getConversationMock } from "./../utilities/MockData/ConversationMock";
@@ -107,44 +108,64 @@ export class ChatScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          {Platform.OS !== "web" && (
+        <StatusBar
+          animated={true}
+          backgroundColor={"rgba(0,0,0,.25)"}
+          barStyle={"light-content"}
+          translucent={true}
+        />
+        <View style={styles.headerWrapper}>
+          {Platform.OS === "android" && <View style={styles.statusBar} />}
+          <View style={styles.header}>
+            {Platform.OS !== "web" && (
+              <IconButton
+                title={t("chat:labels.back_button")}
+                name={"arrow-back"}
+                style={styles.backIcon}
+                onPress={() => requestAnimationFrame(this.onBackButtonPress)}
+              />
+            )}
+            {contact && (
+              <ContactItem
+                style={{
+                  flex: 1,
+                  width: "100%",
+                  margin: 8,
+                  marginLeft: Platform.OS === "web" ? 0 : 8
+                }}
+                unread={false}
+                username={contact.username}
+                status={Platform.OS === "web" ? contact.status : null}
+                avatarUri={contact.avatarUri}
+                avatarSize={Platform.OS === "web" ? 46 : 32}
+                color={
+                  Platform.OS === "web" ? Colors.PRIMARY_TEXT : Colors.TEXT
+                }
+                presence={Platform.OS === "web" ? contact.presence : null}
+                presenceBackgroundColor={
+                  Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT
+                }
+              />
+            )}
             <IconButton
-              title={t("chat:labels.back_button")}
-              name={"arrow-back"}
-              style={styles.backIcon}
-              onPress={() => requestAnimationFrame(this.onBackButtonPress)}
-            />
-          )}
-          {contact && (
-            <ContactItem
-              style={{ flex: 1, width: "100%" }}
-              unread={false}
-              username={contact.username}
-              status={Platform.OS === "web" ? contact.status : null}
-              avatarUri={contact.avatarUri}
-              avatarSize={Platform.OS === "web" ? 46 : 32}
-              color={Platform.OS === "web" ? Colors.PRIMARY_TEXT : Colors.TEXT}
-              presence={Platform.OS === "web" ? contact.presence : null}
-              presenceBackgroundColor={
-                Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT
+              style={styles.headerIcon}
+              title={t("chat:labels.start_audio_call")}
+              name={"call"}
+              size={Platform.OS === "web" ? 30 : 24}
+              color={
+                Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT
               }
             />
-          )}
-          <IconButton
-            style={styles.headerIcon}
-            title={t("chat:labels.start_audio_call")}
-            name={"call"}
-            size={Platform.OS === "web" ? 30 : 24}
-            color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
-          />
-          <IconButton
-            style={styles.headerIcon}
-            title={t("chat:labels.start_video_call")}
-            name={"videocam"}
-            size={Platform.OS === "web" ? 30 : 24}
-            color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
-          />
+            <IconButton
+              style={styles.headerIcon}
+              title={t("chat:labels.start_video_call")}
+              name={"videocam"}
+              size={Platform.OS === "web" ? 30 : 24}
+              color={
+                Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT
+              }
+            />
+          </View>
         </View>
         <ScrollView
           style={{ width: "100%", flex: 1 }}
@@ -254,6 +275,9 @@ export class ChatScreen extends React.Component {
   }
 }
 
+const STATUSBAR_HEIGHT =
+  Platform.OS === "android" ? StatusBar.currentHeight : 0;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -264,15 +288,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: Colors.BACKGROUND
   },
-  header: {
-    height: Platform.OS === "web" ? 64 : 56,
+  headerWrapper: {
     width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
     backgroundColor: Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT,
-    paddingHorizontal: Platform.OS === "web" ? 0 : 16,
-    paddingRight: Platform.OS === "web" ? 8 : 12,
     ...Platform.select({
       ios: {
         boxShadow:
@@ -287,12 +305,29 @@ const styles = StyleSheet.create({
       }
     })
   },
+  statusBar: {
+    zIndex: 800,
+    height: STATUSBAR_HEIGHT,
+    width: "100%",
+    backgroundColor: Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT
+  },
+  header: {
+    zIndex: 500,
+    height: Platform.OS === "web" ? 64 : 56,
+    maxHeight: Platform.OS === "web" ? 64 : 56,
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    padding: 8,
+    paddingLeft: Platform.OS === "web" ? 0 : 8
+  },
   backIcon: {
-    marginLeft: 0,
+    margin: 8,
     justifyContent: "center"
   },
   headerIcon: {
-    paddingHorizontal: 8
+    margin: 8
   },
   chatView: {
     //flex: 1,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View, StatusBar } from "react-native";
 
 import Routing from "./../utilities/routing";
 import Presence from "./../utilities/enums/Presence";
@@ -94,7 +94,7 @@ export class RecentsScreen extends React.Component {
 
     const { match: { isExact, path }, t } = this.props;
     if (isExact && path === "/chat") {
-      return <WelcomePlaceholder t={t} style={{zIndex:9000}} />;
+      return <WelcomePlaceholder t={t} style={{ zIndex: 9000 }} />;
     } else {
       return (
         <View style={styles.section}>
@@ -113,6 +113,12 @@ export class RecentsScreen extends React.Component {
 
     return (
       <View style={styles.container}>
+        <StatusBar
+          animated={true}
+          backgroundColor={Colors.DARKER_ACCENT}
+          barStyle={"light-content"}
+          translucent={false}
+        />
         <ContactsList
           t={t}
           contacts={fakeUsers}

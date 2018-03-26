@@ -41,7 +41,7 @@ export class Avatar extends Component {
       : {
           width: DEFAULT_SIZE,
           height: DEFAULT_SIZE,
-          borderRadius: DEFAULT_SIZE * 2
+          borderRadius: DEFAULT_SIZE / 2
         };
     const presenceStyle = presenceBackgroundColor
       ? {
@@ -128,7 +128,7 @@ const styles = {
     width: DEFAULT_SIZE,
     height: DEFAULT_SIZE,
     resizeMode: "contain",
-    borderRadius: DEFAULT_SIZE * 2,
+    borderRadius: DEFAULT_SIZE / 2,
     overflow: "hidden",
     backgroundColor: Colors.LIGHT_PRIMARY,
     justifyContent: "center",

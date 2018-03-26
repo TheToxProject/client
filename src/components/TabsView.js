@@ -315,7 +315,8 @@ const styles = {
   container: {
     flex: 1,
     width: "100%",
-    height: "100%"
+    height: "100%",
+    zIndex: 600
   },
   tabBar: {
     display: "flex",
@@ -329,7 +330,8 @@ const styles = {
       },
       android: {
         elevation: 4,
-        zIndex: 800
+        zIndex: 8000,
+        marginBottom: 0
       }
     })
   },

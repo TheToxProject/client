@@ -140,8 +140,9 @@ export class LoginScreen extends React.Component {
       <View style={styles.container} onLayout={this.onLayout}>
         <StatusBar
           animated={true}
-          backgroundColor={Colors.DARK_BACKGROUND}
+          backgroundColor={Colors.DARKER_BACKGROUND}
           barStyle={"light-content"}
+          translucent={false}
         />
         <Logo
           //height={logoSize}

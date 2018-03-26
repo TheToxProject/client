@@ -62,7 +62,9 @@ export class ContactsList extends React.Component {
         </View>
         <TabsView
           defaultTabIndex={1}
-          tabsColor={Colors.DARK_BACKGROUND}
+          tabsColor={
+            Platform.OS === "web" ? Colors.DARK_BACKGROUND : Colors.ACCENT
+          }
           textColor={Colors.TEXT}
         >
           <View
@@ -167,17 +169,9 @@ const styles = {
     flexDirection: "column",
     alignItems: "stretch",
     justifyContent: "center",
-    backgroundColor: Colors.DARK_BACKGROUND,
-    zIndex: 800,
-    ...Platform.select({
-      ios: {
-        boxShadow:
-          "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"
-      },
-      android: {
-        elevation: 4
-      }
-    })
+    zIndex: 400,
+    backgroundColor:
+      Platform.OS === "web" ? Colors.DARK_BACKGROUND : Colors.ACCENT
   },
   icons: {
     flexDirection: "row",
@@ -193,31 +187,5 @@ const styles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between"
-  },
-  tabs: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end"
-  },
-  tab: {
-    flex: 1,
-    height: 48,
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      web: {
-        userSelect: "none",
-        cursor: "pointer"
-      }
-    })
-  },
-  tabText: {
-    color: Colors.TEXT,
-    textAlign: "center",
-    fontSize: 14
-  },
-  selectedTab: {
-    borderBottomWidth: 2,
-    borderBottomColor: Colors.TEXT
   }
 };
