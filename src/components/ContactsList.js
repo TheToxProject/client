@@ -60,7 +60,11 @@ export class ContactsList extends React.Component {
             </View>
           </View>
         </View>
-        <TabsView tabsColor={Colors.DARK_BACKGROUND} textColor={Colors.TEXT}>
+        <TabsView
+          defaultTabIndex={1}
+          tabsColor={Colors.DARK_BACKGROUND}
+          textColor={Colors.TEXT}
+        >
           <View
             icon={<Icon name="access-time" size={24} title={"Recent"} />}
             text={"Recent"}
@@ -164,6 +168,7 @@ const styles = {
     alignItems: "stretch",
     justifyContent: "center",
     backgroundColor: Colors.DARK_BACKGROUND,
+    zIndex: 800,
     ...Platform.select({
       ios: {
         boxShadow:
