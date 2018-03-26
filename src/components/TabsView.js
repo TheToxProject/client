@@ -19,7 +19,6 @@ class TabsView extends Component {
   constructor(props) {
     super(props);
 
-    this.selectTab = this.selectTab.bind(this);
     this._canMoveScreen = this._canMoveScreen.bind(this);
     this._startGesture = this._startGesture.bind(this);
     this._respondToGesture = this._respondToGesture.bind(this);
@@ -56,6 +55,10 @@ class TabsView extends Component {
       onPanResponderRelease: this._terminateGesture,
       onPanResponderTerminationRequest: () => true
     });
+  }
+
+  componentDidMount() {
+    this._transitionTo(this.props.defaultTabIndex, false);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -155,7 +158,7 @@ class TabsView extends Component {
     this._transitionTo(nextIndex);
   }
 
-  _transitionTo(index) {
+  _transitionTo(index, animated = true) {
     const { width } =
       Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
     const offset = -index * width;
@@ -166,12 +169,21 @@ class TabsView extends Component {
       friction: 35
     };
 
+    // The following allows for initial tab index to avoid being animated (which creates a laggy effect)
+    let animationTiming = null;
+    if (animated) {
+      animationTiming = Animated.spring;
+    } else {
+      animationTiming = Animated.timing;
+      animationConfig.duration = 0;
+    }
+
     Animated.parallel([
-      Animated.spring(this.state.animated, {
+      animationTiming(this.state.animated, {
         toValue: 0,
         ...animationConfig
       }),
-      Animated.spring(this.state.offsetX, {
+      animationTiming(this.state.offsetX, {
         toValue: offset,
         ...animationConfig
       })
@@ -182,18 +194,6 @@ class TabsView extends Component {
     });
 
     this.setState({ pendingIndex: index });
-  }
-
-  selectTab(index) {
-    this.setState({ previousIndex: this.state.selectedIndex });
-    this.setState({ selectedIndex: index });
-
-    Animated.spring(this.state.animated, {
-      toValue: this.state.selectedIndex,
-      useNativeDriver: true,
-      tension: 4,
-      friction: 200
-    }).start();
   }
 
   render() {
