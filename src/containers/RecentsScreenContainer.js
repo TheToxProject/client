@@ -19,6 +19,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default translate(["recents"], { wait: true })(
-  withRouter(connect(mapStateToProps, mapDispatchToProps)(RecentsScreen))
+export default withRouter(
+  translate(["recents"], { wait: true })(
+    connect(mapStateToProps, mapDispatchToProps)(RecentsScreen)
+  )
 );

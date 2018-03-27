@@ -11,7 +11,7 @@ export class LoginForm extends Component {
   render() {
     const { width } = Dimensions.get("window");
     const formWidth = Platform.OS === "web" ? 400 : width - 60;
-    const { disableLinks, onLayout, t } = this.props;
+    const { disableLinks, onLayout, onLoginButtonPress, t } = this.props;
     const ButtonLink = disableLinks ? View : Link;
 
     return (
@@ -38,7 +38,7 @@ export class LoginForm extends Component {
         <View style={styles.actions}>
           <Button
             uppercase={true}
-            onPress={() => this.props.onLoginButtonPress()}
+            onPress={onLoginButtonPress}
             onPressDelay={200}
             text={t("login:actions.login")}
             backgroundColor={Colors.ACCENT}

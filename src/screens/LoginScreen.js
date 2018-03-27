@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, StatusBar, Animated, Platform } from "react-native";
+import { StyleSheet, View, StatusBar, Animated, Easing } from "react-native";
 
 import Colors from "./../styles/colors";
 import SimpleLogo from "./../components/Logo";
@@ -8,10 +8,9 @@ import SimpleLoginForm from "./../components/LoginForm";
 const Logo = Animated.createAnimatedComponent(SimpleLogo);
 const LoginForm = Animated.createAnimatedComponent(SimpleLoginForm);
 
-const ANIMATION_LOAD_DURATION = 1200;
-const ANIMATION_SHOW_DURATION = 400;
-const DEFAULT_LOGO_HEIGHT = Platform.OS === "web" ? 120 : 120;
-const SMALL_LOGO_HEIGHT = Platform.OS === "web" ? DEFAULT_LOGO_HEIGHT / 2 : 60;
+const ANIMATION_LOAD_DURATION = 800;
+const ANIMATION_SHOW_DURATION = 600;
+const DEFAULT_LOGO_HEIGHT = 120;
 
 export class LoginScreen extends React.Component {
   constructor(props, context) {
@@ -30,13 +29,12 @@ export class LoginScreen extends React.Component {
     };
 
     this.onLayout = this.onLayout.bind(this);
-    this.onLoginButtonPress = this.onLoginButtonPress.bind(this);
     this.onLoginFormLayout = this.onLoginFormLayout.bind(this);
+    this.onLoginButtonPress = this.onLoginButtonPress.bind(this);
   }
 
   componentDidMount() {
     const { loginAnimationRan } = this.props;
-
     if (loginAnimationRan) {
       this.startAnimation(0, 0, 0);
     } else {
@@ -52,20 +50,25 @@ export class LoginScreen extends React.Component {
     const { loadValue, showValue } = this.state;
     const { loginAnimationDone, loginAnimationRan } = this.props;
 
-    Animated.sequence([
-      Animated.timing(loadValue, { duration: 0, toValue: 0 }),
-      Animated.timing(showValue, { duration: 0, toValue: 0 }),
+    this.state.loadValue.setValue(0);
+    this.state.showValue.setValue(0);
+
+    Animated.stagger(loadDuration + 100, [
       Animated.timing(loadValue, {
         delay: loginAnimationRan ? 0 : 600,
         duration: loadDuration,
         toValue: 1,
-        useNativeDriver: false
+        friction: 1.3,
+        useNativeDriver: true,
+        easing: Easing.in(Easing.elastic(0.4))
       }),
       Animated.timing(showValue, {
         delay: 0,
         duration: showDuration,
         toValue: 1,
-        useNativeDriver: false
+        tension: 4,
+        useNativeDriver: true,
+        easing: Easing.in(Easing.elastic(1.2))
       })
     ]).start(() => {
       loginAnimationDone();
@@ -78,17 +81,9 @@ export class LoginScreen extends React.Component {
       selfWidth: layout.width
     });
 
-    const { loadValue } = this.state;
-    const { loginAnimationRan } = this.props;
-
-    if (loginAnimationRan) {
-      Animated.timing(loadValue, {
-        delay: 0,
-        duration: 400,
-        toValue: 1,
-        useNativeDriver: false
-      }).start();
-    }
+    /**
+     * @todo Implement logo moves when keyboard is shown.
+     */
   }
 
   onLoginFormLayout({ nativeEvent: { layout } }) {
@@ -111,9 +106,9 @@ export class LoginScreen extends React.Component {
   }
 
   render() {
-    const logoSize = this.state.loadValue.interpolate({
+    const logoScale = this.state.loadValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [DEFAULT_LOGO_HEIGHT, SMALL_LOGO_HEIGHT]
+      outputRange: [2, 1]
     });
 
     const logoOpacity = this.state.loadValue.interpolate({
@@ -124,8 +119,8 @@ export class LoginScreen extends React.Component {
     const logoY = this.state.loadValue.interpolate({
       inputRange: [0, 1],
       outputRange: [
-        this.state.selfHeight / 2 - DEFAULT_LOGO_HEIGHT / 2,
-        this.state.formY - (Platform.OS === "web" ? 58 : 58)
+        this.state.selfHeight / 2 - DEFAULT_LOGO_HEIGHT * 1.5,
+        -(this.state.formY / 2 - DEFAULT_LOGO_HEIGHT)
       ]
     });
 
@@ -134,27 +129,45 @@ export class LoginScreen extends React.Component {
       outputRange: [0, 1]
     });
 
+    const formTranslate = this.state.showValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [-100, 0]
+    });
+
     const { t } = this.props;
 
     return (
       <View style={styles.container} onLayout={this.onLayout}>
         <StatusBar
           animated={true}
-          backgroundColor={Colors.DARK_BACKGROUND}
+          backgroundColor={Colors.DARKER_BACKGROUND}
           barStyle={"light-content"}
+          translucent={false}
         />
         <Logo
-          height={logoSize}
+          //height={logoSize}
+          size={"normal"}
           variant={"white"}
           align={"center"}
           style={[
             styles.logo,
-            { opacity: logoOpacity, position: "absolute", top: logoY }
+            {
+              opacity: logoOpacity,
+              transform: [
+                { translateY: logoY },
+                { scaleX: logoScale },
+                { scaleY: logoScale }
+              ]
+            }
           ]}
         />
         <LoginForm
           t={t}
-          style={{ opacity: formOpacity, paddingTop: 32 }}
+          style={{
+            opacity: formOpacity,
+            transform: [{ translateY: formTranslate }],
+            marginTop: 32
+          }}
           onLayout={this.onLoginFormLayout}
           onLoginButtonPress={this.onLoginButtonPress}
         />
@@ -176,7 +189,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.DARK_BACKGROUND
   },
   logo: {
-    marginBottom: 32,
     alignSelf: "center"
   }
 });

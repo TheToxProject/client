@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, Platform } from "react-native";
+import { Avatar, Touchable } from "@toxclient/shathui";
 
 import { unixToDate } from "./../utilities";
 import Colors from "./../styles/colors";
-import Avatar from "./../components/Avatar";
-import Touchable from "./../components/Touchable";
 
 export class ContactItem extends Component {
   render() {
@@ -17,6 +16,7 @@ export class ContactItem extends Component {
       avatarUri,
       avatarSize,
       color,
+      active,
       onPress,
       onLongPress,
       unread
@@ -26,20 +26,30 @@ export class ContactItem extends Component {
     const timeDisplay = time ? [time.hours, time.minutes].join("h") : null;
     const unreadStyle = unread ? { fontWeight: "bold" } : null;
     const colorStyle = color ? { color: color } : null;
+    const activeStyle = active
+      ? null /*{ backgroundColor: Colors.ACTIVE_ITEM } */
+      : null;
+
+    active && console.log(`Active contact is ${username}`);
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, activeStyle]}>
         <Touchable
           activeOpacity={0.8}
-          onPress={() => onPress && setTimeout(onPress, 200)}
+          onPress={() => onPress && setTimeout(onPress, 300)}
           onLongPress={onLongPress}
         >
           <View style={[styles.row, styles.noSelect]}>
             <Avatar
-              username={username}
               presence={presence}
               presenceBackgroundColor={presenceBackgroundColor}
-              source={{ uri: avatarUri }}
+              {...(avatarUri && avatarUri.length >= 1
+                ? { source: { uri: avatarUri } }
+                : null)}
+              title={username}
+              letter={username}
+              letterColor={Colors.ACCENT}
+              noAvatarBackgroundColor={Colors.DIVIDE}
               style={styles.avatar}
               size={avatarSize}
             />

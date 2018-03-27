@@ -19,6 +19,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default translate(["register"], { wait: true })(
-  withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterScreen))
+export default withRouter(
+  translate(["register"], { wait: true })(
+    connect(mapStateToProps, mapDispatchToProps)(RegisterScreen)
+  )
 );

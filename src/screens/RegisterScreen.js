@@ -12,8 +12,9 @@ export class RegisterScreen extends React.Component {
       <View style={styles.container}>
         <StatusBar
           animated={true}
-          backgroundColor={Colors.DARK_BACKGROUND}
+          backgroundColor={Colors.DARKER_BACKGROUND}
           barStyle={"light-content"}
+          translucent={false}
         />
         <RegisterForm t={t} />
       </View>

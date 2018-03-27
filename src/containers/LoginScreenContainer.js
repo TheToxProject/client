@@ -19,6 +19,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default translate(["login"], { wait: true })(
-  withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginScreen))
+export default withRouter(
+  translate(["login"], { wait: true })(
+    connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+  )
 );
