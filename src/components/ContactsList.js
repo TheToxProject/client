@@ -1,13 +1,13 @@
 import React from "react";
 import { Platform, View, ScrollView, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { TabsView } from "@toxclient/shathui";
 
 import Colors from "./../styles/colors";
 import Logo from "./../components/Logo";
 import UserButton from "./../components/UserButton";
 import IconButton from "./../components/IconButton";
 import ContactItem from "./../components/ContactItem";
-import TabsView from "./TabsView/index";
 
 export class ContactsList extends React.Component {
   constructor(props, context) {

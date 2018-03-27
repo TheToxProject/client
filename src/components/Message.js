@@ -8,11 +8,10 @@ import {
   Easing,
   Image
 } from "react-native";
+import { Avatar, Touchable } from "@toxclient/shathui";
 
 //import { Link } from "./../utilities/routing/router";
 import { unixToDate, containsEmojisOnly } from "./../utilities";
-import Avatar from "./../components/Avatar";
-import Touchable from "./../components/Touchable";
 import Colors from "./../styles/colors";
 
 export class Message extends Component {

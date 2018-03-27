@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, Platform } from "react-native";
+import { Touchable } from "@toxclient/shathui";
 
 import Colors from "./../styles/colors";
-import Touchable from "./../components/Touchable";
 
 export default class Button extends Component {
   render() {

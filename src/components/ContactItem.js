@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, Platform } from "react-native";
+import { Avatar, Touchable } from "@toxclient/shathui";
 
 import { unixToDate } from "./../utilities";
 import Colors from "./../styles/colors";
-import Avatar from "./../components/Avatar";
-import Touchable from "./../components/Touchable";
 
 export class ContactItem extends Component {
   render() {
