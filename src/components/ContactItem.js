@@ -42,10 +42,15 @@ export class ContactItem extends Component {
         >
           <View style={[styles.row, styles.noSelect]}>
             <Avatar
-              username={username}
               presence={presence}
               presenceBackgroundColor={presenceBackgroundColor}
-              source={{ uri: avatarUri }}
+              {...(avatarUri && avatarUri.length >= 1
+                ? { source: { uri: avatarUri } }
+                : null)}
+              title={username}
+              letter={username}
+              letterColor={Colors.ACCENT}
+              noAvatarBackgroundColor={Colors.DIVIDE}
               style={styles.avatar}
               size={avatarSize}
             />

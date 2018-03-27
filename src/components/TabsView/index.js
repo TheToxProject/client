@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
   Animated,
   View,
@@ -7,13 +8,12 @@ import {
   Dimensions,
   PanResponder
 } from "react-native";
-import PropTypes from "prop-types";
 
-import Touchable from "./../components/Touchable";
-import Colors from "./../styles/colors";
-import { noSelect } from "./../utilities";
+import styles from "./styles";
 
-const DEAD_ZONE = 12;
+import Touchable from "./../../components/Touchable";
+import Colors from "./../../styles/colors";
+import { noSelect } from "./../../utilities";
 
 class TabsView extends Component {
   constructor(props) {
@@ -36,8 +36,7 @@ class TabsView extends Component {
 
   componentWillMount() {
     const { defaultTabIndex, children } = this.props;
-    const { width } =
-      Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
+    const { width } = this.state;
     const tabsCount = React.Children.toArray(children).length;
 
     this.setState({
@@ -71,25 +70,30 @@ class TabsView extends Component {
   }
 
   _isMovingHorizontally(evt, gestureState) {
+    const { swipeTolerance } = this.props;
+
     return (
-      Math.abs(gestureState.dx) > Math.abs(gestureState.dy * 2) &&
-      Math.abs(gestureState.vx) > Math.abs(gestureState.vy * 2)
+      Math.abs(gestureState.dx) > Math.abs(gestureState.dy * swipeTolerance) &&
+      Math.abs(gestureState.vx) > Math.abs(gestureState.vy * swipeTolerance)
     );
   }
 
   _canMoveScreen(evt, gestureState) {
+    const { deadZone } = this.props;
     const { tabsCount, selectedIndex } = this.state;
 
     return (
       this._isMovingHorizontally(evt, gestureState) &&
-      ((gestureState.dx >= DEAD_ZONE && selectedIndex > 0) ||
-        (gestureState.dx <= -DEAD_ZONE && selectedIndex < tabsCount - 1))
+      ((gestureState.dx >= deadZone && selectedIndex > 0) ||
+        (gestureState.dx <= -deadZone && selectedIndex < tabsCount - 1))
     );
   }
 
   _startGesture(evt, gestureState) {
-    if (typeof this.props.onSwipeStart === "function") {
-      this.props.onSwipeStart(evt, gestureState);
+    const { onSwipeStart } = this.props;
+
+    if (typeof onSwipeStart === "function") {
+      onSwipeStart(evt, gestureState);
     }
 
     this.state.animated.stopAnimation();
@@ -112,14 +116,13 @@ class TabsView extends Component {
 
   _terminateGesture(evt, gestureState) {
     const { tabsCount, selectedIndex, pendingIndex } = this.state;
-    const { width } =
-      Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
+    const { width, onSwipeEnd } = this.props;
 
     let swipeDistanceThreshold = width / 1.75;
     let swipeVelocityThreshold = 0.15;
 
-    if (typeof this.props.onSwipeEnd === "function") {
-      this.props.onSwipeEnd(evt, gestureState);
+    if (typeof onSwipeEnd === "function") {
+      onSwipeEnd(evt, gestureState);
     }
 
     /**
@@ -159,14 +162,13 @@ class TabsView extends Component {
   }
 
   _transitionTo(index, animated = true) {
-    const { width } =
-      Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
+    const { width, animTension, animFriction } = this.props;
     const offset = -index * width;
 
     const animationConfig = {
-      useNativeDriver: true,
-      tension: 300,
-      friction: 35
+      useNativeDriver: Platform.OS === "android",
+      tension: animTension,
+      friction: animFriction
     };
 
     // The following allows for initial tab index to avoid being animated (which creates a laggy effect)
@@ -197,17 +199,17 @@ class TabsView extends Component {
   }
 
   render() {
-    const { width } =
-      Platform.OS === "web" ? { width: 320 } : Dimensions.get("window");
+    const { tabsCount, animated, offsetX } = this.state;
     const {
       children,
       backgroundColor,
       tabsColor,
       iconsColor,
       underlineColor,
-      underlineHeight
+      underlineHeight,
+      width
     } = this.props;
-    const { tabsCount, animated, offsetX } = this.state;
+
     const childrens = React.Children.toArray(children);
     const maxTranslate = width * (tabsCount - 1);
 
@@ -297,7 +299,14 @@ TabsView.propTypes = {
   tabsColor: PropTypes.string,
   iconsColor: PropTypes.string,
   underlineColor: PropTypes.string,
-  underlineHeight: PropTypes.number
+  underlineHeight: PropTypes.number,
+  width: PropTypes.number,
+  deadZone: PropTypes.number,
+  swipeTolerance: PropTypes.number,
+  animFriction: PropTypes.number,
+  animTension: PropTypes.number,
+  onSwipeStart: PropTypes.func,
+  onSwipeEnd: PropTypes.func
 };
 
 TabsView.defaultProps = {
@@ -306,58 +315,14 @@ TabsView.defaultProps = {
   iconsColor: Colors.BACKGROUND,
   tabsColor: Colors.ACCENT,
   backgroundColor: Colors.BACKGROUND,
-  underlineHeight: 3
+  underlineHeight: 3,
+  width: Dimensions.get("window").width, // 100%
+  deadZone: 12,
+  swipeTolerance: 2,
+  animFriction: 35,
+  animTension: 200,
+  onSwipeStart: () => null,
+  onSwipeEnd: () => null
 };
 
 export default TabsView;
-
-const styles = {
-  container: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    zIndex: 600
-  },
-  tabBar: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    height: 48,
-    ...Platform.select({
-      default: {
-        boxShadow:
-          "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"
-      },
-      android: {
-        elevation: 4,
-        zIndex: 8000,
-        marginBottom: 0
-      }
-    })
-  },
-  tabs: {
-    display: "flex",
-    position: "relative",
-    height: 48,
-    maxHeight: 48,
-    minHeight: 48,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "stretch",
-    width: "100%"
-  },
-  tab: {
-    height: 48,
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      web: {
-        userSelect: "none",
-        cursor: "pointer"
-      }
-    })
-  },
-  tabContent: {
-    //maxWidth:
-  }
-};

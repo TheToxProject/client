@@ -26,8 +26,8 @@ export const unixToDate = timestamp => {
 export const noSelect = {
   ...Platform.select({
     web: {
-      userSelect: "none",
-      "-webkit-user-drag": "none"
+      userSelect: "none"
+      //"-webkit-user-drag": "none"
     }
   })
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, View, ScrollView } from "react-native";
+import { Platform, View, ScrollView, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import Colors from "./../styles/colors";
@@ -7,13 +7,17 @@ import Logo from "./../components/Logo";
 import UserButton from "./../components/UserButton";
 import IconButton from "./../components/IconButton";
 import ContactItem from "./../components/ContactItem";
-import TabsView from "./TabsView";
+import TabsView from "./TabsView/index";
 
 export class ContactsList extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.onPopupEvent = this.onPopupEvent.bind(this);
+
+    this.state = {
+      width: Platform.OS === "web" ? 320 : Dimensions.get("window").width
+    };
   }
 
   onPopupEvent = (eventName, index) => {
@@ -61,10 +65,10 @@ export class ContactsList extends React.Component {
           </View>
         </View>
         <TabsView
+          width={this.state.width}
           defaultTabIndex={1}
-          tabsColor={
-            Platform.OS === "web" ? Colors.DARK_BACKGROUND : Colors.ACCENT
-          }
+          swipeTolerance={6}
+          tabsColor={Colors.ACCENT}
           textColor={Colors.TEXT}
         >
           <View
@@ -170,8 +174,7 @@ const styles = {
     alignItems: "stretch",
     justifyContent: "center",
     zIndex: 400,
-    backgroundColor:
-      Platform.OS === "web" ? Colors.DARK_BACKGROUND : Colors.ACCENT
+    backgroundColor: Colors.ACCENT
   },
   icons: {
     flexDirection: "row",
