@@ -1,11 +1,11 @@
 {
-  "header": "Glad to see you back! 🤘",
+  "header": "Мы рады, что вы вернулись! 🤘",
   "fields": {
-    "username": "Username...",
-    "password": "Password..."
+    "username": "Имя пользователя...",
+    "password": "Пароль..."
   },
   "actions": {
-    "login": "Login",
-    "register": "Create a profile"
+    "login": "Вход",
+    "register": "Создать профиль"
   }
 }
