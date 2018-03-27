@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: {
         overflowY: "auto",
-        overflowX: "none"
+        overflowX: "hidden"
       }
     })
   },

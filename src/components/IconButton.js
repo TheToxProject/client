@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, Platform } from "react-native";
+import { Touchable } from "@toxclient/shathui";
 
 import Colors from "./../styles/colors";
-import Touchable from "./../components/Touchable";
 
 const DEFAULT_SIZE = 36;
 const DEFAULT_ICON_SIZE = 24;

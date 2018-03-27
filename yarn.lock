@@ -550,10 +550,11 @@
     react-treebeard "^2.1.0"
     redux "^3.7.2"
 
-"@toxclient/shathui@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@toxclient/shathui/-/shathui-0.3.0.tgz#1a7c474ce1c9a603b358c3c515508e6008fc0fb5"
+"@toxclient/shathui@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@toxclient/shathui/-/shathui-0.4.5.tgz#4e38156a3c4af64e4e7d9d0ec089e811cc6c0afb"
   dependencies:
+    babel-preset-es2015 "^6.24.1"
     prop-types "^15.6.0"
     react-native-material-ripple "^0.8.0"
 

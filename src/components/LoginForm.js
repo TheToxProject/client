@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Platform, Dimensions } from "react-native";
+import { Button } from "@toxclient/shathui";
 
 import { Link } from "./../utilities/routing/router";
 import Colors from "../styles/colors";
 import Input from "./Input";
-import Button from "./Button";
 import FormHeader from "./FormHeader";
 
 export class LoginForm extends Component {
