@@ -1,6 +1,6 @@
 # 🔒 The Universal Tox Client
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/Tox-Client/client.svg)](https://greenkeeper.io/) [![Build Status](https://travis-ci.org/TheToxProject/client.svg?branch=master)](https://travis-ci.org/TheToxProject/client) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Greenkeeper badge](https://badges.greenkeeper.io/Tox-Client/client.svg)](https://greenkeeper.io/) [![Build Status](https://travis-ci.org/TheToxProject/client.svg?branch=master)](https://travis-ci.org/TheToxProject/client) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/tox-client/localized.svg)](https://crowdin.com/project/tox-client)
 
 This project is a fresh start of the new Tox client I'm willing to dev. It's shared between platforms with only one codebase and can run easily on Android, iOS, Linux, OSX, Windows 10/UWP, Windows 7/8, and maybe Windows Phone.
 
