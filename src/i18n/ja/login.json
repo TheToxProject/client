@@ -1,11 +1,11 @@
 {
   "header": "Glad to see you back! 🤘",
   "fields": {
-    "username": "Username...",
-    "password": "Password..."
+    "username": "ユーザー名...",
+    "password": "パスワード..."
   },
   "actions": {
     "login": "Login",
-    "register": "Create a profile"
+    "register": "プロフィールを作成"
   }
 }
