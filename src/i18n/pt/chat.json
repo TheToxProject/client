@@ -1,12 +1,12 @@
 {
   "headers": {
-    "welcome_back": "Bem-vindo de volta no Tox! 😘",
-    "info_text": "Cria uma conversa ou seleciona um contato para iniciar"
+    "welcome_back": "Welcome back on Tox! 😘",
+    "info_text": "Create a conversation or select a contact to start"
   },
   "labels": {
-    "back_button": "Voltar",
-    "start_video_call": "Chamada de Vídeo",
-    "start_audio_call": "Chamada de Áudio",
-    "more_infos": "Mais informações"
+    "back_button": "Back",
+    "start_video_call": "Video Call",
+    "start_audio_call": "Audio Call",
+    "more_infos": "More informations"
   }
 }
