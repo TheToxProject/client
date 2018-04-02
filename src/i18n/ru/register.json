@@ -6,7 +6,7 @@
     "password_confirm": "Подтвердите ваш пароль..."
   },
   "actions": {
-    "register": "Зарегистрироваться",
+    "register": "Register",
     "login": "Назад"
   }
 }
