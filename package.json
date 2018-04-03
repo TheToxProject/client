@@ -92,7 +92,7 @@
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.2.0",
     "react-i18next": "^7.4.0",
-    "react-native": "0.54.2",
+    "react-native": "0.55.0",
     "react-native-material-ripple": "^0.8.0",
     "react-native-vector-icons": "^4.5.0",
     "react-native-web": "0.5.3",
