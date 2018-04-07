@@ -6,7 +6,7 @@
   "labels": {
     "back_button": "Назад",
     "start_video_call": "Видеозвонок",
-    "start_audio_call": "Аудиозвонок",
+    "start_audio_call": "Audio Call",
     "more_infos": "More informations"
   }
 }
