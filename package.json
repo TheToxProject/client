@@ -95,7 +95,7 @@
     "react-native": "0.54.2",
     "react-native-material-ripple": "^0.8.0",
     "react-native-vector-icons": "^4.5.0",
-    "react-native-web": "0.5.3",
+    "react-native-web": "0.7.1",
     "react-native-windows": "^1.0.0",
     "react-redux": "5.0.7",
     "react-router": "4.2.0",
