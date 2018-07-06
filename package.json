@@ -64,7 +64,7 @@
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.3.2",
-    "css-loader": "0.28.11",
+    "css-loader": "1.0.0",
     "dotenv": "5.0.1",
     "dotenv-expand": "4.0.1",
     "electron-is-dev": "^0.3.0",
