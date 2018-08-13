@@ -106,6 +106,8 @@ export class ChatScreen extends React.Component {
       return <WelcomePlaceholder t={t} />;
     }
 
+    console.log(contact);
+
     return (
       <View style={styles.container}>
         <StatusBar
@@ -141,7 +143,7 @@ export class ChatScreen extends React.Component {
                 color={
                   Platform.OS === "web" ? Colors.PRIMARY_TEXT : Colors.TEXT
                 }
-                presence={Platform.OS === "web" ? contact.presence : null}
+                //presence={Platform.OS === "web" ? contact.presence : null}
                 presenceBackgroundColor={
                   Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT
                 }
@@ -337,7 +339,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: {
         overflowY: "auto",
-        overflowX: "none"
+        overflowX: "hidden"
       }
     })
   },

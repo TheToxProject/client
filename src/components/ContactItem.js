@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, Platform } from "react-native";
+import { Avatar, Touchable } from "@toxclient/shathui";
 
 import { unixToDate } from "./../utilities";
 import Colors from "./../styles/colors";
-import Avatar from "./../components/Avatar";
-import Touchable from "./../components/Touchable";
 
 export class ContactItem extends Component {
   render() {
@@ -42,10 +41,15 @@ export class ContactItem extends Component {
         >
           <View style={[styles.row, styles.noSelect]}>
             <Avatar
-              username={username}
               presence={presence}
               presenceBackgroundColor={presenceBackgroundColor}
-              source={{ uri: avatarUri }}
+              {...(avatarUri && avatarUri.length >= 1
+                ? { source: { uri: avatarUri } }
+                : null)}
+              title={username}
+              letter={username}
+              letterColor={Colors.ACCENT}
+              noAvatarBackgroundColor={Colors.DIVIDE}
               style={styles.avatar}
               size={avatarSize}
             />

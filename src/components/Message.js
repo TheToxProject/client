@@ -8,11 +8,10 @@ import {
   Easing,
   Image
 } from "react-native";
+import { Avatar, Touchable } from "@toxclient/shathui";
 
 //import { Link } from "./../utilities/routing/router";
 import { unixToDate, containsEmojisOnly } from "./../utilities";
-import Avatar from "./../components/Avatar";
-import Touchable from "./../components/Touchable";
 import Colors from "./../styles/colors";
 
 export class Message extends Component {
@@ -81,7 +80,7 @@ export class Message extends Component {
               onPress={() => Platform.OS !== "web" && this.animateTime}
               style={{
                 maxWidth: Platform.OS !== "web" ? "100%" : "90%",
-                borderRadius: 0,
+                borderRadius: 3,
                 overflow: "hidden"
               }}
             >
@@ -152,9 +151,14 @@ export class Message extends Component {
       >
         {showAvatar ? (
           <Avatar
-            source={{ uri: author.avatarUri }}
+            {...(author.avatarUri
+              ? { source: { uri: author.avatarUri } }
+              : null)}
             size={36}
-            username={author.name}
+            letter={author.name[0]}
+            letterColor={Colors.ACCENT}
+            noAvatarBackgroundColor={Colors.DIVIDE}
+            title={author.name}
           />
         ) : (
           <View style={{ width: 36, height: 36, marginRight: 16 }} />
@@ -203,7 +207,7 @@ const styles = StyleSheet.create({
     maxWidth: "100%"
   },
   emojiBubble: {
-    borderRadius: 0,
+    borderRadius: 3,
     overflow: "hidden"
   },
   emojiTextStyle: {
