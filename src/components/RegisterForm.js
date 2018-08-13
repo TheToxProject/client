@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Platform, Dimensions } from "react-native";
+import { Logo, Button } from "@toxclient/shathui";
 
 import { Link } from "./../utilities/routing/router";
+import Colors from "../styles/colors";
 import Input from "./Input";
-import Button from "./Button";
-import Logo from "./Logo";
 import FormHeader from "./FormHeader";
 
 export class RegisterForm extends Component {
@@ -39,6 +39,8 @@ export class RegisterForm extends Component {
             uppercase={true}
             onPress={() => this.props.onRegisterButtonPress()}
             onPressDelay={200}
+            backgroundColor={Colors.BACKGROUND}
+            color={Colors.ACCENT}
             text={t("register:actions.register")}
           />
           <ButtonLink to="/">

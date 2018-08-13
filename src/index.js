@@ -8,8 +8,8 @@ import ReactNative, { View } from "react-native";
 import MaterialIconsFont from "react-native-vector-icons/Fonts/MaterialIcons.ttf";
 import MaterialCommunityIconsFont from "react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf";
 import { I18nextProvider, translate } from "react-i18next";
-import i18n from "./i18n/i18n";
 
+import i18n from "./i18n/i18n";
 import store from "./utilities/storage/store";
 import Routing, { Router, Switch } from "./utilities/routing";
 import { BackButton } from "./utilities/routing/router";
@@ -48,7 +48,11 @@ class App extends React.Component {
       const { t } = props;
       document.title = t("commons:defaultAppTitle");
 
-      return <View style={{ height: "100%" }}>{props.children}</View>;
+      return (
+        <View style={{ height: "100%", width: "100%", overflow: "hidden" }}>
+          {props.children}
+        </View>
+      );
     });
 
     return (
