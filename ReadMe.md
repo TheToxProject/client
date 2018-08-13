@@ -6,7 +6,7 @@ This project is a fresh start of the new Tox client I'm willing to dev. It's sha
 
 The main goal of this project is to provide the same experience between platforms by giving users an instant messenger application that is both secure and user-friendly.
 
-You can live preview most of the components on [The Storybook](https://tox-client.github.io/client)!
+You can live preview most of the components on [The Storybook](https://thetoxproject.github.io)!
 
 ![The Universal Tox Client running on multiple platforms](misc/tox-client-multiple-platforms.png)
 
