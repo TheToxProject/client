@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, View, StatusBar, Animated, Easing } from "react-native";
-import { Logo as SimpleLogo } from "@toxclient/shathui";
+import { Logo } from "@toxclient/shathui";
 
 import Colors from "./../styles/colors";
 import SimpleLoginForm from "./../components/LoginForm";
 
-const Logo = Animated.createAnimatedComponent(SimpleLogo);
+const ToxLogo = Animated.createAnimatedComponent(Logo);
 const LoginForm = Animated.createAnimatedComponent(SimpleLoginForm);
 
 const ANIMATION_LOAD_DURATION = 800;
@@ -144,7 +144,7 @@ export class LoginScreen extends React.Component {
           barStyle={"light-content"}
           translucent={false}
         />
-        <Logo
+        <ToxLogo
           //height={logoSize}
           size={"bigger"}
           variant={"white"}
