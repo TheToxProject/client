@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View, StatusBar, Animated, Easing } from "react-native";
+import { Logo as SimpleLogo } from "@toxclient/shathui";
 
 import Colors from "./../styles/colors";
-import SimpleLogo from "./../components/Logo";
 import SimpleLoginForm from "./../components/LoginForm";
 
 const Logo = Animated.createAnimatedComponent(SimpleLogo);
@@ -108,7 +108,7 @@ export class LoginScreen extends React.Component {
   render() {
     const logoScale = this.state.loadValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [2, 1]
+      outputRange: [4, 2]
     });
 
     const logoOpacity = this.state.loadValue.interpolate({
@@ -146,7 +146,7 @@ export class LoginScreen extends React.Component {
         />
         <Logo
           //height={logoSize}
-          size={"normal"}
+          size={"bigger"}
           variant={"white"}
           align={"center"}
           style={[
