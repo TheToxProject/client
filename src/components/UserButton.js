@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { View, Platform } from "react-native";
-
-import Touchable from "./../components/Touchable";
-import Avatar from "./../components/Avatar";
+import { Avatar, Touchable } from "@toxclient/shathui";
 
 const DEFAULT_SIZE = 36;
 const DEFAULT_PRESS_DELAY = 300;

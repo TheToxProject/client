@@ -20,9 +20,6 @@ const styles = {
     paddingBottom: 12,
     textAlign: "center",
     ...Platform.select({
-      web: {
-        borderBottom: "3px solid rgba(255, 255, 255, .2)"
-      },
       default: {
         borderBottomColor: "rgba(255, 255, 255, .3)",
         borderBottomWidth: 2

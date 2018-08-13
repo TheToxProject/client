@@ -5,15 +5,14 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
-import Logo from "../components/Logo";
-import Button from "../components/Button";
+import { Avatar, Logo, Button } from "@toxclient/shathui";
+
 import Input from "../components/Input";
 import FormHeader from "../components/FormHeader";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
 import UserButton from "../components/UserButton";
 import ContactItem from "../components/ContactItem";
-import Avatar from "../components/Avatar";
 
 import Presence from "../utilities/enums/Presence";
 import Colors from "../styles/colors";

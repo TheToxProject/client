@@ -4,15 +4,18 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,
   TextInput,
-  Keyboard
+  Keyboard,
+  StatusBar
 } from "react-native";
 
+import { getConversationMock } from "./../utilities/MockData/ConversationMock";
 import Colors from "./../styles/colors";
+
 import ContactItem from "./../components/ContactItem";
 import IconButton from "./../components/IconButton";
 import WelcomePlaceholder from "./../components/WelcomePlaceholder";
+import Message from "./../components/Message";
 
 const MAX_INPUT_EXPAND = 120;
 
@@ -27,6 +30,25 @@ export class ChatScreen extends React.Component {
     this.onBackButtonPress = this.onBackButtonPress.bind(this);
     this.onContentSizeChange = this.onContentSizeChange.bind(this);
     this.onKeyboardHideRequest = this.onKeyboardHideRequest.bind(this);
+    this.onKeyboardShow = this.onKeyboardShow.bind(this);
+    this.scrollToEnd = this.scrollToEnd.bind(this);
+  }
+
+  componentWillMount() {
+    if (Platform.OS !== "web") {
+      Keyboard.addListener("keyboardDidShow", this.onKeyboardShow);
+    }
+  }
+
+  componentDidMount() {}
+  componentDidUpdate() {
+    this.scrollToEnd();
+  }
+
+  scrollToEnd() {
+    this._chatView &&
+      this._chatView.scrollToEnd &&
+      this._chatView.scrollToEnd({ animated: true });
   }
 
   onBackButtonPress() {
@@ -63,6 +85,19 @@ export class ChatScreen extends React.Component {
     Keyboard.dismiss();
   }
 
+  onKeyboardShow() {
+    /**
+     * @todo Check if scrollview bottom is reached
+     * @body If the scrollview has reached the bottom, when the keyboard shows
+     *       it should makes the scrollview to scroll to bottom again. If the
+     *       scrollview content was NOT full bottom, then we don't scroll.
+     */
+
+    requestAnimationFrame(() => {
+      this.scrollToEnd();
+    });
+  }
+
   render() {
     const { t } = this.props;
     const { contact } = this.props.location.state || { contact: null };
@@ -71,59 +106,85 @@ export class ChatScreen extends React.Component {
       return <WelcomePlaceholder t={t} />;
     }
 
+    console.log(contact);
+
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          {Platform.OS !== "web" && (
+        <StatusBar
+          animated={true}
+          backgroundColor={"rgba(0,0,0,.25)"}
+          barStyle={"light-content"}
+          translucent={true}
+        />
+        <View style={styles.headerWrapper}>
+          {Platform.OS === "android" && <View style={styles.statusBar} />}
+          <View style={styles.header}>
+            {Platform.OS !== "web" && (
+              <IconButton
+                title={t("chat:labels.back_button")}
+                name={"arrow-back"}
+                style={styles.backIcon}
+                onPress={() => requestAnimationFrame(this.onBackButtonPress)}
+              />
+            )}
+            {contact && (
+              <ContactItem
+                style={{
+                  flex: 1,
+                  width: "100%",
+                  margin: 8,
+                  marginLeft: Platform.OS === "web" ? 0 : 8
+                }}
+                unread={false}
+                username={contact.username}
+                status={Platform.OS === "web" ? contact.status : null}
+                avatarUri={contact.avatarUri}
+                avatarSize={Platform.OS === "web" ? 46 : 32}
+                color={
+                  Platform.OS === "web" ? Colors.PRIMARY_TEXT : Colors.TEXT
+                }
+                //presence={Platform.OS === "web" ? contact.presence : null}
+                presenceBackgroundColor={
+                  Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT
+                }
+              />
+            )}
             <IconButton
-              title={t("chat:labels.back_button")}
-              name={"arrow-back"}
-              style={styles.backIcon}
-              onPress={() => requestAnimationFrame(this.onBackButtonPress)}
-            />
-          )}
-          {contact && (
-            <ContactItem
-              style={{ flex: 1, width: "100%" }}
-              unread={false}
-              username={contact.username}
-              status={Platform.OS === "web" ? contact.status : null}
-              avatarUri={contact.avatarUri}
-              avatarSize={Platform.OS === "web" ? 46 : 32}
-              color={Platform.OS === "web" ? Colors.PRIMARY_TEXT : Colors.TEXT}
-              presence={Platform.OS === "web" ? contact.presence : null}
-              presenceBackgroundColor={
-                Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT
+              style={styles.headerIcon}
+              title={t("chat:labels.start_audio_call")}
+              name={"call"}
+              size={Platform.OS === "web" ? 30 : 24}
+              color={
+                Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT
               }
             />
-          )}
-          <IconButton
-            style={styles.headerIcon}
-            title={t("chat:labels.start_audio_call")}
-            name={"call"}
-            size={Platform.OS === "web" ? 30 : 24}
-            color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
-          />
-          <IconButton
-            style={styles.headerIcon}
-            title={t("chat:labels.start_video_call")}
-            name={"videocam"}
-            size={Platform.OS === "web" ? 30 : 24}
-            color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
-          />
-          <IconButton
-            style={styles.headerIcon}
-            title={t("chat:labels.more_infos")}
-            name={"info-outline"}
-            size={Platform.OS === "web" ? 30 : 24}
-            color={Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT}
-          />
+            <IconButton
+              style={styles.headerIcon}
+              title={t("chat:labels.start_video_call")}
+              name={"videocam"}
+              size={Platform.OS === "web" ? 30 : 24}
+              color={
+                Platform.OS === "web" ? Colors.SECONDARY_TEXT : Colors.TEXT
+              }
+            />
+          </View>
         </View>
         <ScrollView
+          style={{ width: "100%", flex: 1 }}
           contentContainerStyle={styles.chatView}
           onMomentumScrollBegin={this.onKeyboardHideRequest}
+          ref={scrollview => (this._chatView = scrollview)}
         >
-          <Text>Chat happens here</Text>
+          {getConversationMock(contact).map((message, index) => (
+            <Message
+              key={message.id}
+              author={message.author}
+              fromSelf={message.fromSelf}
+              showAvatar={message.showAvatar}
+              message={message.message}
+              time={message.time}
+            />
+          ))}
         </ScrollView>
         <View style={styles.inputView}>
           <View style={styles.actions}>
@@ -188,11 +249,18 @@ export class ChatScreen extends React.Component {
               underlineColorAndroid={"rgba(0,0,0,0)"}
               style={[
                 styles.input,
-                { height: Math.max(24, this.state.inputHeight) }
+                {
+                  height:
+                    Platform.OS !== "web"
+                      ? Math.max(24, this.state.inputHeight)
+                      : 80
+                }
               ]}
               placeholder={"Enter a message..."}
-              onContentSizeChange={this.onContentSizeChange}
-              onChange={Platform.OS === "web" ? this.onContentSizeChange : null}
+              onContentSizeChange={
+                Platform.OS !== "web" ? this.onContentSizeChange : null
+              }
+              //onChange={Platform.OS === "web" ? this.onContentSizeChange : null}
               onBlur={this.onKeyboardHideRequest}
             />
             {Platform.OS !== "web" ? (
@@ -209,6 +277,9 @@ export class ChatScreen extends React.Component {
   }
 }
 
+const STATUSBAR_HEIGHT =
+  Platform.OS === "android" ? StatusBar.currentHeight : 0;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -219,15 +290,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: Colors.BACKGROUND
   },
-  header: {
-    height: Platform.OS === "web" ? 64 : 56,
+  headerWrapper: {
     width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
     backgroundColor: Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT,
-    paddingHorizontal: Platform.OS === "web" ? 0 : 16,
-    paddingRight: Platform.OS === "web" ? 8 : 12,
     ...Platform.select({
       ios: {
         boxShadow:
@@ -237,22 +302,46 @@ const styles = StyleSheet.create({
         elevation: 4
       },
       web: {
-        boxShadow:
-          "0 2px 6px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.23)"
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.DIVIDE
       }
     })
   },
+  statusBar: {
+    zIndex: 800,
+    height: STATUSBAR_HEIGHT,
+    width: "100%",
+    backgroundColor: Platform.OS === "web" ? Colors.BACKGROUND : Colors.ACCENT
+  },
+  header: {
+    zIndex: 500,
+    height: Platform.OS === "web" ? 64 : 56,
+    maxHeight: Platform.OS === "web" ? 64 : 56,
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    padding: 8,
+    paddingLeft: Platform.OS === "web" ? 0 : 8
+  },
   backIcon: {
-    marginLeft: 0,
+    margin: 8,
     justifyContent: "center"
   },
   headerIcon: {
-    paddingHorizontal: 8
+    margin: 8
   },
   chatView: {
-    flex: 1,
+    //flex: 1,
+    alignItems: "flex-start",
     width: "100%",
-    padding: 16
+    padding: 16,
+    ...Platform.select({
+      web: {
+        overflowY: "auto",
+        overflowX: "hidden"
+      }
+    })
   },
   inputView: {
     width: "100%",
@@ -271,7 +360,7 @@ const styles = StyleSheet.create({
   input: {
     minHeight: 44,
     backgroundColor: Colors.BACKGROUND,
-    color: Colors.PRIMARY_TEXT,
+    color: "rgba(0,0,0,.87)",
     paddingVertical: 12,
     paddingHorizontal: 16,
     flex: 1
