@@ -1,11 +1,11 @@
 {
-  "header": "Fico feliz em vê-lo de volta! 🤘",
+  "header": "Glad to see you back! 🤘",
   "fields": {
-    "username": "Nome do usuário...",
-    "password": "Senha..."
+    "username": "Username...",
+    "password": "Password..."
   },
   "actions": {
-    "login": "Iniciar sessão",
-    "register": "Criar um perfil"
+    "login": "Login",
+    "register": "Create a profile"
   }
 }
