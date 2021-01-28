@@ -4,8 +4,8 @@
     "info_text": "Create a conversation or select a contact to start"
   },
   "labels": {
-    "back_button": "Back",
-    "start_video_call": "Video Call",
+    "back_button": "Zurück",
+    "start_video_call": "Videoanruf",
     "start_audio_call": "Audio Call",
     "more_infos": "More informations"
   }

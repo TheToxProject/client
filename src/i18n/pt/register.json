@@ -1,12 +1,12 @@
 {
-  "header": "Create your Tox profile 🤠",
+  "header": "Criar seu perfil Tox 🤠",
   "fields": {
-    "username": "Choose your username...",
-    "password": "Type your password...",
-    "password_confirm": "Confirm your password..."
+    "username": "Escolha seu nome de usuário...",
+    "password": "Digite sua senha...",
+    "password_confirm": "Confirme sua senha..."
   },
   "actions": {
-    "register": "Register",
-    "login": "Back to login"
+    "register": "Registrar",
+    "login": "Volte para login"
   }
 }
