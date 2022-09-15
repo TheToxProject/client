@@ -4,9 +4,9 @@
     "info_text": "Create a conversation or select a contact to start"
   },
   "labels": {
-    "back_button": "Back",
-    "start_video_call": "Video Call",
-    "start_audio_call": "Audio Call",
+    "back_button": "Geri",
+    "start_video_call": "Görüntülü Arama",
+    "start_audio_call": "Sesli Arama",
     "more_infos": "More informations"
   }
 }
